@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.demo.nomad.nomad5s.Activities.TestingDB">
+
+   <android.support.v7.widget.RecyclerView
+       android:id="@+id/recyclerAudit"
+       android:layout_width="match_parent"
+       android:layout_height="200dp">
+
+   </android.support.v7.widget.RecyclerView>
+    <Button
+        android:text="agregar campania"
+        android:id="@+id/agregarCampania"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+    android:text="agregar auditoria"
+    android:id="@+id/agregarAudit"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+
+</LinearLayout>
