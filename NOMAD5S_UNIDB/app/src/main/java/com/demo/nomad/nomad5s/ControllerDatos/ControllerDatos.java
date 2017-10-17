@@ -1,5 +1,9 @@
 package com.demo.nomad.nomad5s.ControllerDatos;
 import android.content.Context;
+
+import com.demo.nomad.nomad5s.DAO.DAOAreas;
+import com.demo.nomad.nomad5s.Model.Area;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -360,9 +364,22 @@ public class ControllerDatos {
         DAOAreas daoAreas = new DAOAreas(context);
         Area unArea=daoAreas.getArea(idArea);
         Foto unaFoto = daoFotos.getFoto(idArea);
-
-
-
     }
     */
+
+
+public void guardarArea(Area unArea){
+    //GUARDAR EN LA DB
+
+    DAOAreas daoAreas = new DAOAreas(context);
+    daoAreas.addArea(unArea);
+
+    //GUARDAR EN FIREBASE
+}
+
+
+    public List<Area> traerListaAreas() {
+        DAOAreas daoAreas = new DAOAreas(context);
+        return daoAreas.getAllAreas();
+    }
 }

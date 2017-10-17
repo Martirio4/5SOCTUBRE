@@ -50,6 +50,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAOAuditorias.RUTA_FOTO_SUBITEM + " TEXT, " +
                 DAOAuditorias.COMENTARIO_FOTO_SUBITEM + " TEXT )";
         db.execSQL(query2);
+
+        //CREO TABLA DE CAMPANIAS
+        String query3 =  "CREATE TABLE " + DAOAreas.TABLE_AREAS  + "(" +
+                DAOAreas.IDAREA + " TEXT, " +
+                DAOAreas.NOMBRE_AREA + " TEXT, " +
+                DAOAreas.IDFOTO_AREA + " TEXT, " +
+                DAOAreas.RUTA_FOTO_AREA + " TEXT )";
+        db.execSQL(query3);
     }
 
     @Override

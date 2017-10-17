@@ -1,5 +1,7 @@
 package com.demo.nomad.nomad5s.Activities;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,16 +13,17 @@ import android.widget.Button;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.demo.nomad.nomad5s.Adapter.AdapterTesting;
-import com.demo.nomad.nomad5s.DAO.DAOAuditorias;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
+import com.demo.nomad.nomad5s.Fragments.FragmentManageAreas;
 import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.R;
 
 import java.util.UUID;
 
-public class TestingDB extends AppCompatActivity {
+public class TestingDB extends AppCompatActivity implements FragmentManageAreas.Avisable {
 
     private Button boton;
+    private Button boton2;
     private RecyclerView recyclerAudit;
     private AdapterTesting adapterTesting;
     private LinearLayoutManager layoutManager;
@@ -44,6 +47,7 @@ public class TestingDB extends AppCompatActivity {
         adapterTesting.notifyDataSetChanged();
         recyclerAudit.setAdapter(adapterTesting);
 
+
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +59,7 @@ public class TestingDB extends AppCompatActivity {
                 new MaterialDialog.Builder(TestingDB.this)
                     .title("Add a comment")
                     .contentColor(ContextCompat.getColor(TestingDB.this, R.color.colorPrimary))
-                                .backgroundColor(ContextCompat.getColor(TestingDB.this, R.color.blanco))
+                                .backgroundColor(ContextCompat.getColor(TestingDB.this, R.color.marfil))
                                 .titleColor(ContextCompat.getColor(TestingDB.this, R.color.colorPrimaryDark))
                                 .content("Please, add a comment for this photo")
                     .inputType(InputType.TYPE_CLASS_TEXT)
@@ -77,18 +81,24 @@ public class TestingDB extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
+        boton2=(Button)findViewById(R.id.manageareas);
+        boton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManageAreas fragmentCargarArea = new FragmentManageAreas();
+                FragmentManager fragmentManager= getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.containerFragment,fragmentCargarArea);
+                fragmentTransaction.commit();
+            }
+        });
 
     }
+
+    @Override
+    public void salirDeAca() {
+
+    }
+
+
 }

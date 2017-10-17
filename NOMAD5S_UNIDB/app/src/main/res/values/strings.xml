@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Nomad5s</string>
+    <string name="SeleccionArea">Select Audit Area</string>
+    <string name="nuevaArea">New Area</string>
+    <string name="nuevaAreaHint">Enter new area name</string>
+    <string name="guardarNuevaArea">Save new area</string>
+    <string name="seEliminoFoto">Image loaded</string>
+    <string name="noSeEliminoFoto">image loaded. a backup image was saved to gallery</string>
+
+    <string name="verCriterios">Criteria</string>
+    <string name="criteriaTitulo">Criteria</string>
+    <string name="sacarFoto">Add photo</string>
+    <string name="guardarAuditoria">Save Audit</string>
+    <string name="salir">quit</string>
+    <string name="manageAreas">Manage audit areas</string>
+    <string name="myAudits">My Audits</string>
+    <string name="addNewArea">Add new Area</string>
+    <string name="auth_failed">Authentication failed</string>
+    <string name="signed_out">Signed out</string>
+    <string name="generarPDF">Send PDF report</string>
+    <string name="quit">Quit</string>
+    <string name="signOut">Sign out your account and quit</string>
+    <string name="settings">Settings</string>
 </resources>
