@@ -20,6 +20,7 @@ import com.demo.nomad.nomad5s.Adapter.AdapterTesting;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAreas;
+import com.demo.nomad.nomad5s.Fragments.FragmentManageAuditores;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.R;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements FragmentManageAre
 
     private Button boton;
     private Button boton2;
+    private Button boton3;
     private RecyclerView recyclerAudit;
     private AdapterTesting adapterTesting;
     private LinearLayoutManager layoutManager;
@@ -95,14 +97,33 @@ public class MainActivity extends AppCompatActivity implements FragmentManageAre
         boton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManageAreas fragmentCargarArea = new FragmentManageAreas();
-                FragmentManager fragmentManager= getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.containerFragment,fragmentCargarArea,"fragmentManageAreas");
-                fragmentTransaction.commit();
+                abrirFragmentManageAreas();
+            }
+        });
+        
+        boton3=(Button)findViewById(R.id.manageauditores);
+        boton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirFragmentManageAuditores();
             }
         });
 
+    }
+
+    private void abrirFragmentManageAreas() {
+        FragmentManageAreas fragmentCargarArea = new FragmentManageAreas();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.containerFragment,fragmentCargarArea,"fragmentManageAreas");
+        fragmentTransaction.commit();
+    }
+    private void abrirFragmentManageAuditores() {
+        FragmentManageAuditores fragmentManageAuditores = new FragmentManageAuditores();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.containerFragment,fragmentManageAuditores,"fragmentManageAuditores");
+        fragmentTransaction.commit();
     }
 
     @Override

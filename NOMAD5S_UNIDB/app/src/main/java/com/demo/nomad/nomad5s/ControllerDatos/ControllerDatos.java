@@ -6,6 +6,8 @@ import com.demo.nomad.nomad5s.DAO.DAOAreas;
 import com.demo.nomad.nomad5s.DAO.DAOAuditorias;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Model.Area;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,12 +23,15 @@ public class ControllerDatos {
     private DAOAreas daoAreas;
     private DAOCampania daoCampanias;
     private DAOAuditorias daoAuditorias;
+    private DatabaseReference mDatabase;
 
     public ControllerDatos(Context context) {
         this.context = context;
         daoAreas=new DAOAreas(context);
         daoAuditorias=new DAOAuditorias(context);
         daoCampanias= new DAOCampania(context);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
     }
 
     public List<String>traerSeiri(){
@@ -379,10 +384,9 @@ public class ControllerDatos {
 
     public void guardarArea(Area unArea){
         //GUARDAR EN LA DB
-
         daoAreas.addArea(unArea);
-
         //GUARDAR EN FIREBASE
+        mDatabase.child("AREAS").child(unArea.getIdArea()).setValue(unArea);
     }
 
 
@@ -394,6 +398,7 @@ public class ControllerDatos {
 //        BORRAR DE LA DB
         daoAreas.borrarArea(unArea);
 //        BORRAR DE FIREBASE
+        mDatabase.child("AREAS").child(unArea.getIdArea()).removeValue();
 
 //
 
@@ -404,6 +409,9 @@ public class ControllerDatos {
     }
 
     public void renombrarArea(Area unArea, String s) {
+        //RENOMBRAR DB
         daoAreas.rename(unArea,s);
+        //RENOMBRAR FIREBASE
+        mDatabase.child("AREAS").child(unArea.getIdArea()).child("nombreArea").setValue(s);
     }
 }
