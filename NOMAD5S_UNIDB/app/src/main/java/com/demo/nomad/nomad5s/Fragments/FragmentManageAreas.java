@@ -52,9 +52,7 @@ public class FragmentManageAreas extends Fragment {
     private GridLayoutManager layoutManager;
     private File fotoOriginal;
     private File fotoComprimida;
-    private FloatingActionMenu fabMenuManage;
     private FloatingActionButton fabAgregarArea;
-    private FloatingActionButton fabSalir;
     private Avisable unAvisable;
     private TextView textView;
 
@@ -68,6 +66,8 @@ public class FragmentManageAreas extends Fragment {
     }
 
     public void updateAdapter() {
+        adapterArea.setListaAreasOriginales(controllerAreas.traerListaAreas());
+        adapterArea.notifyDataSetChanged();
         /*
         Realm realm=Realm.getDefaultInstance();
         RealmResults<Area> result3 = realm.where(Area.class)
@@ -101,50 +101,15 @@ public class FragmentManageAreas extends Fragment {
         adapterArea.setListaAreasOriginales(listaAreas);
         recyclerAreas.setAdapter(adapterArea);
 
-        fabMenuManage =(FloatingActionMenu) view.findViewById(R.id.agregarArea);
-        fabMenuManage.setMenuButtonColorNormal(ContextCompat.getColor(getContext(), R.color.verdeoscuro));
-        fabAgregarArea=new FloatingActionButton(getActivity());
-
-
-        fabAgregarArea.setButtonSize(FloatingActionButton.SIZE_MINI);
-        fabAgregarArea.setColorNormal(ContextCompat.getColor(getContext(), R.color.verde));
-        fabAgregarArea.setLabelText(getString(R.string.addNewArea));
-        fabAgregarArea.setImageResource(R.drawable.ic_note_add_black_24dp);
-        fabMenuManage.addMenuButton(fabAgregarArea);
-
-        fabAgregarArea.setLabelColors(ContextCompat.getColor(getActivity(), R.color.verde),
-                ContextCompat.getColor(getActivity(), R.color.light_grey),
-                ContextCompat.getColor(getActivity(), R.color.white_transparent));
-        fabAgregarArea.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
+        fabAgregarArea =(FloatingActionButton) view.findViewById(R.id.agregarArea);
 
         fabAgregarArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fabMenuManage.close(true);
                 EasyImage.openChooserWithGallery(FragmentManageAreas.this, "Select image", 1);
             }
         });
 
-        fabSalir = new FloatingActionButton(getActivity());
-        fabSalir.setButtonSize(FloatingActionButton.SIZE_MINI);
-        fabSalir.setColorNormal(ContextCompat.getColor(getContext(), R.color.verde));
-        fabSalir.setLabelText(getString(R.string.salir));
-        fabSalir.setImageResource(R.drawable.ic_exit_to_app_black_24dp);
-        fabMenuManage.addMenuButton(fabSalir);
-
-        fabSalir.setLabelColors(ContextCompat.getColor(getActivity(), R.color.verde),
-                ContextCompat.getColor(getActivity(), R.color.light_grey),
-                ContextCompat.getColor(getActivity(), R.color.white_transparent));
-        fabSalir.setLabelTextColor(ContextCompat.getColor(getActivity(), R.color.black));
-
-        fabSalir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fabMenuManage.close(true);
-                unAvisable.salirDeAca();
-
-            }
-        });
 
 
 
@@ -232,9 +197,6 @@ public class FragmentManageAreas extends Fragment {
 
         new MaterialDialog.Builder(getContext())
                 .title("New Area")
-                .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
-                .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
-                .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
                 .content("Name for the new Area")
                 .inputType(InputType.TYPE_CLASS_TEXT)
                 .input("Area name","", new MaterialDialog.InputCallback() {
@@ -257,7 +219,10 @@ public class FragmentManageAreas extends Fragment {
                         */
                         try {
                             controllerAreas.guardarArea(unArea);
-                            dialogoExito(unArea);
+                            updateAdapter();
+                           // dialogoExito(unArea);
+                            Snackbar.make(getView(),unArea.getNombreArea()+" was succesfully created",Snackbar.LENGTH_SHORT)
+                                    .show();
                         } catch (Exception e) {
                             e.printStackTrace();
                             Snackbar.make(getView(),"Area was not saved. Please try again",Snackbar.LENGTH_SHORT)
@@ -269,6 +234,7 @@ public class FragmentManageAreas extends Fragment {
 
     }
 
+//    SE COMENTO LA LLAMADA A ESTE METODO, QUEDA OBSOLETO POR UX, SE REEMPLAZO POR SNACKBAR
     public void dialogoExito(Area unArea) {
 
         new MaterialDialog.Builder(getContext())

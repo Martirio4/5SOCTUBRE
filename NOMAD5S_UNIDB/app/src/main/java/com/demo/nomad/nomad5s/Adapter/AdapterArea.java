@@ -33,7 +33,7 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
     private List<Area> listaAreasFavoritos;
     private View.OnClickListener listener;
     private AdapterView.OnLongClickListener listenerLong;
-    private Eliminable eliminable;
+    private EditaEliminable editaEliminable;
 
     public void setLongListener(View.OnLongClickListener unLongListener) {
         this.listenerLong = unLongListener;
@@ -69,8 +69,12 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
         FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
         FragmentManageAreas fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
 
-        viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_areas, parent, false);
-
+        if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
+            viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_areas, parent, false);
+        }
+        else{
+            viewCelda=layoutInflater.inflate(R.layout.detalle_celda_seleccion_areas,parent,false);
+        }
         AreaViewHolder areasViewHolder = new AreaViewHolder(viewCelda);
 
         return areasViewHolder;
@@ -92,9 +96,17 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
             AreaViewHolder.fabEliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    eliminable = (Eliminable) v.getContext();
-                    eliminable.EliminarArea(unArea);
+                    editaEliminable = (EditaEliminable) v.getContext();
+                    editaEliminable.EliminarArea(unArea);
 
+                }
+            });
+
+            AreaViewHolder.fabEditar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editaEliminable=(EditaEliminable) view.getContext();
+                    editaEliminable.editarArea(unArea);
                 }
             });
         }
@@ -124,6 +136,7 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
         private ImageView imageView;
         private TextView textView;
         private FloatingActionButton fabEliminar;
+        private FloatingActionButton fabEditar;
 
 
 
@@ -138,7 +151,10 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
 
             if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
                 fabEliminar = (FloatingActionButton) itemView.findViewById(R.id.botonEliminar);
-                fabEliminar.setColorNormal(ContextCompat.getColor(itemView.getContext(), R.color.verde));
+                fabEliminar.setColorNormal(ContextCompat.getColor(itemView.getContext(), R.color.antiverde));
+
+                fabEditar=(FloatingActionButton) itemView.findViewById(R.id.botonEditar);
+                fabEditar.setColorNormal(ContextCompat.getColor(itemView.getContext(),R.color.amarillito));
             }
         }
 
@@ -159,7 +175,8 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
 
     }
 
-    public interface Eliminable {
-        public void EliminarArea(Area unArea);
+    public interface EditaEliminable {
+        void EliminarArea(Area unArea);
+        void editarArea(Area unArea);
     }
 }

@@ -96,7 +96,7 @@ public class DAOAreas extends DatabaseHelper {
 
         List<Area> allAreas = new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
-        String select = "SELECT * FROM " + TABLE_AUDITORIAS;
+        String select = "SELECT * FROM " + TABLE_AREAS;
 
         Cursor cursor = database.rawQuery(select, null);
         while(cursor.moveToNext()){
@@ -124,4 +124,22 @@ public class DAOAreas extends DatabaseHelper {
         return !(unArea == null);
     }
 
+    public void borrarArea(Area unArea){
+        SQLiteDatabase database = getWritableDatabase();
+
+        String query = "DELETE FROM " + TABLE_AREAS +
+                " WHERE IDAREA='"+unArea.getIdArea()+"'";
+
+        database.execSQL(query);
+        database.close();
+
+    }
+
+    public void rename(Area unArea, String s) {
+        SQLiteDatabase database = getWritableDatabase();
+
+        String query ="UPDATE "+TABLE_AREAS+" SET NOMBRE_AREA='"+s+"' WHERE IDAREA='"+unArea.getIdArea()+"'";
+        database.execSQL(query);
+        database.close();
+    }
 }

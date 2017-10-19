@@ -1,7 +1,10 @@
 package com.demo.nomad.nomad5s.ControllerDatos;
 import android.content.Context;
+import android.support.design.widget.Snackbar;
 
 import com.demo.nomad.nomad5s.DAO.DAOAreas;
+import com.demo.nomad.nomad5s.DAO.DAOAuditorias;
+import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Model.Area;
 
 import java.util.ArrayList;
@@ -15,9 +18,15 @@ import java.util.List;
 public class ControllerDatos {
 
     private Context context;
+    private DAOAreas daoAreas;
+    private DAOCampania daoCampanias;
+    private DAOAuditorias daoAuditorias;
 
     public ControllerDatos(Context context) {
         this.context = context;
+        daoAreas=new DAOAreas(context);
+        daoAuditorias=new DAOAuditorias(context);
+        daoCampanias= new DAOCampania(context);
     }
 
     public List<String>traerSeiri(){
@@ -368,18 +377,33 @@ public class ControllerDatos {
     */
 
 
-public void guardarArea(Area unArea){
-    //GUARDAR EN LA DB
+    public void guardarArea(Area unArea){
+        //GUARDAR EN LA DB
 
-    DAOAreas daoAreas = new DAOAreas(context);
-    daoAreas.addArea(unArea);
+        daoAreas.addArea(unArea);
 
-    //GUARDAR EN FIREBASE
-}
+        //GUARDAR EN FIREBASE
+    }
 
 
     public List<Area> traerListaAreas() {
-        DAOAreas daoAreas = new DAOAreas(context);
         return daoAreas.getAllAreas();
+    }
+
+    public void eliminarArea(Area unArea){
+//        BORRAR DE LA DB
+        daoAreas.borrarArea(unArea);
+//        BORRAR DE FIREBASE
+
+//
+
+    }
+
+    public List<String> traerCampanias() {
+        return daoCampanias.getAllCampanias();
+    }
+
+    public void renombrarArea(Area unArea, String s) {
+        daoAreas.rename(unArea,s);
     }
 }
