@@ -13,8 +13,8 @@
 
         <android.support.v7.widget.CardView
 
-            android:layout_width="@dimen/anchoTarjeta"
-            android:layout_height="@dimen/altoTarjeta"
+            android:layout_width="@dimen/anchoTarjeta2"
+            android:layout_height="@dimen/altoTarjeta2"
             android:layout_margin="@dimen/margenChico"
             android:elevation="5dp"
             app:cardBackgroundColor="@color/tile1">
@@ -48,24 +48,31 @@
                     android:text="new area"
                     android:textColor="@color/primary_text" />
             </LinearLayout>
-                <com.github.clans.fab.FloatingActionButton
-                    android:alpha="0.8"
-                    app:fab_size="mini"
-                    android:src="@drawable/ic_delete_forever_black_24dp"
-                    android:layout_margin="4dp"
-                    android:layout_gravity="center|end"
-                    android:id="@+id/botonEliminar"
+                <RelativeLayout
+                    android:paddingTop="@dimen/margenChico"
+                    android:paddingRight="@dimen/margenChico"
+                    android:layout_gravity="top|end"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
                 <com.github.clans.fab.FloatingActionButton
-                    android:alpha="0.8"
                     app:fab_size="mini"
+                    android:layout_margin="0dp"
                     android:src="@drawable/ic_edit_black_24dp"
-                    android:layout_margin="4dp"
                     android:layout_gravity="center|start"
                     android:id="@+id/botonEditar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+                <com.github.clans.fab.FloatingActionButton
+                    android:layout_margin="0dp"
+                    android:layout_below="@id/botonEditar"
+                    app:fab_size="mini"
+                    android:src="@drawable/ic_delete_forever_black_24dp"
+                    android:layout_gravity="center|end"
+                    android:id="@+id/botonEliminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                </RelativeLayout>
             </FrameLayout>
 
         </android.support.v7.widget.CardView>

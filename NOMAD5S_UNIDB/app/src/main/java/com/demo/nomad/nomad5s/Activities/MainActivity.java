@@ -28,7 +28,7 @@ import com.demo.nomad.nomad5s.R;
 import java.util.UUID;
 
 
-public class MainActivity extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable {
+public class MainActivity extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentManageAuditores.Avisable {
 
     private Button boton;
     private Button boton2;

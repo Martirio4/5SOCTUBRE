@@ -1,11 +1,14 @@
 package com.demo.nomad.nomad5s.ControllerDatos;
 import android.content.Context;
+import android.security.keystore.UserNotAuthenticatedException;
 import android.support.design.widget.Snackbar;
 
 import com.demo.nomad.nomad5s.DAO.DAOAreas;
+import com.demo.nomad.nomad5s.DAO.DAOAuditores;
 import com.demo.nomad.nomad5s.DAO.DAOAuditorias;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Model.Area;
+import com.demo.nomad.nomad5s.Model.Auditor;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -24,12 +27,14 @@ public class ControllerDatos {
     private DAOCampania daoCampanias;
     private DAOAuditorias daoAuditorias;
     private DatabaseReference mDatabase;
+    private DAOAuditores daoAuditores;
 
     public ControllerDatos(Context context) {
         this.context = context;
         daoAreas=new DAOAreas(context);
         daoAuditorias=new DAOAuditorias(context);
         daoCampanias= new DAOCampania(context);
+        daoAuditores=new DAOAuditores(context);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
@@ -413,5 +418,25 @@ public class ControllerDatos {
         daoAreas.rename(unArea,s);
         //RENOMBRAR FIREBASE
         mDatabase.child("AREAS").child(unArea.getIdArea()).child("nombreArea").setValue(s);
+    }
+
+    public List<Auditor> traerListaAuditores() {
+        return daoAuditores.getAllAuditors();
+    }
+
+    public void guardarAuditor(Auditor unAuditor) {
+        //GUARDAR EN LA DB
+        daoAuditores.addAuditor(unAuditor);
+        //GUARDAR EN FIREBASE
+
+    }
+    public void eliminarAuditor(Auditor unAuditor){
+//        BORRAR DE LA DB
+        daoAuditores.borrarAuditor(unAuditor);
+//        BORRAR DE FIREBASE
+
+
+//
+
     }
 }

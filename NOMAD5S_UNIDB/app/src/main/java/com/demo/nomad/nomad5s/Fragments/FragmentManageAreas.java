@@ -10,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -49,7 +50,7 @@ public class FragmentManageAreas extends Fragment {
     private List<Area> listaAreas;
     private RecyclerView recyclerAreas;
     private AdapterArea adapterArea;
-    private GridLayoutManager layoutManager;
+    private LinearLayoutManager layoutManager;
     private File fotoOriginal;
     private File fotoComprimida;
     private FloatingActionButton fabAgregarArea;
@@ -96,7 +97,7 @@ public class FragmentManageAreas extends Fragment {
         recyclerAreas= view.findViewById(R.id.recyclerArea);
         adapterArea= new AdapterArea();
         adapterArea.setContext(getContext());
-        layoutManager= new GridLayoutManager(getContext(),2);
+        layoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerAreas.setLayoutManager(layoutManager);
         adapterArea.setListaAreasOriginales(listaAreas);
         recyclerAreas.setAdapter(adapterArea);

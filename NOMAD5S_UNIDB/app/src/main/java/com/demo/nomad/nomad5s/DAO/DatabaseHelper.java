@@ -58,6 +58,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAOAreas.IDFOTO_AREA + " TEXT, " +
                 DAOAreas.RUTA_FOTO_AREA + " TEXT )";
         db.execSQL(query3);
+
+
+        //CREO TABLA DE AUDITORES
+        String query4 =  "CREATE TABLE " + DAOAuditores.TABLE_AUDITORES  + "(" +
+                DAOAuditores.IDAUDITOR + " TEXT, " +
+                DAOAuditores.NOMBRE_AUDITOR + " TEXT, " +
+                DAOAuditores.IDFOTO_AUDITOR + " TEXT, " +
+                DAOAuditores.CANTIDAD_AUDITORIAS_REALIZADAS + " NUMERIC, " +
+                DAOAuditores.RUTA_FOTO_AUDITOR + " TEXT )";
+        db.execSQL(query4);
     }
 
     @Override

@@ -49,7 +49,7 @@ public class DAOAuditores extends DatabaseHelper {
                 row.put(NOMBRE_AUDITOR, unAuditor.getNombreAuditor());
                 row.put(IDFOTO_AUDITOR, unAuditor.getFotoAuditor().getIdFoto());
                 row.put(RUTA_FOTO_AUDITOR, unAuditor.getFotoAuditor().getRutaFoto());
-                row.put(RUTA_FOTO_AUDITOR, unAuditor.getCantidadAuditoriasRealizada());
+                row.put(CANTIDAD_AUDITORIAS_REALIZADAS, unAuditor.getCantidadAuditoriasRealizada());
 
 
                 //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
@@ -142,7 +142,7 @@ public class DAOAuditores extends DatabaseHelper {
     public void rename(Auditor unAuditor, String s) {
         SQLiteDatabase database = getWritableDatabase();
 
-        String query ="UPDATE "+TABLE_AUDITORES+" SET NOMBRE_AUDITOR='"+s+"' WHERE IDAUDITOR='"+unAuditor.getIDAUDITOR()+"'";
+        String query ="UPDATE "+TABLE_AUDITORES+" SET NOMBRE_AUDITOR='"+s+"' WHERE IDAUDITOR='"+unAuditor.getIdAuditor()+"'";
         database.execSQL(query);
         database.close();
     }

@@ -43,7 +43,7 @@
 
     <com.github.clans.fab.FloatingActionButton
        android:id="@+id/agregarArea"
-       fab:fab_colorNormal="@color/ultraverde"
+       fab:fab_colorNormal="@color/verde"
         android:layout_centerHorizontal="true"
        android:src="@drawable/ic_note_add_black_24dp"
        app:fab_label="@string/addNewArea"

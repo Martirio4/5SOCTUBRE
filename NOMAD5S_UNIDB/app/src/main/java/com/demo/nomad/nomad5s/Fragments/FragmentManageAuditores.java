@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -19,9 +20,10 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.demo.nomad.nomad5s.Adapter.AdapterArea;
+import com.demo.nomad.nomad5s.Adapter.AdapterAuditores;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.Model.Area;
+import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -41,11 +43,11 @@ import pl.aprilapps.easyphotopicker.EasyImage;
  */
 public class FragmentManageAuditores extends Fragment {
 
-    private ControllerDatos controllerAreas;
-    private List<Area> listaAreas;
+    private ControllerDatos controllerAuditores;
+    private List<Auditor> listaAreas;
     private RecyclerView recyclerAreas;
-    private AdapterArea adapterArea;
-    private GridLayoutManager layoutManager;
+    private AdapterAuditores adapterAuditores;
+    private LinearLayoutManager layoutManager;
     private File fotoOriginal;
     private File fotoComprimida;
     private FloatingActionButton fabAgregarArea;
@@ -62,16 +64,16 @@ public class FragmentManageAuditores extends Fragment {
     }
 
     public void updateAdapter() {
-        adapterArea.setListaAreasOriginales(controllerAreas.traerListaAreas());
-        adapterArea.notifyDataSetChanged();
+        adapterAuditores.setListaAuditoresOriginales(controllerAuditores.traerListaAuditores());
+        adapterAuditores.notifyDataSetChanged();
         /*
         Realm realm=Realm.getDefaultInstance();
         RealmResults<Area> result3 = realm.where(Area.class)
                 .findAll();
         listaAreas=new List<>();
         listaAreas.addAll(result3);
-        adapterArea.setListaAreasOriginales(listaAreas);
-        adapterArea.notifyDataSetChanged();
+        adapterAuditores.setListaAreasOriginales(listaAreas);
+        adapterAuditores.notifyDataSetChanged();
         */
     }
 
@@ -80,7 +82,7 @@ public class FragmentManageAuditores extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_manage_auditores, container, false);
-        controllerAreas=new ControllerDatos(getContext());
+        controllerAuditores=new ControllerDatos(getContext());
         /*
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Area> result2 = realm.where(Area.class)
@@ -88,14 +90,14 @@ public class FragmentManageAuditores extends Fragment {
         */
         //PEDIR LISTADO DE AREAS
         listaAreas=new ArrayList<>();
-        listaAreas=controllerAreas.traerListaAreas();
+        listaAreas=controllerAuditores.traerListaAuditores();
         recyclerAreas= view.findViewById(R.id.recyclerArea);
-        adapterArea= new AdapterArea();
-        adapterArea.setContext(getContext());
-        layoutManager= new GridLayoutManager(getContext(),2);
+        adapterAuditores= new AdapterAuditores();
+        adapterAuditores.setContext(getContext());
+        layoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         recyclerAreas.setLayoutManager(layoutManager);
-        adapterArea.setListaAreasOriginales(listaAreas);
-        recyclerAreas.setAdapter(adapterArea);
+        adapterAuditores.setListaAuditoresOriginales(listaAreas);
+        recyclerAreas.setAdapter(adapterAuditores);
 
         fabAgregarArea =(FloatingActionButton) view.findViewById(R.id.agregarArea);
 
@@ -142,7 +144,7 @@ public class FragmentManageAuditores extends Fragment {
                                 .setMaxHeight(480)
                                 .setQuality(75)
                                 .setCompressFormat(Bitmap.CompressFormat.WEBP)
-                                .setDestinationDirectoryPath(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "AREAS")
+                                .setDestinationDirectoryPath(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "AUDITORES")
                                 .compressToFile(fotoOriginal);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -177,7 +179,7 @@ public class FragmentManageAuditores extends Fragment {
     }
     public void existeDirectorioImagenesAreas() {
         Boolean sePudo = true;
-        File dir = new File(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "AREAS");
+        File dir = new File(fotoOriginal.getParent() + File.separator + "images"+ File.separator + "AUDITORES");
         if (!dir.exists() || !dir.isDirectory()) {
             sePudo = dir.mkdirs();
         }
@@ -192,17 +194,17 @@ public class FragmentManageAuditores extends Fragment {
     public void crearDialogoNombreArea(final Foto unaFoto){
 
         new MaterialDialog.Builder(getContext())
-                .title("New Area")
-                .content("Name for the new Area")
+                .title("New Auditor")
+                .content("Name for the new Auditor")
                 .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("Area name","", new MaterialDialog.InputCallback() {
+                .input("Auditor name","", new MaterialDialog.InputCallback() {
                     @Override
                     public void onInput(MaterialDialog dialog, CharSequence input) {
 
-                        final Area unArea = new Area();
-                        unArea.setNombreArea(input.toString());
-                        unArea.setFotoArea(unaFoto);
-                        unArea.setIdArea("area" + UUID.randomUUID());
+                        final Auditor unAuditor = new Auditor();
+                        unAuditor.setNombreAuditor(input.toString());
+                        unAuditor.setFotoAuditor(unaFoto);
+                        unAuditor.setIdAuditor("AUDITOR" + UUID.randomUUID());
                         /*
                             //guardo nueva area en Realm
                             Realm realm = Realm.getDefaultInstance();
@@ -214,14 +216,14 @@ public class FragmentManageAuditores extends Fragment {
                             });
                         */
                         try {
-                            controllerAreas.guardarArea(unArea);
+                            controllerAuditores.guardarAuditor(unAuditor);
                             updateAdapter();
                            // dialogoExito(unArea);
-                            Snackbar.make(getView(),unArea.getNombreArea()+" was succesfully created",Snackbar.LENGTH_SHORT)
+                            Snackbar.make(getView(),unAuditor.getNombreAuditor()+" account was succesfully created",Snackbar.LENGTH_SHORT)
                                     .show();
                         } catch (Exception e) {
                             e.printStackTrace();
-                            Snackbar.make(getView(),"Area was not saved. Please try again",Snackbar.LENGTH_SHORT)
+                            Snackbar.make(getView(),"Auditor was not saved. Please try again",Snackbar.LENGTH_SHORT)
                                     .show();
                         }
 
