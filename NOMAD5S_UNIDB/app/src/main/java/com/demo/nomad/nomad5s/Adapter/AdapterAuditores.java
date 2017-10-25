@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -69,9 +70,9 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
         View viewCelda;
         FragmentActivity unaActivity = (FragmentActivity) context;
         FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-        FragmentManageAuditores FragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("FragmentManageAuditores");
+        FragmentManageAuditores fragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
 
-        if (FragmentManageAuditores != null && FragmentManageAuditores.isVisible()) {
+        if (fragmentManageAuditores != null && fragmentManageAuditores.isVisible()) {
             viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_auditores, parent, false);
         }
         else{
@@ -90,7 +91,7 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
 
         FragmentActivity unaActivity = (FragmentActivity) context;
         FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-        FragmentManageAuditores FragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("FragmentManageAuditores");
+        FragmentManageAuditores FragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
 
 
         if (FragmentManageAuditores != null && FragmentManageAuditores.isVisible()) {
@@ -138,8 +139,8 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
         private CircleImageView circleImageView;
         private TextView textViewNombre;
         private TextView textViewAudits;
-        private FloatingActionButton fabEliminar;
-        private FloatingActionButton fabEditar;
+        private ImageButton fabEliminar;
+        private ImageButton fabEditar;
 
 
 
@@ -151,14 +152,14 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
 
             FragmentActivity unaActivity = (FragmentActivity) itemView.getContext();
             FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-            FragmentManageAuditores FragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("FragmentManageAuditores");
+            FragmentManageAuditores FragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
 
             if (FragmentManageAuditores != null && FragmentManageAuditores.isVisible()) {
-                fabEliminar = (FloatingActionButton) itemView.findViewById(R.id.botonEliminar);
-                fabEliminar.setColorNormal(ContextCompat.getColor(itemView.getContext(), R.color.antiverde));
+                fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
 
-                fabEditar=(FloatingActionButton) itemView.findViewById(R.id.botonEditar);
-                fabEditar.setColorNormal(ContextCompat.getColor(itemView.getContext(),R.color.amarillito));
+
+                fabEditar=(ImageButton) itemView.findViewById(R.id.botonEditar);
+
             }
         }
 

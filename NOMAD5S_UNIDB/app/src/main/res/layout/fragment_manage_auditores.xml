@@ -1,66 +1,56 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/marfil"
+    android:background="@color/blancoNomad"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
+
 
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.demo.nomad.nomad5s.Fragments.FragmentManageAreas">
+
+
+
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/textoTituloManage"
-        android:textColor="@color/ultraverde"
-        android:textSize="20sp"
-        android:layout_marginTop="@dimen/margenChico"
-        android:gravity="center"
-        android:text="@string/manageAreas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <TextView
 
+            android:id="@+id/textoTituloManage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margenMini"
+            android:gravity="center"
+            android:text="@string/manageAuditores"
+            android:textColor="@color/grisOscuroNomad"
+            android:textSize="20sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerArea"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/margenGrande"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
 
-    </android.support.v7.widget.RecyclerView>
+            android:id="@+id/recyclerArea"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginEnd="@dimen/margenMini"
+            android:layout_marginBottom="@dimen/margenGrande"
+            android:layout_marginStart="@dimen/margenMini">
+        </android.support.v7.widget.RecyclerView>
+
     </LinearLayout>
 
-<RelativeLayout
-    android:layout_gravity="bottom|end"
-    android:layout_margin="@dimen/margenChico"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-
     <com.github.clans.fab.FloatingActionButton
-       android:id="@+id/agregarArea"
-       fab:fab_colorNormal="@color/ultraverde"
+        android:layout_gravity="bottom|end"
+        android:id="@+id/agregarArea"
+        fab:fab_colorNormal="@color/colorAccent"
         android:layout_centerHorizontal="true"
-       android:src="@drawable/ic_note_add_black_24dp"
-       app:fab_label="@string/addNewArea"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content" />
-    <TextView
-        android:elevation="5dp"
-        android:textColor="@color/ultraverde"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/agregarArea"
-        android:text="New"
-        android:id="@+id/textoFab"
+        android:src="@drawable/ic_note_add_black_24dp"
+        app:fab_label="@string/addNewArea"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-</RelativeLayout>
+        android:layout_height="wrap_content" />
 
 
 

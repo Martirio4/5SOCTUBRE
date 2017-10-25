@@ -62,7 +62,7 @@
             from the colorAccent attribute of AppCompat or android:colorAccent
             attribute of the Material theme.
         -->
-        <item name="md_positive_color">@color/verdeoscuro</item>
+        <item name="md_positive_color">@color/unverdemediano</item>
 
         <!--
             By default, the neutral action text color is derived

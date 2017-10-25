@@ -439,4 +439,8 @@ public class ControllerDatos {
 //
 
     }
+
+    public void renombrarAuditor(Auditor unAuditor, String s) {
+        daoAuditores.rename(unAuditor, s);
+    }
 }

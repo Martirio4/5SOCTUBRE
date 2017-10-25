@@ -3,107 +3,94 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/blancoNomad"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-        <android.support.v7.widget.CardView
-            android:layout_gravity="center"
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/altoTarjeta3"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margenMini"
+        android:layout_marginStart="@dimen/margenChico"
+        android:layout_marginEnd="@dimen/margenChico"
+        android:elevation="5dp"
+        app:cardBackgroundColor="@color/marfil">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/altoTarjeta3"
-            android:layout_margin="@dimen/margenChico"
-            app:cardBackgroundColor="@color/marfil"
-            android:elevation="5dp"
-            >
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margenMini"
+            android:layout_marginEnd="@dimen/margenChico"
+            android:layout_marginStart="@dimen/margenChico"
+            android:layout_marginTop="@dimen/margenMini"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imagenCamara"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:src="@drawable/desconocidocolor"
+                app:civ_border_color="#000000"
+                app:civ_border_width="3dp" />
+
 
             <LinearLayout
-                android:layout_margin="@dimen/margenChico"
-                android:layout_gravity="center"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:id="@+id/linearTextoNombreAuditor"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:orientation="vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imagenCamara"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    android:src="@drawable/desconocidocolor"
-                    app:civ_border_width="2dp"
-                    android:layout_gravity="center"
-                    app:civ_border_color="#000000"/>
 
 
                 <LinearLayout
-                    android:id="@+id/linearTextoNombreAuditor"
-                    android:orientation="vertical"
-                    android:layout_weight="80"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:layout_marginStart="@dimen/margenGrande"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="50">
+
+
 
                     <TextView
-                        android:layout_marginLeft="@dimen/margenGrande"
                         android:id="@+id/nombreAuditor"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="60"
-                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingStart="@dimen/margenChico"
                         android:gravity="center"
                         android:text="Auditor name"
-                        android:textColor="@color/primary_text" />
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_weight="40"
-                        android:layout_height="0dp">
-                        <TextView
-                            android:textAlignment="textEnd"
-                            android:layout_marginLeft="@dimen/margenGrande"
-                            android:id="@+id/cantidadAuditorias"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="50"
-                            android:textSize="20sp"
-                            android:text="44"
-                            android:textColor="@color/primary_text" />
-                        <TextView
-                            android:textAlignment="textStart"
-                            android:layout_weight="50"
-                            android:text=" Audits"
-                            android:layout_width="0dp"
-                            android:textSize="20sp"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/primary_text"
-                            />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearBotones"
-                    android:orientation="vertical"
-                    android:layout_weight="20"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
-
-                    <com.github.clans.fab.FloatingActionButton
-                        android:layout_gravity="center"
-                        app:fab_size="mini"
-                        android:src="@drawable/ic_delete_forever_black_24dp"
-                        android:id="@+id/botonEliminar"
-                        android:layout_width="wrap_content"
-                        android:layout_weight="50"
-                        android:layout_height="0dp" />
-                    <com.github.clans.fab.FloatingActionButton
-                        android:layout_gravity="center"
-                        app:fab_size="mini"
-                        android:src="@drawable/ic_edit_black_24dp"
+                        android:textColor="@color/primary_text"
+                        android:textSize="15sp" />
+                    <ImageButton
+                        android:layout_marginStart="@dimen/margenMini"
                         android:id="@+id/botonEditar"
                         android:layout_width="wrap_content"
-                        android:layout_weight="50"
-                        android:layout_height="0dp" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_edit_black_24dp" />
+
+
                 </LinearLayout>
+
+
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+
+            <ImageButton
+                android:background="@android:color/transparent"
+                android:id="@+id/botonEliminar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|end"
+                android:src="@drawable/ic_delete_forever_red_24dp"
+                />
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
+
