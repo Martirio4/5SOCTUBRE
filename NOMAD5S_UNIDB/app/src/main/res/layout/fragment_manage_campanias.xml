@@ -44,7 +44,7 @@
 
     <com.github.clans.fab.FloatingActionButton
         android:layout_gravity="bottom|end"
-        android:id="@+id/agregarArea"
+        android:id="@+id/agregarCampania"
         fab:fab_colorNormal="@color/colorAccent"
         android:layout_centerHorizontal="true"
         android:src="@drawable/ic_note_add_black_24dp"

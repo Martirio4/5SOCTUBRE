@@ -82,19 +82,22 @@ public class DAOCampania extends DatabaseHelper {
 //    }
 
 
-    public List<String> getAllCampanias(){
+    public List<Campania> getAllCampanias(){
 
-        List<String> allCampanias  = new ArrayList<>();
+        List<Campania> allCampanias  = new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
-        String select = "SELECT IDCAMPANIA, NOMBRE_CAMPANIA, FECHA_FIN_CAMPANIA, FECHA_INICIO_CAMPANIA, SUM(CANTIDAD_AUDITORIAS_PROGRAMADAS) AS TOTPROG, " +
-                "SUM(CANTIDAD_AUDITORIAS_TERMINADAS) AS TOTTER, IDAUDITORIA  FROM " + TABLE_CAMPANIA +"GROUP BY IDAUDITORIA";
+        String select = "SELECT * FROM " + TABLE_CAMPANIA;
 
         Cursor cursor = database.rawQuery(select, null);
+        Campania laCampania = new Campania();
         while(cursor.moveToNext()){
+            if (cursor.getString(cursor.getColumnIndex(IDCAMPANIA)).equals(laCampania.getIdCampania())){
 
-//            AGREGO EL NOMBRE DE TODAS LAS CAMPAÑAS A LA LISTA
-            allCampanias.add(cursor.getString(cursor.getColumnIndex(NOMBRE_CAMPANIA)));
-
+            }
+            else{
+                laCampania= getCampania(cursor.getString(cursor.getColumnIndex(IDCAMPANIA)));
+                allCampanias.add(laCampania);
+            }
         }
         //CERRAR
         cursor.close();

@@ -2,18 +2,29 @@ package com.demo.nomad.nomad5s.Fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.demo.nomad.nomad5s.Adapter.AdapterCampania;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
+import com.demo.nomad.nomad5s.Model.Auditor;
+import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +40,7 @@ public class FragmentManageCampanias extends Fragment {
     private AdapterCampania adapterCampania;
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerCampania;
+    private FloatingActionButton fabAgregarCampania;
 
 
     @Override
@@ -38,20 +50,49 @@ public class FragmentManageCampanias extends Fragment {
         View view = inflater.inflate(R.layout.fragment_manage_campanias, container, false);
         controllerCampanias = new ControllerDatos(getContext());
 
-        recyclerCampania= (RecyclerView) view.findViewById(R.id.recyclerCampania);
+        recyclerCampania= view.findViewById(R.id.recyclerCampania);
         layoutManager= new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerCampania.setLayoutManager(layoutManager);
         adapterCampania= new AdapterCampania();
         adapterCampania.setContext(getContext());
         recyclerCampania.setAdapter(adapterCampania);
         adapterCampania.setListaCampaniaesOriginales(controllerCampanias.traerListaCampanias());
+        adapterCampania.notifyDataSetChanged();
 
+        fabAgregarCampania=view.findViewById(R.id.agregarCampania);
+        fabAgregarCampania.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                crearDialogoNuevaCampania();
+            }
+        });
+        return view;
+    }
 
+    public void crearDialogoNuevaCampania(){
 
+        new MaterialDialog.Builder(getContext())
+                .title("New Campaign")
+                .customView(R.layout.dialog_layout,true)
+                .inputType(InputType.TYPE_CLASS_DATETIME)
+                .negativeText("cancelar")
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
 
+                    }
+                })
+                .positiveText("toast")
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        View view = dialog.getView();
+                        EditText unedit= (EditText)view.findViewById(R.id.asd123);
+                        Toast.makeText(getContext(), unedit.getText().toString(),Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show();
 
-
-        return view
     }
 
 }

@@ -410,9 +410,6 @@ public class ControllerDatos {
 
     }
 
-    public List<String> traerCampanias() {
-        return daoCampanias.getAllCampanias();
-    }
 
     public void renombrarArea(Area unArea, String s) {
         //RENOMBRAR DB

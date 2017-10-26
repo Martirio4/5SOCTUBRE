@@ -49,21 +49,7 @@ public class MainActivity extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new MaterialDialog.Builder(MainActivity.this)
-                        .title("Add a comment")
-                        .contentColor(ContextCompat.getColor(MainActivity.this, R.color.colorPrimary))
-                        .backgroundColor(ContextCompat.getColor(MainActivity.this, R.color.marfil))
-                        .titleColor(ContextCompat.getColor(MainActivity.this, R.color.colorPrimaryDark))
-                        .content("Please, add a comment for this photo")
-                        .inputType(InputType.TYPE_CLASS_TEXT)
-                        .input("Comment","", new MaterialDialog.InputCallback() {
-                            @Override
-                            public void onInput(MaterialDialog dialog, CharSequence input) {
-
-
-
-                            }
-                        }).show();
+                abrirDeterminadoFragment("manageCampanias");
 
 
 
