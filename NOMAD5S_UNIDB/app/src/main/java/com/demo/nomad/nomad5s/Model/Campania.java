@@ -11,7 +11,10 @@ public class Campania {
 
     private String idCampania;
     private String nombreCampaña;
+    private String fechaInicio;
     private String fechaLimite;
+    private Integer cantidadAuditoriasProgramadas;
+    private Integer cantidadAuditoriasTerminadas;
     private List<Auditoria>auditoriasCampania;
 
 //CONSTRUCTOR
@@ -59,5 +62,29 @@ public class Campania {
 
     public void setNombreCampaña(String nombreCampaña) {
         this.nombreCampaña = nombreCampaña;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Integer getCantidadAuditoriasProgramadas() {
+        return cantidadAuditoriasProgramadas;
+    }
+
+    public void setCantidadAuditoriasProgramadas(Integer cantidadAuditoriasProgramadas) {
+        this.cantidadAuditoriasProgramadas = cantidadAuditoriasProgramadas;
+    }
+
+    public Integer getCantidadAuditoriasTerminadas() {
+        return cantidadAuditoriasTerminadas;
+    }
+
+    public void setCantidadAuditoriasTerminadas(Integer cantidadAuditoriasTerminadas) {
+        this.cantidadAuditoriasTerminadas = cantidadAuditoriasTerminadas;
     }
 }

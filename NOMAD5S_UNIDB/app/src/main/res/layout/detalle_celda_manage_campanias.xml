@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/blancoNomad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/altoTarjeta4"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margenMini"
+        android:layout_marginStart="@dimen/margenChico"
+        android:layout_marginEnd="@dimen/margenChico"
+        android:elevation="5dp"
+        app:cardBackgroundColor="@color/marfil"
+    >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_margin="@dimen/margenMini"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <LinearLayout
+                android:layout_weight="25"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+                <TextView
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:text="NombreCampania"
+                    android:textSize="25sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_weight="75"
+                android:layout_height="0dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/columna1"
+                    android:layout_width="0dp"
+                    android:layout_weight="25"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="@string/tagFechaInicio"
+                        android:id="@+id/tagFechaInicio"
+                        android:layout_weight="20"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"/>
+                    <TextView
+                        android:textSize="20sp"
+                        android:text="@string/tagFechaStart"
+                        android:id="@+id/tagFechaFin"
+                        android:layout_weight="30"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                    <TextView
+                        android:text="@string/tagFechaInicio"
+                        android:id="@+id/editFechaInicio"
+                        android:layout_weight="20"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"/>
+                    <TextView
+                        android:textSize="20sp"
+                        android:text="@string/tagFechaFin"
+                        android:id="@+id/editFechaFin"
+                        android:layout_weight="30"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/columna2"
+                    android:layout_width="0dp"
+                    android:layout_weight="15"
+                    android:layout_height="match_parent">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/columna3"
+                    android:layout_width="0dp"
+                    android:layout_weight="30"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:gravity="center"
+                        android:text="@string/tagCantidadAuditoriasProgramadas"
+                        android:id="@+id/tagCantidadAuditoriasProgramadas"
+                        android:layout_weight="20"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"/>
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="40sp"
+                        android:text="00"
+                        android:id="@+id/cantidadAuditoriasProgramadas"
+                        android:layout_weight="80"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:id="@+id/columna4"
+                    android:layout_width="0dp"
+                    android:layout_weight="30"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:gravity="center"
+                        android:text="@string/tagCantidadAuditoriasTerminadas"
+                        android:id="@+id/tagCantidadAuditoriasTerminadas"
+                        android:layout_weight="20"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"/>
+                    <TextView
+                        android:gravity="center"
+                        android:textSize="40sp"
+                        android:text="00"
+                        android:id="@+id/cantidadAuditoriasTerminadas"
+                        android:layout_weight="80"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
+

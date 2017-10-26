@@ -28,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //CREO TABLA DE CAMPANIAS
         String query =  "CREATE TABLE " + DAOCampania.TABLE_CAMPANIA  + "(" +
                 DAOCampania.IDCAMPANIA + " TEXT, " +
-                DAOCampania.FECHA_CAMPANIA + " TEXT, " +
+                DAOCampania.FECHA_FIN_CAMPANIA + " TEXT, " +
                 DAOCampania.IDAUDITORIA + " TEXT, " +
                 DAOCampania.NOMBRE_CAMPANIA + " TEXT )";
         db.execSQL(query);

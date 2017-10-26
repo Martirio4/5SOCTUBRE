@@ -24,6 +24,7 @@ import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAreas;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAuditores;
+import com.demo.nomad.nomad5s.Fragments.FragmentManageCampanias;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Campania;
@@ -61,11 +62,10 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
                 abrirFragmentManageAreas();
                 getSupportActionBar().setTitle("Manage audit areas");
                 break;
+            case "manageCampanias":
+                abrirFragmentManageCampanias();
+                getSupportActionBar().setTitle("Manage Campaigns");
         }
-
-      
-
-        
 
     }
 
@@ -81,6 +81,13 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
         FragmentManager fragmentManager= getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerFragment,fragmentManageAuditores,"fragmentManageAuditores");
+        fragmentTransaction.commit();
+    }
+    private void abrirFragmentManageCampanias() {
+        FragmentManageCampanias fragmentManageCampanias = new FragmentManageCampanias();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.containerFragment,fragmentManageCampanias,"fragmentManageCampanias");
         fragmentTransaction.commit();
     }
 

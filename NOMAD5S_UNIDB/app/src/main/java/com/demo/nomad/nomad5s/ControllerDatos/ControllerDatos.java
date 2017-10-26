@@ -9,6 +9,7 @@ import com.demo.nomad.nomad5s.DAO.DAOAuditorias;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
+import com.demo.nomad.nomad5s.Model.Campania;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -442,5 +443,9 @@ public class ControllerDatos {
 
     public void renombrarAuditor(Auditor unAuditor, String s) {
         daoAuditores.rename(unAuditor, s);
+    }
+
+    public List<Campania> traerListaCampanias() {
+        return daoCampanias.getAllCampanias();
     }
 }

@@ -22,4 +22,14 @@
     <string name="signOut">Sign out your account and quit</string>
     <string name="settings">Settings</string>
     <string name="manageAuditores">Manage audit team</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="manageCampanias">Manage campaigns</string>
+    <string name="fechaInicioCampania">Kick off date:</string>
+    <string name="tagFechaInicio">Kick Off</string>
+    <string name="tagFechaFin">End Date</string>
+    <string name="tagFechaStart">StartDate</string>
+    <string name="tagCantidadAuditoriasProgramadas">Total audits</string>
+    <string name="tagCantidadAuditoriasTerminadas">Finished</string>
 </resources>

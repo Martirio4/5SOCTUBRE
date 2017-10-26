@@ -11,4 +11,5 @@
     <dimen name="margenGrande">16dp</dimen>
     <dimen name="title_text_size">12dp</dimen>
     <dimen name="margenMini">4dp</dimen>
+    <dimen name="altoTarjeta4">160dp</dimen>
 </resources>

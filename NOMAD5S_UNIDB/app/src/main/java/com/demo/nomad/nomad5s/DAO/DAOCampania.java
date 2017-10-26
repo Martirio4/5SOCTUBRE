@@ -20,7 +20,10 @@ public class DAOCampania extends DatabaseHelper {
     private Context context;
 
    public static final String IDCAMPANIA = "IDCAMPANIA";
-   public static final String FECHA_CAMPANIA = "FECHA_CAMPANIA";
+   public static final String FECHA_FIN_CAMPANIA = "FECHA_FIN_CAMPANIA";
+   public static final String FECHA_INICIO_CAMPANIA = "FECHA_INICIO_CAMPANIA";
+   public static final String CANTIDAD_AUDITORIAS_PROGRAMADAS = "CANTIDAD_AUDITORIAS_PROGRAMADAS";
+   public static final String CANTIDAD_AUDITORIAS_TERMINADAS = "CANTIDAD_AUDITORIAS_TERMINADAS";
    public static final String IDAUDITORIA = "IDAUDITORIA";
    public static final String NOMBRE_CAMPANIA = "NOMBRE_CAMPANIA";
 
@@ -46,7 +49,10 @@ public class DAOCampania extends DatabaseHelper {
                     //CREO LA FILA Y LE CARGO LOS DATOS
                     ContentValues row = new ContentValues();
                     row.put(IDCAMPANIA, unaCampania.getIdCampania());
-                    row.put(FECHA_CAMPANIA, unaCampania.getFechaLimite());
+                    row.put(FECHA_FIN_CAMPANIA, unaCampania.getFechaLimite());
+                    row.put(FECHA_INICIO_CAMPANIA, unaCampania.getFechaInicio());
+                    row.put(CANTIDAD_AUDITORIAS_PROGRAMADAS, unaCampania.getCantidadAuditoriasProgramadas());
+                    row.put(CANTIDAD_AUDITORIAS_TERMINADAS, unaCampania.getCantidadAuditoriasTerminadas());
                     row.put(NOMBRE_CAMPANIA, unaCampania.getNombreCampaña());
                     row.put(IDAUDITORIA, unAudit.getIdAuditoria());
 
@@ -58,8 +64,9 @@ public class DAOCampania extends DatabaseHelper {
             else{
                 ContentValues row = new ContentValues();
                 row.put(IDCAMPANIA, unaCampania.getIdCampania());
-                row.put(FECHA_CAMPANIA, unaCampania.getFechaLimite());
+                row.put(FECHA_FIN_CAMPANIA, unaCampania.getFechaLimite());
                 row.put(NOMBRE_CAMPANIA, unaCampania.getNombreCampaña());
+                row.put(FECHA_INICIO_CAMPANIA, unaCampania.getFechaInicio());
                 database.insert(TABLE_CAMPANIA,null,row);
             }
             database.close();
@@ -79,7 +86,8 @@ public class DAOCampania extends DatabaseHelper {
 
         List<String> allCampanias  = new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
-        String select = "SELECT IDCAMPANIA, NOMBRE_CAMPANIA FROM " + TABLE_CAMPANIA + " GROUP BY IDCAMPANIA" ;
+        String select = "SELECT IDCAMPANIA, NOMBRE_CAMPANIA, FECHA_FIN_CAMPANIA, FECHA_INICIO_CAMPANIA, SUM(CANTIDAD_AUDITORIAS_PROGRAMADAS) AS TOTPROG, " +
+                "SUM(CANTIDAD_AUDITORIAS_TERMINADAS) AS TOTTER, IDAUDITORIA  FROM " + TABLE_CAMPANIA +"GROUP BY IDAUDITORIA";
 
         Cursor cursor = database.rawQuery(select, null);
         while(cursor.moveToNext()){
@@ -107,12 +115,15 @@ public class DAOCampania extends DatabaseHelper {
 
         Cursor cursor = database.rawQuery(query, null);
         Campania unaCampania = null;
-        if(cursor.moveToNext()){
+        while (cursor.moveToNext()){
 
             //LEER CADA FILA DE LA TABLA RESULTADO
 
             unaCampania.setIdCampania(cursor.getString(cursor.getColumnIndex(IDCAMPANIA)));
-            unaCampania.setFechaLimite(cursor.getString(cursor.getColumnIndex(FECHA_CAMPANIA)));
+            unaCampania.setFechaLimite(cursor.getString(cursor.getColumnIndex(FECHA_FIN_CAMPANIA)));
+            unaCampania.setFechaInicio(cursor.getString(cursor.getColumnIndex(FECHA_INICIO_CAMPANIA)));
+            unaCampania.setCantidadAuditoriasProgramadas(cursor.getInt(cursor.getColumnIndex(CANTIDAD_AUDITORIAS_PROGRAMADAS)));
+            unaCampania.setCantidadAuditoriasTerminadas(cursor.getInt(cursor.getColumnIndex(CANTIDAD_AUDITORIAS_TERMINADAS)));
 
             Auditoria unAuditoria = new Auditoria();
             unAuditoria=daoAuditorias.getAuditoria(cursor.getString(cursor.getColumnIndex(IDAUDITORIA)));
