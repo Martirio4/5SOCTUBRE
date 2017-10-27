@@ -14,6 +14,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -22,18 +23,22 @@ import com.demo.nomad.nomad5s.Adapter.AdapterAuditores;
 import com.demo.nomad.nomad5s.Adapter.AdapterTesting;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
+import com.demo.nomad.nomad5s.Fragments.FragmentCrearCampania;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAreas;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAuditores;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageCampanias;
+import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAreas;
+import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAuditores;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
+import com.demo.nomad.nomad5s.Model.Auditoria;
 import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.R;
 
 import java.util.List;
 import java.util.UUID;
 
-public class ActivityBase extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentManageAuditores.Avisable, AdapterAuditores.EditaEliminable {
+public class ActivityBase extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentSeleccionAuditores.Terminable, FragmentCrearCampania.Elegible, FragmentManageAuditores.Avisable, AdapterAuditores.EditaEliminable,FragmentManageCampanias.Creable {
 
    
     private ControllerDatos controllerDatos;
@@ -56,15 +61,19 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
         switch (queFragmentTengoQueAbrir) {
             case "manageAuditores":
                 abrirFragmentManageAuditores();
-                getSupportActionBar().setTitle("Manage audit team");
+
                 break;
             case "manageAreas":
                 abrirFragmentManageAreas();
-                getSupportActionBar().setTitle("Manage audit areas");
+
                 break;
             case "manageCampanias":
                 abrirFragmentManageCampanias();
-                getSupportActionBar().setTitle("Manage Campaigns");
+
+            case "crearCampania":
+                abrirFragmentCrearCampanias();
+
+
         }
 
     }
@@ -75,6 +84,18 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerFragment,fragmentCargarArea,"fragmentManageAreas");
         fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Manage audit areas");
+
+    }
+    private void abrirFragmentSeleccionAreas() {
+        FragmentSeleccionAreas fragmentCargarArea = new FragmentSeleccionAreas();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.containerFragment,fragmentCargarArea,"fragmentSeleccionAreas");
+        fragmentTransaction.addToBackStack("seleccionArea");
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Select audit area");
+
     }
     private void abrirFragmentManageAuditores() {
         FragmentManageAuditores fragmentManageAuditores = new FragmentManageAuditores();
@@ -82,6 +103,22 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerFragment,fragmentManageAuditores,"fragmentManageAuditores");
         fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Manage audit team");
+    }
+    private void abrirFragmentSeleccionAuditores(Area unArea){
+        FragmentSeleccionAuditores fragmentSeleccionAuditores = new FragmentSeleccionAuditores();
+
+        Bundle bundle= new Bundle();
+        bundle.putString(FragmentSeleccionAuditores.IDAREA,unArea.getIdArea());
+        fragmentSeleccionAuditores.setArguments(bundle);
+
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(R.id.containerFragment,fragmentSeleccionAuditores,"fragmentSeleccionAuditores");
+        fragmentTransaction.addToBackStack("seleccionAuditor");
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Select Auditor");
+
     }
     private void abrirFragmentManageCampanias() {
         FragmentManageCampanias fragmentManageCampanias = new FragmentManageCampanias();
@@ -89,8 +126,26 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.containerFragment,fragmentManageCampanias,"fragmentManageCampanias");
         fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Manage Campaigns");
+    }
+    private void abrirFragmentCrearCampanias(){
+        FragmentCrearCampania fragmentCrearCampania = new FragmentCrearCampania();
+        FragmentManager fragmentManager= getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.containerFragment,fragmentCrearCampania,"fragmentCrearCampanias");
+        fragmentTransaction.commit();
+        getSupportActionBar().setTitle("Create Campaign");
     }
 
+
+
+
+
+
+    @Override
+    public void abrirFragmentCreacionCampanias() {
+        abrirFragmentCrearCampanias();
+    }
 
     @Override
     public void salirDeAca() {
@@ -310,4 +365,29 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
 
     }
 
+    @Override
+    public void armarAuditoria(Area unArea, Auditor unAuditor) {
+        FragmentManager fm = this.getSupportFragmentManager();
+        fm.popBackStack("seleccionArea",fm.POP_BACK_STACK_INCLUSIVE);
+        fm.popBackStack("seleccionAuditor",fm.POP_BACK_STACK_INCLUSIVE);
+
+        Auditoria unAudit=new Auditoria();
+        unAudit.setAreaAuditada(unArea);
+        unAudit.setAuditor(unAuditor);
+        unAudit.setIdAuditoria("audit_"+UUID.randomUUID());
+        FragmentCrearCampania fcc=(FragmentCrearCampania) fm.findFragmentByTag("fragmentCrearCampanias");
+        unAudit.setDeadLine(fcc.getDeadline());
+        Toast.makeText(this, fcc.getDeadline(), Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void elegirArea() {
+        abrirFragmentSeleccionAreas();
+
+    }
+
+    @Override
+    public void elegirAuditor(Area unArea) {
+        abrirFragmentSeleccionAuditores(unArea);
+    }
 }

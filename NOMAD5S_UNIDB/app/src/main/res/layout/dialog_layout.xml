@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<android.support.design.widget.TextInputLayout
-    android:hint="Campaign name"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <EditText
-        android:id="@+id/asd124"
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="300dp"
+    android:layout_height="300dp">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerDialogArea"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</android.support.design.widget.TextInputLayout>
+        android:layout_height="match_parent">
 
-
-<android.support.design.widget.TextInputLayout
-    android:hint="kick off date"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <EditText
-        android:inputType="date"
-        android:id="@+id/asd125"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</android.support.design.widget.TextInputLayout>
-
-<android.support.design.widget.TextInputLayout
-    android:hint="finish date"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-        <EditText
-            android:inputType="date"
-            android:id="@+id/asd123"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        />
-</android.support.design.widget.TextInputLayout>
-
-
-
-
-
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

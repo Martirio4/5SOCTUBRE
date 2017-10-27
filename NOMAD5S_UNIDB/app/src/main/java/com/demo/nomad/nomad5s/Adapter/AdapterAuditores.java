@@ -68,16 +68,11 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View viewCelda;
-        FragmentActivity unaActivity = (FragmentActivity) context;
-        FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-        FragmentManageAuditores fragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
 
-        if (fragmentManageAuditores != null && fragmentManageAuditores.isVisible()) {
             viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_auditores, parent, false);
-        }
-        else{
-            viewCelda=layoutInflater.inflate(R.layout.detalle_celda_seleccion_auditores,parent,false);
-        }
+
+
+        viewCelda.setOnClickListener(listener);
         AuditorViewHolder AuditoresViewHolder = new AuditorViewHolder(viewCelda);
 
         return AuditoresViewHolder;
@@ -99,7 +94,7 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
             AuditorViewHolder.fabEliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    editaEliminable = (EditaEliminable) v.getContext();
+                    editaEliminable = (EditaEliminable) context;
                     editaEliminable.EliminarAuditor(unAuditor);
 
                 }
@@ -108,10 +103,14 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
             AuditorViewHolder.fabEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    editaEliminable=(EditaEliminable) view.getContext();
+                    editaEliminable=(EditaEliminable) context;
                     editaEliminable.editarAuditor(unAuditor);
                 }
             });
+        }
+        else{
+            AuditorViewHolder.fabEditar.setVisibility(View.GONE);
+            AuditorViewHolder.fabEliminar.setVisibility(View.GONE);
         }
 
     }
@@ -150,17 +149,13 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
             textViewNombre= (TextView) itemView.findViewById(R.id.nombreAuditor);
             textViewAudits= (TextView) itemView.findViewById(R.id.cantidadAuditorias);
 
-            FragmentActivity unaActivity = (FragmentActivity) itemView.getContext();
-            FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-            FragmentManageAuditores FragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
 
-            if (FragmentManageAuditores != null && FragmentManageAuditores.isVisible()) {
                 fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
 
 
                 fabEditar=(ImageButton) itemView.findViewById(R.id.botonEditar);
 
-            }
+
         }
 
         public void cargarAuditor(Auditor unAuditor) {

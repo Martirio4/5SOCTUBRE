@@ -66,7 +66,7 @@ public class DAOAuditorias extends DatabaseHelper {
             row.put(NOMBRE_AREA, unAuditoria.getAreaAuditada().getNombreArea());
             row.put(IDFOTO_AREA, unAuditoria.getAreaAuditada().getFotoArea().getIdFoto());
             row.put(RUTA_FOTO_AREA, unAuditoria.getAreaAuditada().getFotoArea().getRutaFoto());
-            row.put(AUDITOR, unAuditoria.getAuditor());
+            row.put(AUDITOR, unAuditoria.getAuditor().getIdAuditor());
 
             //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
             database.insert(TABLE_AUDITORIAS, null, row);
@@ -102,7 +102,7 @@ public class DAOAuditorias extends DatabaseHelper {
                     unAuditoria.setIdAuditoria(cursor.getString(cursor.getColumnIndex(IDAUDITORIA)));
                     unAuditoria.setIdCampania(cursor.getString(cursor.getColumnIndex(IDCAMPANIA)));
                     unAuditoria.setDeadLine(cursor.getString(cursor.getColumnIndex(DEADLINE)));
-                    unAuditoria.setAuditor(cursor.getString(cursor.getColumnIndex(AUDITOR)));
+                   unAuditoria.setAuditor(cursor.getString(cursor.getColumnIndex(AUDITOR)));
                     unAuditoria.setFechaAuditoria(cursor.getString(cursor.getColumnIndex(FECHA_AUDITORIA)));
                     unAuditoria.setPuntajeFinal(cursor.getDouble(cursor.getColumnIndex(PUNTAJE_FINAL)));
     ///ATENCION////ATENCION//////traigo el area y le modifico los parametros, se guarda ok??

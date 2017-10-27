@@ -26,10 +26,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="manageCampanias">Manage campaigns</string>
-    <string name="fechaInicioCampania">Kick off date:</string>
+    <string name="fechaInicioCampania">Starting Date</string>
     <string name="tagFechaInicio">Kick Off</string>
-    <string name="tagFechaFin">End Date</string>
+    <string name="tagFechaFin">Finish Date</string>
     <string name="tagFechaStart">StartDate</string>
     <string name="tagCantidadAuditoriasProgramadas">Total audits</string>
     <string name="tagCantidadAuditoriasTerminadas">Finished</string>
+    <string name="tituloListadoAuditoriasDeCampania">Audit List</string>
+    <string name="addAuditoria">Add Audit</string>
+    <string name="saveCampaign">saveCampaign</string>
 </resources>

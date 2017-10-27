@@ -84,7 +84,7 @@ public class FragmentManageAreas extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_manage_aerea, container, false);
+        View view= inflater.inflate(R.layout.fragment_manage_auditores, container, false);
         controllerAreas=new ControllerDatos(getContext());
         /*
         Realm realm = Realm.getDefaultInstance();
@@ -103,6 +103,7 @@ public class FragmentManageAreas extends Fragment {
         recyclerAreas.setAdapter(adapterArea);
 
         fabAgregarArea =(FloatingActionButton) view.findViewById(R.id.agregarArea);
+        fabAgregarArea.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.ic_note_add_white_24dp));
 
         fabAgregarArea.setOnClickListener(new View.OnClickListener() {
             @Override

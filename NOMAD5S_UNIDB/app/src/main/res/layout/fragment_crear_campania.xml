@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.demo.nomad.nomad5s.Fragments.FragmentCrearCampania">
+
+    <LinearLayout
+        android:focusableInTouchMode="true"
+        android:id="@+id/inputLayoutNombreCampania"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputLayout
+            android:hint="Insert Campaign Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+
+                android:layout_margin="@dimen/margenGrande"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+            <EditText
+                android:focusable="false"
+                android:hint="@string/fechaInicioCampania"
+                android:id="@+id/editFechaInicioEnCampania"
+                android:layout_margin="@dimen/margenGrande"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="45"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="10">
+
+            </View>
+
+
+            <EditText
+                android:focusable="false"
+                android:hint="@string/tagFechaFin"
+                android:id="@+id/editFechaFinEnCampania"
+                android:layout_margin="@dimen/margenGrande"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="45"
+                android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+    <FrameLayout
+        android:background="@color/blancoNomad"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/contenedorFragmentAuditoriasDeCampania"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tituloListaAuditoriasDeCampania"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/tituloListadoAuditoriasDeCampania" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerAuditoriasDeCampania"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menuAgregarCampania"
+            android:layout_margin="@dimen/margenGrande"
+            android:layout_gravity="bottom|end"
+            app:menu_colorNormal="@color/verde3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+    </FrameLayout>
+
+
+
+
+
+
+
+</LinearLayout>

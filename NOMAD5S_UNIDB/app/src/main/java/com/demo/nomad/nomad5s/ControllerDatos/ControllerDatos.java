@@ -445,4 +445,8 @@ public class ControllerDatos {
     public List<Campania> traerListaCampanias() {
         return daoCampanias.getAllCampanias();
     }
+
+    public Area traerArea(String string) {
+        return daoAreas.getArea(string);
+    }
 }

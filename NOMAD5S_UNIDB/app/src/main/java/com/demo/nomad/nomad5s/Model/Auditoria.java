@@ -15,7 +15,7 @@ public class Auditoria {
     private List<SubItem> subItems;
     private String fechaAuditoria;
     private String deadLine;
-    private String Auditor;
+    private Auditor auditor;
     private Area areaAuditada;
     private Double puntajeFinal;
 
@@ -51,12 +51,12 @@ public class Auditoria {
         this.fechaAuditoria = fechaAuditoria;
     }
 
-    public String getAuditor() {
-        return Auditor;
+    public Auditor getAuditor() {
+        return auditor;
     }
 
-    public void setAuditor(String auditor) {
-        this.Auditor = auditor;
+    public void setAuditor(Auditor auditor) {
+        this.auditor = auditor;
     }
 
     public Area getAreaAuditada() {

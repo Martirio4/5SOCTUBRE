@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,12 +22,14 @@ import com.squareup.picasso.Picasso;
 import java.io.File;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 /**
  * Created by elmar on 18/5/2017.
  */
 
-public class AdapterArea extends RecyclerView.Adapter implements View.OnClickListener, View.OnLongClickListener {
+public class AdapterArea extends RecyclerView.Adapter implements View.OnClickListener {
 
     private Context context;
     private List<Area> listaAreasOriginales;
@@ -70,12 +73,14 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
         FragmentManageAreas fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
 
         if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
-            viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_areas, parent, false);
+            viewCelda = layoutInflater.inflate(R.layout.detalle_celda_manage_auditores, parent, false);
         }
         else{
-            viewCelda=layoutInflater.inflate(R.layout.detalle_celda_seleccion_areas,parent,false);
+            viewCelda=layoutInflater.inflate(R.layout.detalle_celda_manage_auditores,parent,false);
         }
+        viewCelda.setOnClickListener(listener);
         AreaViewHolder areasViewHolder = new AreaViewHolder(viewCelda);
+
 
         return areasViewHolder;
     }
@@ -96,7 +101,7 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
             AreaViewHolder.fabEliminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    editaEliminable = (EditaEliminable) v.getContext();
+                    editaEliminable = (EditaEliminable) context;
                     editaEliminable.EliminarArea(unArea);
 
                 }
@@ -105,10 +110,14 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
             AreaViewHolder.fabEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    editaEliminable=(EditaEliminable) view.getContext();
+                    editaEliminable=(EditaEliminable)context;
                     editaEliminable.editarArea(unArea);
                 }
             });
+        }
+        else{
+            AreaViewHolder.fabEditar.setVisibility(View.GONE);
+            AreaViewHolder.fabEliminar.setVisibility(View.GONE);
         }
 
     }
@@ -123,39 +132,28 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
         listener.onClick(view);
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        listenerLong.onLongClick(v);
-        return true;
-    }
 
     //creo el viewholder que mantiene las referencias
     //de los elementos de la celda
 
     private static class AreaViewHolder extends RecyclerView.ViewHolder {
-        private ImageView imageView;
+        private CircleImageView imageView;
         private TextView textView;
-        private FloatingActionButton fabEliminar;
-        private FloatingActionButton fabEditar;
+        private ImageButton fabEliminar;
+        private ImageButton fabEditar;
 
 
 
         public AreaViewHolder(View itemView) {
             super(itemView);
-            imageView = (ImageView) itemView.findViewById(R.id.imagenCamara);
-            textView= (TextView) itemView.findViewById(R.id.nombreNuevaArea);
+            imageView = (CircleImageView) itemView.findViewById(R.id.imagenCamara);
+            textView= (TextView) itemView.findViewById(R.id.nombreAuditor);
 
-            FragmentActivity unaActivity = (FragmentActivity) itemView.getContext();
-            FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-            FragmentManageAreas fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
+            fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
 
-            if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
-                fabEliminar = (FloatingActionButton) itemView.findViewById(R.id.botonEliminar);
-                fabEliminar.setColorNormal(ContextCompat.getColor(itemView.getContext(), R.color.antiverde));
 
-                fabEditar=(FloatingActionButton) itemView.findViewById(R.id.botonEditar);
-                fabEditar.setColorNormal(ContextCompat.getColor(itemView.getContext(),R.color.amarillito));
-            }
+            fabEditar=(ImageButton) itemView.findViewById(R.id.botonEditar);
+
         }
 
         public void cargarArea(Area unArea) {

@@ -1,10 +1,12 @@
 package com.demo.nomad.nomad5s.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -41,6 +43,12 @@ public class FragmentManageCampanias extends Fragment {
     private LinearLayoutManager layoutManager;
     private RecyclerView recyclerCampania;
     private FloatingActionButton fabAgregarCampania;
+    private Creable creable;
+
+    public interface Creable{
+        void abrirFragmentCreacionCampanias();
+    }
+
 
 
     @Override
@@ -63,36 +71,15 @@ public class FragmentManageCampanias extends Fragment {
         fabAgregarCampania.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                crearDialogoNuevaCampania();
+               creable.abrirFragmentCreacionCampanias();
             }
         });
         return view;
     }
 
-    public void crearDialogoNuevaCampania(){
-
-        new MaterialDialog.Builder(getContext())
-                .title("New Campaign")
-                .customView(R.layout.dialog_layout,true)
-                .inputType(InputType.TYPE_CLASS_DATETIME)
-                .negativeText("cancelar")
-                .onNegative(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-
-                    }
-                })
-                .positiveText("toast")
-                .onPositive(new MaterialDialog.SingleButtonCallback() {
-                    @Override
-                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        View view = dialog.getView();
-                        EditText unedit= (EditText)view.findViewById(R.id.asd123);
-                        Toast.makeText(getContext(), unedit.getText().toString(),Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .show();
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.creable=(Creable) context;
     }
-
 }

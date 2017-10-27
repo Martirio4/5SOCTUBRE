@@ -25,6 +25,7 @@ import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Foto;
+
 import com.demo.nomad.nomad5s.R;
 import com.github.clans.fab.FloatingActionButton;
 
@@ -100,6 +101,7 @@ public class FragmentManageAuditores extends Fragment {
         recyclerAreas.setAdapter(adapterAuditores);
 
         fabAgregarArea =(FloatingActionButton) view.findViewById(R.id.agregarArea);
+        fabAgregarArea.setImageDrawable(ContextCompat.getDrawable(getActivity(),R.drawable.ic_person_add_white_24dp));
 
         fabAgregarArea.setOnClickListener(new View.OnClickListener() {
             @Override

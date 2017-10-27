@@ -5,9 +5,9 @@
     <color name="colorAccent">#ff6f00</color>
 
     <color name="marfil">#ffffff</color>
-    <color name="verde">#4caf50</color>
+    <color name="verde0">#4caf50</color>
     <color name="unverdemediano">#388e3c</color>
-    <color name="ultraverde">#1b5e20</color>
+
     <color name="antiverde">#aa5739</color>
     <color name="amarillito">#AAA839</color>
 
@@ -23,10 +23,11 @@
     <color name="rojoOscuro">#D32F2F</color>
     <color name="primary_text">#000000</color>
 
-    <color name="verdeUltra">#2d664c</color>
+    <color name="verde4">#1b5e20</color>
+    <color name="verde3">#2d664c</color>
     <color name="blancoNomad">#fcfbf5</color>
-    <color name="verdeOscuro">#669975</color>
-    <color name="verdeClaro">#92be96</color>
+    <color name="verde2">#669975</color>
+    <color name="verde1">#92be96</color>
     <color name="grisNomad">#5c5b5c</color>
     <color name="grisOscuroNomad">#212121</color>
 
