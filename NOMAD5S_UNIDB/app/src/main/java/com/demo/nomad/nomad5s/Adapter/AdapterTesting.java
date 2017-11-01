@@ -1,7 +1,6 @@
 package com.demo.nomad.nomad5s.Adapter;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 
 import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.R;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -74,7 +72,7 @@ public class AdapterTesting extends RecyclerView.Adapter implements View.OnClick
     }
 
     public void agregarCamp(Campania unaCamp) {
-        this.listaStringesOriginales.add(unaCamp.getNombreCampaña());
+        this.listaStringesOriginales.add(unaCamp.getNombreCampania());
     }
 
     //creo el viewholder que mantiene las referencias

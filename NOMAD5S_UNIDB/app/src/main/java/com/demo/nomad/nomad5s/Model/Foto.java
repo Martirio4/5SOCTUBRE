@@ -8,17 +8,22 @@ public class Foto {
 
 
    private String idFoto;
-    private String rutaFoto;
+    private String rutaFotoDB;
+    private String rutaFotoFB;
     private String comentario;
 
     public Foto() {
     }
 
-    public Foto(String idFoto, String rutaFoto, String comentario) {
+    public Foto(String idFoto, String rutaFotoDB, String rutaFotoFB, String comentario) {
         this.idFoto = idFoto;
-        this.rutaFoto = rutaFoto;
+        this.rutaFotoDB = rutaFotoDB;
+        this.rutaFotoFB = rutaFotoFB;
         this.comentario = comentario;
     }
+
+    //GETTER AND SETTER
+
 
     public String getIdFoto() {
         return idFoto;
@@ -28,12 +33,20 @@ public class Foto {
         this.idFoto = idFoto;
     }
 
-    public String getRutaFoto() {
-        return rutaFoto;
+    public String getRutaFotoDB() {
+        return rutaFotoDB;
     }
 
-    public void setRutaFoto(String rutaFoto) {
-        this.rutaFoto = rutaFoto;
+    public void setRutaFotoDB(String rutaFotoDB) {
+        this.rutaFotoDB = rutaFotoDB;
+    }
+
+    public String getRutaFotoFB() {
+        return rutaFotoFB;
+    }
+
+    public void setRutaFotoFB(String rutaFotoFB) {
+        this.rutaFotoFB = rutaFotoFB;
     }
 
     public String getComentario() {

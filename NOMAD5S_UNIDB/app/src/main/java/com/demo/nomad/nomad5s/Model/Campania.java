@@ -10,11 +10,9 @@ import java.util.List;
 public class Campania {
 
     private String idCampania;
-    private String nombreCampaña;
+    private String nombreCampania;
     private String fechaInicio;
     private String fechaLimite;
-    private Integer cantidadAuditoriasProgramadas;
-    private Integer cantidadAuditoriasTerminadas;
     private List<Auditoria>auditoriasCampania;
 
 //CONSTRUCTOR
@@ -27,13 +25,31 @@ public class Campania {
     public Campania() {
         this.auditoriasCampania=new ArrayList<>();
     }
+
 //GETTER AND SETTER
+
     public String getIdCampania() {
         return idCampania;
     }
 
     public void setIdCampania(String idCampania) {
         this.idCampania = idCampania;
+    }
+
+    public String getNombreCampania() {
+        return nombreCampania;
+    }
+
+    public void setNombreCampania(String nombreCampania) {
+        this.nombreCampania = nombreCampania;
+    }
+
+    public String getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(String fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
     public String getFechaLimite() {
@@ -52,39 +68,7 @@ public class Campania {
         this.auditoriasCampania = auditoriasCampania;
     }
 
-    public void agregarAuditoria(Auditoria unAuditoria) {
-        this.auditoriasCampania.add(unAuditoria);
-    }
-
-    public String getNombreCampaña() {
-        return nombreCampaña;
-    }
-
-    public void setNombreCampaña(String nombreCampaña) {
-        this.nombreCampaña = nombreCampaña;
-    }
-
-    public String getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public void setFechaInicio(String fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
-
-    public Integer getCantidadAuditoriasProgramadas() {
-        return cantidadAuditoriasProgramadas;
-    }
-
-    public void setCantidadAuditoriasProgramadas(Integer cantidadAuditoriasProgramadas) {
-        this.cantidadAuditoriasProgramadas = cantidadAuditoriasProgramadas;
-    }
-
-    public Integer getCantidadAuditoriasTerminadas() {
-        return cantidadAuditoriasTerminadas;
-    }
-
-    public void setCantidadAuditoriasTerminadas(Integer cantidadAuditoriasTerminadas) {
-        this.cantidadAuditoriasTerminadas = cantidadAuditoriasTerminadas;
+    public void agregarAuditoria(Auditoria unAudit){
+        this.auditoriasCampania.add(unAudit);
     }
 }

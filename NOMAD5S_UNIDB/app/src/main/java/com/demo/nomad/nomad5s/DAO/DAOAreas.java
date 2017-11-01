@@ -12,8 +12,6 @@ import com.demo.nomad.nomad5s.Model.Foto;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.demo.nomad.nomad5s.DAO.DAOAuditorias.TABLE_AUDITORIAS;
-
 /**
  * Created by digitalhouse on 10/06/17.
  */
@@ -24,12 +22,7 @@ public class DAOAreas extends DatabaseHelper {
 
 //    DEFINIDOS POR MANAGER
     
-    public static final String IDAREA = "IDAREA";
-    public static final String NOMBRE_AREA = "NOMBRE_AREA";
-    public static final String IDFOTO_AREA = "IDFOTO_AREA";
-    public static final String RUTA_FOTO_AREA = "RUTA_FOTO_AREA";
 
-    public static final String TABLE_AREAS="TABLE_AREAS";
 
     public DAOAreas(Context context) {
 
@@ -49,7 +42,7 @@ public class DAOAreas extends DatabaseHelper {
                 row.put(IDAREA, unArea.getIdArea());
                 row.put(NOMBRE_AREA, unArea.getNombreArea());
                 row.put(IDFOTO_AREA, unArea.getFotoArea().getIdFoto());
-                row.put(RUTA_FOTO_AREA, unArea.getFotoArea().getRutaFoto());
+                row.put(RUTA_FOTO_AREA, unArea.getFotoArea().getRutaFotoDB());
 
                 //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
                 database.insert(TABLE_AREAS, null, row);
@@ -84,7 +77,7 @@ public class DAOAreas extends DatabaseHelper {
             unArea.setNombreArea((cursor.getString(cursor.getColumnIndex(NOMBRE_AREA))));
             Foto fotoArea= new Foto();
             fotoArea.setIdFoto((cursor.getString(cursor.getColumnIndex(IDFOTO_AREA))));
-            fotoArea.setRutaFoto((cursor.getString(cursor.getColumnIndex(RUTA_FOTO_AREA))));
+            fotoArea.setRutaFotoDB((cursor.getString(cursor.getColumnIndex(RUTA_FOTO_AREA))));
             unArea.setFotoArea(fotoArea);
         }
         cursor.close();
@@ -107,7 +100,7 @@ public class DAOAreas extends DatabaseHelper {
             unArea.setNombreArea((cursor.getString(cursor.getColumnIndex(NOMBRE_AREA))));
             Foto fotoArea= new Foto();
             fotoArea.setIdFoto((cursor.getString(cursor.getColumnIndex(IDFOTO_AREA))));
-            fotoArea.setRutaFoto((cursor.getString(cursor.getColumnIndex(RUTA_FOTO_AREA))));
+            fotoArea.setRutaFotoDB((cursor.getString(cursor.getColumnIndex(RUTA_FOTO_AREA))));
             unArea.setFotoArea(fotoArea);
 
             allAreas.add(unArea);

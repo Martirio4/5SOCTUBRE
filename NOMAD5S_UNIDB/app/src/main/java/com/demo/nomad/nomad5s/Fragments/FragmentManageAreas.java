@@ -3,13 +3,11 @@ package com.demo.nomad.nomad5s.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -27,7 +25,6 @@ import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 
 
 import java.io.File;
@@ -155,7 +152,7 @@ public class FragmentManageAreas extends Fragment {
                     }
 
                     Foto unaFoto = new Foto();
-                    unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
+                    unaFoto.setRutaFotoDB(fotoComprimida.getAbsolutePath());
                     Boolean seBorro = imageFile.delete();
                     if (seBorro) {
                      //   Toast.makeText(getContext(), R.string.seEliminoFoto, Toast.LENGTH_SHORT).show();

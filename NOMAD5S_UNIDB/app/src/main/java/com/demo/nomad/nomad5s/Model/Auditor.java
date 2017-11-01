@@ -11,6 +11,8 @@ public class Auditor {
 
     private String idAuditor;
     private String nombreAuditor;
+    private String mailUsuario;
+    private String puesto;
     private Integer cantidadAuditoriasRealizada;
     private Foto fotoAuditor;
 
@@ -31,6 +33,22 @@ public class Auditor {
 
     public void setNombreAuditor(String nombreAuditor) {
         this.nombreAuditor = nombreAuditor;
+    }
+
+    public String getMailUsuario() {
+        return mailUsuario;
+    }
+
+    public void setMailUsuario(String mailUsuario) {
+        this.mailUsuario = mailUsuario;
+    }
+
+    public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
     }
 
     public Integer getCantidadAuditoriasRealizada() {

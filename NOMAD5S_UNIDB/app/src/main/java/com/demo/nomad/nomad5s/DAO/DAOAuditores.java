@@ -23,13 +23,7 @@ public class DAOAuditores extends DatabaseHelper {
 //    DEFINIDOS POR MANAGER
     //agregar posicion o algun dato del auditor
     
-    public static final String IDAUDITOR = "IDAUDITOR";
-    public static final String NOMBRE_AUDITOR = "NOMBRE_AUDITOR";
-    public static final String IDFOTO_AUDITOR = "IDFOTO_AUDITOR";
-    public static final String RUTA_FOTO_AUDITOR = "RUTA_FOTO_AUDITOR";
-    public static final String CANTIDAD_AUDITORIAS_REALIZADAS="CANTIDAD_AUDITORIAS_REALIZADAS";
 
-    public static final String TABLE_AUDITORES="TABLE_AUDITORES";
 
     public DAOAuditores(Context context) {
 
@@ -48,7 +42,7 @@ public class DAOAuditores extends DatabaseHelper {
                 row.put(IDAUDITOR, unAuditor.getIdAuditor());
                 row.put(NOMBRE_AUDITOR, unAuditor.getNombreAuditor());
                 row.put(IDFOTO_AUDITOR, unAuditor.getFotoAuditor().getIdFoto());
-                row.put(RUTA_FOTO_AUDITOR, unAuditor.getFotoAuditor().getRutaFoto());
+                row.put(MAILAUDITOR, unAuditor.getFotoAuditor().getRutaFotoDB());
                 row.put(CANTIDAD_AUDITORIAS_REALIZADAS, unAuditor.getCantidadAuditoriasRealizada());
 
 
@@ -86,7 +80,7 @@ public class DAOAuditores extends DatabaseHelper {
             unAuditor.setCantidadAuditoriasRealizada((cursor.getInt(cursor.getColumnIndex(CANTIDAD_AUDITORIAS_REALIZADAS))));
             Foto fotoAuditor= new Foto();
             fotoAuditor.setIdFoto((cursor.getString(cursor.getColumnIndex(IDFOTO_AUDITOR))));
-            fotoAuditor.setRutaFoto((cursor.getString(cursor.getColumnIndex(RUTA_FOTO_AUDITOR))));
+            fotoAuditor.setRutaFotoDB((cursor.getString(cursor.getColumnIndex(MAILAUDITOR))));
             unAuditor.setFotoAuditor(fotoAuditor);
         }
         cursor.close();
@@ -111,7 +105,7 @@ public class DAOAuditores extends DatabaseHelper {
             unAuditor.setCantidadAuditoriasRealizada((cursor.getInt(cursor.getColumnIndex(CANTIDAD_AUDITORIAS_REALIZADAS))));
             Foto fotoAuditor= new Foto();
             fotoAuditor.setIdFoto((cursor.getString(cursor.getColumnIndex(IDFOTO_AUDITOR))));
-            fotoAuditor.setRutaFoto((cursor.getString(cursor.getColumnIndex(RUTA_FOTO_AUDITOR))));
+            fotoAuditor.setRutaFotoDB((cursor.getString(cursor.getColumnIndex(MAILAUDITOR))));
             unAuditor.setFotoAuditor(fotoAuditor);
 
             allAuditors.add(unAuditor);

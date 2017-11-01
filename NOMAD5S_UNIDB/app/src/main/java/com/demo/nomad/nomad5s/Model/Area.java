@@ -7,7 +7,8 @@ package com.demo.nomad.nomad5s.Model;
 public class Area{
 
     private String idArea;
-    private String NombreArea;
+    private String nombreArea;
+    private String responsableArea;
     private Foto fotoArea;
 
     public Area() {
@@ -22,11 +23,19 @@ public class Area{
     }
 
     public String getNombreArea() {
-        return NombreArea;
+        return nombreArea;
     }
 
     public void setNombreArea(String nombreArea) {
-        NombreArea = nombreArea;
+        this.nombreArea = nombreArea;
+    }
+
+    public String getResponsableArea() {
+        return responsableArea;
+    }
+
+    public void setResponsableArea(String responsableArea) {
+        this.responsableArea = responsableArea;
     }
 
     public Foto getFotoArea() {

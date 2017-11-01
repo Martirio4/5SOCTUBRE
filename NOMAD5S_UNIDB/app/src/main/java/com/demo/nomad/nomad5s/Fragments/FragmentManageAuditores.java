@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
@@ -153,7 +152,7 @@ public class FragmentManageAuditores extends Fragment {
                     }
 
                     Foto unaFoto = new Foto();
-                    unaFoto.setRutaFoto(fotoComprimida.getAbsolutePath());
+                    unaFoto.setRutaFotoDB(fotoComprimida.getAbsolutePath());
                     Boolean seBorro = imageFile.delete();
                     if (seBorro) {
                      //   Toast.makeText(getContext(), R.string.seEliminoFoto, Toast.LENGTH_SHORT).show();

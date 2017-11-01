@@ -1,5 +1,8 @@
 package com.demo.nomad.nomad5s.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by elmar on 2/10/2017.
  */
@@ -14,28 +17,21 @@ public class Criterio {
     private String opcion3;
     private String opcion4;
     private String opcion5;
+    private Integer puntajeElegido;
+    private List<Foto>listaFotosCriterio;
 
 
     //CONSTRUCTOR
 
-    public Criterio(String idCriterio, String textoCriterio, String opcion1, String opcion2, String opcion3, String opcion4, String opcion5) {
-        this.idCriterio = idCriterio;
-        this.textoCriterio = textoCriterio;
-        this.opcion1 = opcion1;
-        this.opcion2 = opcion2;
-        this.opcion3 = opcion3;
-        this.opcion4 = opcion4;
-        this.opcion5 = opcion5;
-    }
-
-
     //CONSTRUCTOR VACIO
 
     public Criterio() {
+        this.listaFotosCriterio= new ArrayList<>();
     }
 
 
     //GETTER Y SETTER
+
 
     public String getIdCriterio() {
         return idCriterio;
@@ -91,5 +87,24 @@ public class Criterio {
 
     public void setOpcion5(String opcion5) {
         this.opcion5 = opcion5;
+    }
+
+    public Integer getPuntajeElegido() {
+        return puntajeElegido;
+    }
+
+    public void setPuntajeElegido(Integer puntajeElegido) {
+        this.puntajeElegido = puntajeElegido;
+    }
+
+    public List<Foto> getListaFotosCriterio() {
+        return listaFotosCriterio;
+    }
+
+    public void setListaFotosCriterio(List<Foto> listaFotosCriterio) {
+        this.listaFotosCriterio = listaFotosCriterio;
+    }
+    public void agregarFoto(Foto unaFoto){
+        this.listaFotosCriterio.add(unaFoto);
     }
 }

@@ -1,11 +1,8 @@
 package com.demo.nomad.nomad5s.ControllerDatos;
 import android.content.Context;
-import android.security.keystore.UserNotAuthenticatedException;
-import android.support.design.widget.Snackbar;
 
-import com.demo.nomad.nomad5s.DAO.DAOAreas;
 import com.demo.nomad.nomad5s.DAO.DAOAuditores;
-import com.demo.nomad.nomad5s.DAO.DAOAuditorias;
+import com.demo.nomad.nomad5s.DAO.DAODbase;
 import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
@@ -24,18 +21,14 @@ import java.util.List;
 public class ControllerDatos {
 
     private Context context;
-    private DAOAreas daoAreas;
-    private DAOCampania daoCampanias;
-    private DAOAuditorias daoAuditorias;
+    private DAODbase daoDB;
     private DatabaseReference mDatabase;
-    private DAOAuditores daoAuditores;
+
 
     public ControllerDatos(Context context) {
         this.context = context;
-        daoAreas=new DAOAreas(context);
-        daoAuditorias=new DAOAuditorias(context);
-        daoCampanias= new DAOCampania(context);
-        daoAuditores=new DAOAuditores(context);
+
+        daoDB =new DAODbase(context);
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
     }
@@ -390,19 +383,19 @@ public class ControllerDatos {
 
     public void guardarArea(Area unArea){
         //GUARDAR EN LA DB
-        daoAreas.addArea(unArea);
+        daoDB.addArea(unArea);
         //GUARDAR EN FIREBASE
         mDatabase.child("AREAS").child(unArea.getIdArea()).setValue(unArea);
     }
 
 
     public List<Area> traerListaAreas() {
-        return daoAreas.getAllAreas();
+        return daoDB.getAllAreas();
     }
 
     public void eliminarArea(Area unArea){
 //        BORRAR DE LA DB
-        daoAreas.borrarArea(unArea);
+        daoDB.borrarArea(unArea);
 //        BORRAR DE FIREBASE
         mDatabase.child("AREAS").child(unArea.getIdArea()).removeValue();
 
@@ -413,24 +406,24 @@ public class ControllerDatos {
 
     public void renombrarArea(Area unArea, String s) {
         //RENOMBRAR DB
-        daoAreas.rename(unArea,s);
+        daoDB.rename(unArea,s);
         //RENOMBRAR FIREBASE
         mDatabase.child("AREAS").child(unArea.getIdArea()).child("nombreArea").setValue(s);
     }
 
     public List<Auditor> traerListaAuditores() {
-        return daoAuditores.getAllAuditors();
+        return daoDB.getAllAuditors();
     }
 
     public void guardarAuditor(Auditor unAuditor) {
         //GUARDAR EN LA DB
-        daoAuditores.addAuditor(unAuditor);
+        daoDB.addAuditor(unAuditor);
         //GUARDAR EN FIREBASE
 
     }
     public void eliminarAuditor(Auditor unAuditor){
 //        BORRAR DE LA DB
-        daoAuditores.borrarAuditor(unAuditor);
+        daoDB.borrarAuditor(unAuditor);
 //        BORRAR DE FIREBASE
 
 
@@ -439,14 +432,14 @@ public class ControllerDatos {
     }
 
     public void renombrarAuditor(Auditor unAuditor, String s) {
-        daoAuditores.rename(unAuditor, s);
+        daoDB.rename(unAuditor, s);
     }
 
     public List<Campania> traerListaCampanias() {
-        return daoCampanias.getAllCampanias();
+        return daoDB.getAllCampanias();
     }
 
     public Area traerArea(String string) {
-        return daoAreas.getArea(string);
+        return daoDB.getAreaConId(string);
     }
 }

@@ -3,20 +3,17 @@ package com.demo.nomad.nomad5s.Adapter;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAuditores;
 import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.R;
-import com.github.clans.fab.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -161,7 +158,7 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
         public void cargarAuditor(Auditor unAuditor) {
 
             if (unAuditor.getFotoAuditor()!=null) {
-                File f =new File(unAuditor.getFotoAuditor().getRutaFoto());
+                File f =new File(unAuditor.getFotoAuditor().getRutaFotoDB());
                 Picasso.with(circleImageView.getContext())
                         .load(f)
                         .into(circleImageView);

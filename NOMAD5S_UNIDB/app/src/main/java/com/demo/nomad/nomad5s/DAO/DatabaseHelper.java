@@ -26,48 +26,71 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         //CREO TABLA DE CAMPANIAS
-        String query =  "CREATE TABLE " + DAOCampania.TABLE_CAMPANIA  + "(" +
-                DAOCampania.IDCAMPANIA + " TEXT, " +
-                DAOCampania.FECHA_FIN_CAMPANIA + " TEXT, " +
-                DAOCampania.IDAUDITORIA + " TEXT, " +
-                DAOCampania.NOMBRE_CAMPANIA + " TEXT )";
+        String query =  "CREATE TABLE " + DAODbase.TABLE_CAMPANIA  + "(" +
+                DAODbase.IDCAMPANIA + " TEXT, " +
+                DAODbase.FECHA_FIN_CAMPANIA + " TEXT, " +
+                DAODbase.FECHA_INICIO_CAMPANIA + " TEXT, " +
+                DAODbase.IDAUDITORIA + " TEXT, " +
+                DAODbase.NOMBRE_CAMPANIA + " TEXT )";
         db.execSQL(query);
 
         //CREO TABLA DE AUDITORIAS
-        String query2 =  "CREATE TABLE " + DAOAuditorias.TABLE_AUDITORIAS  + "(" +
-                DAOAuditorias.IDAUDITORIA + " TEXT, " +
-                DAOAuditorias.IDCAMPANIA + " TEXT, " +
-                DAOAuditorias.DEADLINE + " TEXT, " +
-                DAOAuditorias.IDAREA + " TEXT, " +
-                DAOAuditorias.NOMBRE_AREA + " TEXT, " +
-                DAOAuditorias.IDFOTO_AREA + " TEXT, " +
-                DAOAuditorias.RUTA_FOTO_AREA + " TEXT, " +
-                DAOAuditorias.AUDITOR + " TEXT, " +
-                DAOAuditorias.FECHA_AUDITORIA + " TEXT, " +
-                DAOAuditorias.IDSUBITEM + " TEXT, " +
-                DAOAuditorias.PUNTAJE_SUBITEM + " TEXT, " +
-                DAOAuditorias.IDFOTO_SUBITEM + " TEXT, " +
-                DAOAuditorias.RUTA_FOTO_SUBITEM + " TEXT, " +
-                DAOAuditorias.COMENTARIO_FOTO_SUBITEM + " TEXT )";
+        String query2 =  "CREATE TABLE " + DAODbase.TABLE_AUDITORIAS  + "(" +
+                DAODbase.IDAUDITORIA + " TEXT, " +
+                DAODbase.IDAREA_FK + " TEXT, " +
+                DAODbase.IDAUDITOR_FK + " TEXT, " +
+                DAODbase.IDESE_FK + " TEXT, " +
+                DAODbase.PUNTAJE_FINAL + " NUMERIC, " +
+                DAODbase.FECHA_AUDITORIA + " TEXT )";
         db.execSQL(query2);
 
-        //CREO TABLA DE CAMPANIAS
-        String query3 =  "CREATE TABLE " + DAOAreas.TABLE_AREAS  + "(" +
-                DAOAreas.IDAREA + " TEXT, " +
-                DAOAreas.NOMBRE_AREA + " TEXT, " +
-                DAOAreas.IDFOTO_AREA + " TEXT, " +
-                DAOAreas.RUTA_FOTO_AREA + " TEXT )";
+        //CREO TABLA DE ESE
+        String query3 =  "CREATE TABLE " + DAODbase.TABLE_ESE  + "(" +
+                DAODbase.IDESE + " TEXT, " +
+                DAODbase.IDCRITERIO_FK + " TEXT, " +
+                DAODbase.NOMBRE_ESE + " TEXT, " +
+                DAODbase.PUNTAJEESE + " NUMERIC )";
         db.execSQL(query3);
 
 
         //CREO TABLA DE AUDITORES
-        String query4 =  "CREATE TABLE " + DAOAuditores.TABLE_AUDITORES  + "(" +
-                DAOAuditores.IDAUDITOR + " TEXT, " +
-                DAOAuditores.NOMBRE_AUDITOR + " TEXT, " +
-                DAOAuditores.IDFOTO_AUDITOR + " TEXT, " +
-                DAOAuditores.CANTIDAD_AUDITORIAS_REALIZADAS + " NUMERIC, " +
-                DAOAuditores.RUTA_FOTO_AUDITOR + " TEXT )";
+        String query4 =  "CREATE TABLE " + DAODbase.TABLE_AUDITORES  + "(" +
+                DAODbase.IDAUDITOR + " TEXT, " +
+                DAODbase.NOMBRE_AUDITOR + " TEXT, " +
+                DAODbase.MAILAUDITOR + " TEXT, " +
+                DAODbase.IDFOTO_AUDITOR + " TEXT, " +
+                DAODbase.CANTIDAD_AUDITORIAS_REALIZADAS + " NUMERIC, " +
+                DAODbase.PUESTOAUDITOR + " TEXT )";
         db.execSQL(query4);
+
+        //CREO TABLA DE FOTOS
+        String query5 =  "CREATE TABLE " + DAODbase.TABLE_FOTOS  + "(" +
+                DAODbase.IDFOTO + " TEXT, " +
+                DAODbase.COMENTARIO + " TEXT, " +
+                DAODbase.RUTAFOTODB + " TEXT, " +
+                DAODbase.RUTAFOTOFB + " TEXT )";
+        db.execSQL(query5);
+
+        //CREO TABLA DE AREAS
+        String query6 =  "CREATE TABLE " + DAODbase.TABLE_AREAS  + "(" +
+                DAODbase.IDAREA + " TEXT, " +
+                DAODbase.NOMBRE_AREA + " TEXT, " +
+                DAODbase.IDFOTO_AREA + " TEXT, " +
+                DAODbase.RESPONSABLEAREA + " TEXT )";
+        db.execSQL(query6);
+
+        //CREO TABLA DE AREAS
+        String query7 =  "CREATE TABLE " + DAODbase.TABLE_CRITERIOS  + "(" +
+                DAODbase.IDCRITERIO + " TEXT, " +
+                DAODbase.TEXTOCRITERIO + " TEXT, " +
+                DAODbase.TEXTOOPCION1 + " TEXT, " +
+                DAODbase.TEXTOOPCION2 + " TEXT, " +
+                DAODbase.TEXTOOPCION3 + " TEXT, " +
+                DAODbase.TEXTOOPCION4 + " TEXT, " +
+                DAODbase.TEXTOOPCION5 + " TEXT, " +
+                DAODbase.PUNTAJEELEGIDO + " TEXT, " +
+                DAODbase.IDFOTOCRITERIO + " TEXT )";
+        db.execSQL(query7);
     }
 
     @Override

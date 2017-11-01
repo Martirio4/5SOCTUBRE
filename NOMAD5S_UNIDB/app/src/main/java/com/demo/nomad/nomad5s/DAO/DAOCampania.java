@@ -19,16 +19,6 @@ public class DAOCampania extends DatabaseHelper {
 
     private Context context;
 
-   public static final String IDCAMPANIA = "IDCAMPANIA";
-   public static final String FECHA_FIN_CAMPANIA = "FECHA_FIN_CAMPANIA";
-   public static final String FECHA_INICIO_CAMPANIA = "FECHA_INICIO_CAMPANIA";
-   public static final String CANTIDAD_AUDITORIAS_PROGRAMADAS = "CANTIDAD_AUDITORIAS_PROGRAMADAS";
-   public static final String CANTIDAD_AUDITORIAS_TERMINADAS = "CANTIDAD_AUDITORIAS_TERMINADAS";
-   public static final String IDAUDITORIA = "IDAUDITORIA";
-   public static final String NOMBRE_CAMPANIA = "NOMBRE_CAMPANIA";
-
-   public static final String TABLE_CAMPANIA="TABLE_CAMPANIA";
-
     public DAOCampania(Context context) {
         super(context);
         this.context=context;
@@ -53,7 +43,7 @@ public class DAOCampania extends DatabaseHelper {
                     row.put(FECHA_INICIO_CAMPANIA, unaCampania.getFechaInicio());
                     row.put(CANTIDAD_AUDITORIAS_PROGRAMADAS, unaCampania.getCantidadAuditoriasProgramadas());
                     row.put(CANTIDAD_AUDITORIAS_TERMINADAS, unaCampania.getCantidadAuditoriasTerminadas());
-                    row.put(NOMBRE_CAMPANIA, unaCampania.getNombreCampaña());
+                    row.put(NOMBRE_CAMPANIA, unaCampania.getNombreCampania());
                     row.put(IDAUDITORIA, unAudit.getIdAuditoria());
 
                     //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
@@ -65,7 +55,7 @@ public class DAOCampania extends DatabaseHelper {
                 ContentValues row = new ContentValues();
                 row.put(IDCAMPANIA, unaCampania.getIdCampania());
                 row.put(FECHA_FIN_CAMPANIA, unaCampania.getFechaLimite());
-                row.put(NOMBRE_CAMPANIA, unaCampania.getNombreCampaña());
+                row.put(NOMBRE_CAMPANIA, unaCampania.getNombreCampania());
                 row.put(FECHA_INICIO_CAMPANIA, unaCampania.getFechaInicio());
                 database.insert(TABLE_CAMPANIA,null,row);
             }
@@ -109,7 +99,7 @@ public class DAOCampania extends DatabaseHelper {
 
 
     public Campania getCampania(String id){
-        DAOAuditorias daoAuditorias= new DAOAuditorias(context);
+        DAODbase daoAuditorias= new DAODbase(context);
 
         SQLiteDatabase database = getReadableDatabase();
 
