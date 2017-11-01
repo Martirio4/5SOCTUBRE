@@ -24,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margenChico"
             android:layout_marginEnd="@dimen/margenMini"
             android:layout_marginBottom="@dimen/margenGrande"
             android:layout_marginStart="@dimen/margenMini">

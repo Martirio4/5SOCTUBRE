@@ -8,21 +8,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.InputType;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.demo.nomad.nomad5s.Adapter.AdapterArea;
 import com.demo.nomad.nomad5s.Adapter.AdapterAuditores;
-import com.demo.nomad.nomad5s.Adapter.AdapterTesting;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
-import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Fragments.FragmentCrearCampania;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAreas;
 import com.demo.nomad.nomad5s.Fragments.FragmentManageAuditores;
@@ -31,20 +25,16 @@ import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAreas;
 import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAuditores;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
-import com.demo.nomad.nomad5s.Model.Auditoria;
-import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.R;
-
-import java.util.List;
-import java.util.UUID;
 
 public class ActivityBase extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentSeleccionAuditores.Terminable, FragmentCrearCampania.Elegible, FragmentManageAuditores.Avisable, AdapterAuditores.EditaEliminable,FragmentManageCampanias.Creable {
 
    
     private ControllerDatos controllerDatos;
-    FragmentManageAreas fragmentManageAreas;
-    FragmentManageAuditores fragmentManageAuditores;
-    FragmentManager fragmentManager;
+    private FragmentManageAreas fragmentManageAreas;
+    private FragmentManageAuditores fragmentManageAuditores;
+    private FragmentManager fragmentManager;
+
 
     public static final String QUE_FRAGMENT_ABRO="QUE_FRAGMENT_ABRO";
 
@@ -183,7 +173,7 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
                     public void onInput(MaterialDialog dialog, CharSequence input) {
 
                         try {
-                            controllerDatos.renombrarArea(unArea,input.toString());
+                            controllerDatos.renombrarArea(unArea.getIdArea(),input.toString());
 
                             fragmentManager = (FragmentManager) ActivityBase.this.getSupportFragmentManager();
                             fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
@@ -228,33 +218,14 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
     }
 
     public void borrarDefinitivamente(final Area unArea){
-       /* Realm realm = Realm.getDefaultInstance();
-        final Area mArea=realm.where(Area.class)
-                .equalTo("idArea",unArea.getIdArea())
-                .findFirst();
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                mArea.deleteFromRealm();
-            }
-        });*/
-
         fragmentManager = (FragmentManager) this.getSupportFragmentManager();
         fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
 
         if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
             try {
-                controllerDatos.eliminarArea(unArea);
+                controllerDatos.eliminarArea(unArea.getIdArea());
                 fragmentManageAreas.updateAdapter();
                 Snackbar.make(fragmentManageAreas.getView(),unArea.getNombreArea()+" was removed",Snackbar.LENGTH_LONG)
-                        .setAction("Undo", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                controllerDatos.guardarArea(unArea);
-                                fragmentManageAreas.updateAdapter();
-                            }
-                        })
-
                         .show();
 
             } catch (Exception e) {
@@ -285,17 +256,9 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
 
         if (fragmentManageAuditores != null && fragmentManageAuditores.isVisible()) {
             try {
-                controllerDatos.eliminarAuditor(unAuditor);
+                controllerDatos.eliminarAuditor(unAuditor.getIdAuditor());
                 fragmentManageAuditores.updateAdapter();
                 Snackbar.make(fragmentManageAuditores.getView(),unAuditor.getNombreAuditor()+" was removed",Snackbar.LENGTH_LONG)
-                        .setAction("Undo", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                controllerDatos.guardarAuditor(unAuditor);
-                                fragmentManageAuditores.updateAdapter();
-                            }
-                        })
-
                         .show();
 
             } catch (Exception e) {
@@ -321,7 +284,7 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
                     public void onInput(MaterialDialog dialog, CharSequence input) {
 
                         try {
-                            controllerDatos.renombrarAuditor(unAuditor,input.toString());
+                            controllerDatos.renombrarAuditor(unAuditor.getIdAuditor(),input.toString());
 
                             fragmentManager = (FragmentManager) ActivityBase.this.getSupportFragmentManager();
                             fragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
@@ -343,9 +306,6 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
     public void crearDialogoBorrarAuditor(final Auditor unAuditor){
         new MaterialDialog.Builder(this)
                 .title("Delete Selected Area")
-                .contentColor(ContextCompat.getColor(this, R.color.primary_text))
-                .titleColor(ContextCompat.getColor(this, R.color.tile4))
-                .backgroundColor(ContextCompat.getColor(this, R.color.tile1))
                 .content("The user: " + unAuditor.getNombreAuditor() +"\n"+ "will be permanently deleted."+"\n"+"Do you wisht to continue?")
                 .positiveText("Delete")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
@@ -371,20 +331,16 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
         fm.popBackStack("seleccionArea",fm.POP_BACK_STACK_INCLUSIVE);
         fm.popBackStack("seleccionAuditor",fm.POP_BACK_STACK_INCLUSIVE);
 
-        Auditoria unAudit=new Auditoria();
-        unAudit.setAreaAuditada(unArea);
-        unAudit.setAuditor(unAuditor);
-        unAudit.setIdAuditoria("audit_"+UUID.randomUUID());
-        FragmentCrearCampania fcc=(FragmentCrearCampania) fm.findFragmentByTag("fragmentCrearCampanias");
-        unAudit.setDeadLine(fcc.getDeadline());
-        Toast.makeText(this, fcc.getDeadline(), Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(this, "armar auditoria", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void elegirArea() {
         abrirFragmentSeleccionAreas();
-
     }
+
+
 
     @Override
     public void elegirAuditor(Area unArea) {

@@ -35,4 +35,17 @@
     <string name="tituloListadoAuditoriasDeCampania">Audit List</string>
     <string name="addAuditoria">Add Audit</string>
     <string name="saveCampaign">saveCampaign</string>
+    <string name="tituloDarNombreAuditor">Set Auditor data</string>
+    <string name="tituloDarNombreArea">Set Area data</string>
+    <string name="hintNombreAuditor">Auditor name</string>
+    <string name="hintPuestoAuditor">Auditor position</string>
+    <string name="hintMailAuditor">Auditor e-mail*</string>
+    <string name="campoRequerido">* Required fields</string>
+    <string name="save">Save</string>
+    <string name="mailAuditorIncompleto">valid e-mail is required to continue</string>
+    <string name="hintNombreArea">Area name</string>
+    <string name="hintResponsableArea">Area owner e-mail</string>
+    <string name="mailInvalido">Please enter a valid e-mail adress</string>
+    <string name="nombreAreaIncompleto">Please enter a name for the new area</string>
+    <string name="audits">Audits</string>
 </resources>

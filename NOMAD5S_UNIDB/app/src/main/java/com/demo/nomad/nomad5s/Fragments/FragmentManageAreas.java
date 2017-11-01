@@ -6,14 +6,17 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.demo.nomad.nomad5s.Adapter.AdapterArea;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.Model.Area;
+import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -53,6 +57,12 @@ public class FragmentManageAreas extends Fragment {
     private FloatingActionButton fabAgregarArea;
     private Avisable unAvisable;
     private TextView textView;
+
+    private EditText editNombre;
+    private EditText editResponsable;
+    private TextInputLayout til1;
+    private TextInputLayout til2;
+
 
 
     public FragmentManageAreas() {
@@ -152,6 +162,7 @@ public class FragmentManageAreas extends Fragment {
                     }
 
                     Foto unaFoto = new Foto();
+                    unaFoto.setIdFoto("fotoArea_"+ UUID.randomUUID());
                     unaFoto.setRutaFotoDB(fotoComprimida.getAbsolutePath());
                     Boolean seBorro = imageFile.delete();
                     if (seBorro) {
@@ -160,7 +171,7 @@ public class FragmentManageAreas extends Fragment {
                     } else {
                        // Toast.makeText(getContext(), R.string.noSeEliminoFoto, Toast.LENGTH_SHORT).show();
                     }
-                    crearDialogoNombreArea(unaFoto);
+                    crearDialogoDatosArea(unaFoto);
 
 
                 }
@@ -192,45 +203,110 @@ public class FragmentManageAreas extends Fragment {
 
     }
 
-    public void crearDialogoNombreArea(final Foto unaFoto){
+    public void crearDialogoDatosArea(final Foto unaFoto){
 
-        new MaterialDialog.Builder(getContext())
-                .title("New Area")
-                .content("Name for the new Area")
-                .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("Area name","", new MaterialDialog.InputCallback() {
+        final MaterialDialog  dialogasd = new MaterialDialog.Builder(getContext())
+                .title(getString(R.string.tituloDarNombreArea))
+                .customView(R.layout.dialog_layout_areas,true)
+                .positiveText(getString(R.string.save))
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
-                    public void onInput(MaterialDialog dialog, CharSequence input) {
+                    public void onClick(@NonNull final MaterialDialog dialog, @NonNull DialogAction which) {
 
-                        final Area unArea = new Area();
-                        unArea.setNombreArea(input.toString());
+                        Area unArea = new Area();
+                        unArea.setIdArea(editNombre.getText().toString());
                         unArea.setFotoArea(unaFoto);
-                        unArea.setIdArea("area" + UUID.randomUUID());
-                        /*
-                            //guardo nueva area en Realm
-                            Realm realm = Realm.getDefaultInstance();
-                            realm.executeTransaction(new Realm.Transaction() {
-                                @Override
-                                public void execute(Realm realm) {
-                                    Area realmArea = realm.copyToRealm(unArea);
-                                }
-                            });
-                        */
+                        if (editResponsable.getText()==null||editNombre.getText().toString().isEmpty()){
+                            editNombre.setText("");
+                        }
+                        unArea.setNombreArea(editNombre.getText().toString());
+                        unArea.setResponsableArea(editResponsable.getText().toString());
+
                         try {
                             controllerAreas.guardarArea(unArea);
                             updateAdapter();
-                           // dialogoExito(unArea);
-                            Snackbar.make(getView(),unArea.getNombreArea()+" was succesfully created",Snackbar.LENGTH_SHORT)
+                            // dialogoExito(unArea);
+                            Snackbar.make(recyclerAreas,unArea.getNombreArea()+" account was succesfully created",Snackbar.LENGTH_SHORT)
                                     .show();
                         } catch (Exception e) {
                             e.printStackTrace();
-                            Snackbar.make(getView(),"Area was not saved. Please try again",Snackbar.LENGTH_SHORT)
+                            Snackbar.make(recyclerAreas,"Auditor was not saved. Please try again",Snackbar.LENGTH_SHORT)
                                     .show();
                         }
 
                     }
-                }).show();
+                })
+                .build();
+        dialogasd.show();
 
+        dialogasd.getActionButton(DialogAction.POSITIVE).setEnabled(false);
+
+
+        editNombre  = dialogasd.getCustomView().findViewById(R.id.ET_nombreArea);
+        editResponsable  = dialogasd.getCustomView().findViewById(R.id.ET_responsableArea);
+        til1= dialogasd.getCustomView().findViewById(R.id.TIL_nombreArea);
+        til2=dialogasd.getCustomView().findViewById(R.id.TIL_responsableArea);
+
+        editNombre.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                til1.setError("");
+                dialogasd.getActionButton(DialogAction.POSITIVE).setEnabled(true);
+            }
+        });
+
+        editResponsable.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (!editResponsable.getText().toString().isEmpty()){
+                    if (isEmailValid(editResponsable.getText().toString())){
+                        til2.setError("");
+                    }
+                    else{
+                        til2.setError(getString(R.string.mailInvalido));
+                    }
+                }
+                else{
+                    til2.setError("");
+                }
+
+
+            }
+        });
+        editNombre.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if (editNombre.getText().toString().isEmpty()){
+                    til1.setError(getString(R.string.nombreAreaIncompleto));
+                }
+                else{
+                    til1.setError("");
+                }
+
+            }
+        });
+
+
+    }
+
+    boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
 //    SE COMENTO LA LLAMADA A ESTE METODO, QUEDA OBSOLETO POR UX, SE REEMPLAZO POR SNACKBAR
@@ -238,9 +314,6 @@ public class FragmentManageAreas extends Fragment {
 
         new MaterialDialog.Builder(getContext())
                 .title("New area successfully created")
-                .contentColor(ContextCompat.getColor(getContext(), R.color.primary_text))
-                .titleColor(ContextCompat.getColor(getContext(), R.color.tile4))
-                .backgroundColor(ContextCompat.getColor(getContext(), R.color.tile1))
                 .content("The area: " + unArea.getNombreArea() +"\n"+ "has been succesfully added to the system")
                 .positiveText("Go back")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {

@@ -134,6 +134,8 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
     private static class AuditorViewHolder extends RecyclerView.ViewHolder {
         private CircleImageView circleImageView;
         private TextView textViewNombre;
+        private TextView textViewPuesto;
+        private TextView textViewMail;
         private TextView textViewAudits;
         private ImageButton fabEliminar;
         private ImageButton fabEditar;
@@ -144,13 +146,11 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
             super(itemView);
             circleImageView = (CircleImageView) itemView.findViewById(R.id.imagenCamara);
             textViewNombre= (TextView) itemView.findViewById(R.id.nombreAuditor);
-            textViewAudits= (TextView) itemView.findViewById(R.id.cantidadAuditorias);
-
-
-                fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
-
-
-                fabEditar=(ImageButton) itemView.findViewById(R.id.botonEditar);
+            textViewAudits= (TextView) itemView.findViewById(R.id.cantAudits);
+            textViewMail=(TextView)itemView.findViewById(R.id.mailAuditor);
+            textViewPuesto=(TextView)itemView.findViewById(R.id.puestoAuditor);
+            fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
+            fabEditar=(ImageButton) itemView.findViewById(R.id.botonEditar);
 
 
         }
@@ -166,7 +166,22 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
             else{
                 circleImageView.setImageResource(R.drawable.desconocidocolor);
             }
-            textViewNombre.setText(unAuditor.getNombreAuditor());
+            if (unAuditor.getNombreAuditor()!= null && !unAuditor.getNombreAuditor().isEmpty()){
+                textViewNombre.setText(unAuditor.getNombreAuditor());
+            }
+            if (unAuditor.getPuesto()!= null && !unAuditor.getPuesto().isEmpty()){
+                textViewPuesto.setText(unAuditor.getPuesto());
+            }
+            if (unAuditor.getMailUsuario()!= null && !unAuditor.getMailUsuario().isEmpty()){
+                textViewMail.setText(unAuditor.getMailUsuario());
+            }
+            if (unAuditor.getCantidadAuditoriasRealizada()!= null){
+                textViewAudits.setText(unAuditor.getCantidadAuditoriasRealizada().toString());
+            }
+
+
+
+
         }
 
 

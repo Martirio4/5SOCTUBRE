@@ -1,9 +1,7 @@
 package com.demo.nomad.nomad5s.ControllerDatos;
 import android.content.Context;
 
-import com.demo.nomad.nomad5s.DAO.DAOAuditores;
 import com.demo.nomad.nomad5s.DAO.DAODbase;
-import com.demo.nomad.nomad5s.DAO.DAOCampania;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Campania;
@@ -393,26 +391,26 @@ public class ControllerDatos {
         return daoDB.getAllAreas();
     }
 
-    public void eliminarArea(Area unArea){
+    public void eliminarArea(String idArea){
 //        BORRAR DE LA DB
-        daoDB.borrarArea(unArea);
+        daoDB.borrarArea(idArea);
 //        BORRAR DE FIREBASE
-        mDatabase.child("AREAS").child(unArea.getIdArea()).removeValue();
+        mDatabase.child("AREAS").child(idArea).removeValue();
 
 //
 
     }
 
 
-    public void renombrarArea(Area unArea, String s) {
+    public void renombrarArea(String idArea, String s) {
         //RENOMBRAR DB
-        daoDB.rename(unArea,s);
+        daoDB.rename(idArea,s);
         //RENOMBRAR FIREBASE
-        mDatabase.child("AREAS").child(unArea.getIdArea()).child("nombreArea").setValue(s);
+        mDatabase.child("AREAS").child(idArea).child("nombreArea").setValue(s);
     }
 
     public List<Auditor> traerListaAuditores() {
-        return daoDB.getAllAuditors();
+        return daoDB.getAllAuditores();
     }
 
     public void guardarAuditor(Auditor unAuditor) {
@@ -421,9 +419,9 @@ public class ControllerDatos {
         //GUARDAR EN FIREBASE
 
     }
-    public void eliminarAuditor(Auditor unAuditor){
+    public void eliminarAuditor(String idAuditor){
 //        BORRAR DE LA DB
-        daoDB.borrarAuditor(unAuditor);
+        daoDB.borrarAuditor(idAuditor);
 //        BORRAR DE FIREBASE
 
 
@@ -431,8 +429,8 @@ public class ControllerDatos {
 
     }
 
-    public void renombrarAuditor(Auditor unAuditor, String s) {
-        daoDB.rename(unAuditor, s);
+    public void renombrarAuditor(String idAuditor, String s) {
+        daoDB.rename(idAuditor, s);
     }
 
     public List<Campania> traerListaCampanias() {

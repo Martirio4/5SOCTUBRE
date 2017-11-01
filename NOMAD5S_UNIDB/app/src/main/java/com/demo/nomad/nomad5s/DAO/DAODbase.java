@@ -48,7 +48,7 @@ public class DAODbase extends DatabaseHelper {
     public static final String IDESE = "IDESE";
     public static final String IDCRITERIO_FK = "IDCRITERIO";
     public static final String PUNTAJEESE = "PUNTAJEESE";
-    public static final String NOMBRE_ESE = "PUNTAJEESE";
+    public static final String NOMBRE_ESE = "NOMBRE_ESE";
     public static final String TABLE_ESE="TABLE_ESE";
     //---FIN TABLA ESES---//
 
@@ -129,6 +129,34 @@ public class DAODbase extends DatabaseHelper {
         }
     }
 
+    //GET ALL CAMPANIAS
+    public List<Campania> getAllCampanias(){
+        List<Campania>listaAllCampanias=null;
+        List<String>listaIdCampanias=new ArrayList<>();
+        Campania laCampania = new Campania();
+
+        SQLiteDatabase database = getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_CAMPANIA;
+
+        Cursor cursor = database.rawQuery(query, null);
+        while(cursor.moveToNext()){
+            if (!cursor.getString(cursor.getColumnIndex(IDCAMPANIA)).equals(laCampania.getIdCampania())){
+                laCampania.setIdCampania(cursor.getString(cursor.getColumnIndex(IDCAMPANIA)));
+                listaIdCampanias.add(cursor.getString(cursor.getColumnIndex(IDCAMPANIA)));
+            }
+        }
+        cursor.close();
+        database.close();
+
+        for (String idCampaniaABuscar:listaIdCampanias
+             ) {
+            listaAllCampanias.add(getCampaniaConId(idCampaniaABuscar));
+        }
+        return listaAllCampanias;
+
+    }
+
     //GET CAMPANIA CON ID
     public Campania getCampaniaConId(String id){
 
@@ -141,7 +169,7 @@ public class DAODbase extends DatabaseHelper {
 
         Campania campaniaConId=new Campania();
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
 
             if (!cursor.getString(cursor.getColumnIndex(IDCAMPANIA)).equals(campaniaConId.getIdCampania())){
                 campaniaConId.setIdCampania((cursor.getString(cursor.getColumnIndex(IDCAMPANIA))));
@@ -200,7 +228,7 @@ public class DAODbase extends DatabaseHelper {
 
         Foto fotoConId=null;
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             fotoConId =new Foto();
             //LEER CADA FILA DE LA TABLA RESULTADO
             fotoConId.setIdFoto((cursor.getString(cursor.getColumnIndex(IDFOTO))));
@@ -232,6 +260,8 @@ public class DAODbase extends DatabaseHelper {
     //AGREGAR AUDITOR
     public void addAuditor (Auditor unAuditor){
         if(!checkIfExistAuditor(unAuditor.getIdAuditor())) {
+            addFoto(unAuditor.getFotoAuditor());
+
             SQLiteDatabase database = getWritableDatabase();
             //CREO LA FILA Y LE CARGO LOS DATOS
             ContentValues row = new ContentValues();
@@ -252,21 +282,21 @@ public class DAODbase extends DatabaseHelper {
     
     //TRAER TODOS LOS AUDITORES
     public List<Auditor> getAllAuditores(){
-        List<Auditor>listaAllAuditores=null;
+        List<Auditor>listaAllAuditores=new ArrayList<>();
         List<String>idAuditorAllAuditores=new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
 
-        String query = "SELECT * FROM " + TABLE_AUDITORES;
+        String query = "SELECT IDAUDITOR FROM " + TABLE_AUDITORES;
 
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             idAuditorAllAuditores.add(cursor.getString(cursor.getColumnIndex(IDAUDITOR)));
         }
         cursor.close();
         database.close();
 
         if (idAuditorAllAuditores.size()>0){
-            listaAllAuditores=new ArrayList<>();
+
             for (String idAuditorBuscado:idAuditorAllAuditores
                     ) {
                 listaAllAuditores.add(getAuditorConId(idAuditorBuscado));
@@ -288,13 +318,13 @@ public class DAODbase extends DatabaseHelper {
 
         Auditor auditorConId=null;
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             auditorConId =new Auditor();
             //LEER CADA FILA DE LA TABLA RESULTADO
             auditorConId.setIdAuditor((cursor.getString(cursor.getColumnIndex(IDAUDITOR))));
-            auditorConId.setNombreAuditor((cursor.getString(cursor.getColumnIndex(COMENTARIO))));
-            auditorConId.setPuesto((cursor.getString(cursor.getColumnIndex(RUTAFOTODB))));
-            auditorConId.setMailUsuario((cursor.getString(cursor.getColumnIndex(RUTAFOTOFB))));
+            auditorConId.setNombreAuditor((cursor.getString(cursor.getColumnIndex(NOMBRE_AUDITOR))));
+            auditorConId.setPuesto((cursor.getString(cursor.getColumnIndex(PUESTOAUDITOR))));
+            auditorConId.setMailUsuario((cursor.getString(cursor.getColumnIndex(MAILAUDITOR))));
             auditorConId.setCantidadAuditoriasRealizada((cursor.getInt(cursor.getColumnIndex(CANTIDAD_AUDITORIAS_REALIZADAS))));
             idFotoAuditor=cursor.getString(cursor.getColumnIndex(IDFOTO_AUDITOR));
         }
@@ -326,7 +356,7 @@ public class DAODbase extends DatabaseHelper {
         String query2 = "DELETE FROM " + TABLE_AUDITORES +
                 " WHERE IDAUDITOR='"+idAuditor+"'";
 
-        database2.execSQL(query);
+        database2.execSQL(query2);
         database2.close();
 
         borrarFoto(idFotoABorrar);
@@ -378,6 +408,9 @@ public class DAODbase extends DatabaseHelper {
     //AGREGAR AREA
     public void addArea (Area unArea){
         if(!checkIfExistArea(unArea.getIdArea())) {
+
+            addFoto(unArea.getFotoArea());
+
             SQLiteDatabase database = getWritableDatabase();
             //CREO LA FILA Y LE CARGO LOS DATOS
             ContentValues row = new ContentValues();
@@ -398,28 +431,26 @@ public class DAODbase extends DatabaseHelper {
     //TRAER TODAS LAS AREAS
 
     public List<Area> getAllAreas(){
-        List<Area>listaAllAreas=null;
+        List<Area>listaAllAreas=new ArrayList<>();
        List<String>idAreasAllAreas=new ArrayList<>();
         SQLiteDatabase database = getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_AREAS;
 
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             idAreasAllAreas.add(cursor.getString(cursor.getColumnIndex(IDAREA)));
         }
         cursor.close();
         database.close();
 
         if (idAreasAllAreas.size()>0){
-            listaAllAreas=new ArrayList<>();
             for (String idAreaBuscadas:idAreasAllAreas
                  ) {
                 listaAllAreas.add(getAreaConId(idAreaBuscadas));
             }
         }
         return listaAllAreas;
-        
     }
     
 
@@ -433,7 +464,7 @@ public class DAODbase extends DatabaseHelper {
 
         Area unAreaConId=null;
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             unAreaConId =new Area();
             //LEER CADA FILA DE LA TABLA RESULTADO
             unAreaConId.setIdArea((cursor.getString(cursor.getColumnIndex(IDAREA))));
@@ -467,7 +498,7 @@ public class DAODbase extends DatabaseHelper {
         String query2 = "DELETE FROM " + TABLE_AREAS +
                 " WHERE IDAREA='"+idArea+"'";
 
-        database2.execSQL(query);
+        database2.execSQL(query2);
         database2.close();
 
         borrarFoto(idFotoABorrar);
@@ -557,7 +588,7 @@ public class DAODbase extends DatabaseHelper {
                 " WHERE IDCRITERIO='"+id+"'";
 
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             if (!cursor.getString(cursor.getColumnIndex(IDCRITERIO)).equals(unCriterioConId.getIdCriterio())){
                 unCriterioConId.setIdCriterio(cursor.getString(cursor.getColumnIndex(IDCRITERIO)));
                 unCriterioConId.setTextoCriterio(cursor.getString(cursor.getColumnIndex(TEXTOCRITERIO)));
@@ -622,7 +653,7 @@ public class DAODbase extends DatabaseHelper {
                 " WHERE IDESE='"+id+"'";
 
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             if (!cursor.getString(cursor.getColumnIndex(IDESE)).equals(unEseConId.getIdEse())){
                 unEseConId.setIdEse(cursor.getString(cursor.getColumnIndex(IDESE)));
                 unEseConId.setNombreEse(cursor.getString(cursor.getColumnIndex(NOMBRE_ESE)));
@@ -693,7 +724,7 @@ public class DAODbase extends DatabaseHelper {
                 " WHERE IDAUDITORIA='"+id+"'";
 
         Cursor cursor = database.rawQuery(query, null);
-        if(cursor.moveToNext()){
+        while(cursor.moveToNext()){
             if (!cursor.getString(cursor.getColumnIndex(IDAUDITORIA)).equals(unAuditoria.getIdAuditoria()))
             {
                 unAuditoria.setIdAuditoria(cursor.getString(cursor.getColumnIndex(IDAUDITORIA)));
@@ -764,5 +795,6 @@ public class DAODbase extends DatabaseHelper {
         return !(unAuditoria == null);
     }
 
-    
+
+
 }

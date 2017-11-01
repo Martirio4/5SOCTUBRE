@@ -138,11 +138,22 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
         private TextView textView;
         private ImageButton fabEliminar;
         private ImageButton fabEditar;
+        private TextView textViewPuesto;
+        private TextView textViewMail;
+        private TextView textViewAudits;
 
 
 
         public AreaViewHolder(View itemView) {
             super(itemView);
+
+
+            textViewAudits= (TextView) itemView.findViewById(R.id.cantAudits);
+            textViewAudits.setVisibility(View.GONE);
+            textViewPuesto=(TextView)itemView.findViewById(R.id.puestoAuditor);
+            textViewPuesto.setVisibility(View.GONE);
+
+            textViewMail=(TextView)itemView.findViewById(R.id.mailAuditor);
             imageView = (CircleImageView) itemView.findViewById(R.id.imagenCamara);
             textView= (TextView) itemView.findViewById(R.id.nombreAuditor);
 
@@ -163,10 +174,17 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
                     .load(f)
                     .into(imageView);
 
-            textView.setText(unArea.getNombreArea());
-            }
-        }
 
+        }
+            if (unArea.getNombreArea()!= null && !unArea.getNombreArea().isEmpty()){
+                textView.setText(unArea.getNombreArea());
+            }
+            if (unArea.getResponsableArea()!= null && !unArea.getResponsableArea().isEmpty()){
+                textViewMail.setText(unArea.getResponsableArea());
+            }
+
+
+        }
 
     }
 

@@ -11,17 +11,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.demo.nomad.nomad5s.Adapter.AdapterArea;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.Model.Area;
+import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -59,6 +63,7 @@ public class FragmentCrearCampania extends Fragment {
     public interface Elegible{
         void elegirArea();
         void elegirAuditor(Area unArea);
+
     }
 
 
@@ -69,7 +74,13 @@ public class FragmentCrearCampania extends Fragment {
         View view= inflater.inflate(R.layout.fragment_crear_campania, container, false);
         controllerDatos= new ControllerDatos(getContext());
 
+        final Campania nuevaCampania= new Campania();
+        nuevaCampania.setIdCampania("campania_"+UUID.randomUUID());
+
         editFechaInicio =(EditText) view.findViewById(R.id.editFechaInicioEnCampania);
+
+
+
         editFechaFin =(EditText) view.findViewById(R.id.editFechaFinEnCampania);
         menuCrearCampania=(FloatingActionMenu) view.findViewById(R.id.menuAgregarCampania);
         menuCrearCampania.setMenuButtonColorPressed(ContextCompat.getColor(getActivity(),R.color.verde0));
@@ -81,10 +92,46 @@ public class FragmentCrearCampania extends Fragment {
             }
         });
 
+        editFechaInicio.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                nuevaCampania.setFechaInicio(editFechaInicio.getText().toString());
+                Toast.makeText(getContext(), "hola", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         editFechaFin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mostrarDialogoFechaEnEdit(editFechaFin);
+            }
+        });
+
+        editFechaFin.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                nuevaCampania.setFechaLimite(editFechaFin.getText().toString());
+                Toast.makeText(getContext(), editFechaFin.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 

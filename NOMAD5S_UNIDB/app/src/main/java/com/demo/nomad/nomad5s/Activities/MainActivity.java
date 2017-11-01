@@ -1,32 +1,12 @@
 package com.demo.nomad.nomad5s.Activities;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
-import com.demo.nomad.nomad5s.Adapter.AdapterArea;
-import com.demo.nomad.nomad5s.Adapter.AdapterTesting;
-import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
-import com.demo.nomad.nomad5s.DAO.DAOCampania;
-import com.demo.nomad.nomad5s.Fragments.FragmentManageAreas;
-import com.demo.nomad.nomad5s.Fragments.FragmentManageAuditores;
-import com.demo.nomad.nomad5s.Model.Area;
-import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.R;
-
-import java.util.UUID;
 
 
 public class MainActivity extends AppCompatActivity {

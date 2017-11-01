@@ -117,10 +117,7 @@ public class AdapterCampania extends RecyclerView.Adapter implements View.OnClic
 
         public void cargarCampania(Campania unCampania) {
 
-            fechaInicio.setText(unCampania.getFechaInicio());
-            fechaFin.setText(unCampania.getFechaLimite());
-            cantidadAuditoriasProgramadas.setText(unCampania.getCantidadAuditoriasProgramadas().toString());
-            fechaInicio.setText(unCampania.getCantidadAuditoriasTerminadas().toString());
+
         }
 
 
