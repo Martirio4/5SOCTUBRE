@@ -100,37 +100,37 @@
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_edit_black_24dp" />
                     <LinearLayout
-                        android:paddingEnd="@dimen/margenChico"
-                        android:paddingStart="@dimen/margenChico"
+
+                        android:gravity="center_horizontal"
                         android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_gravity="end"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <TextView
-                            android:textSize="15sp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="@dimen/margenChico"
+                            android:gravity="center"
+
+                            android:textColor="@color/primary_text"
+                            android:textSize="15sp" />
 
                         <TextView
                             android:id="@+id/cantAudits"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="@dimen/margenChico"
-                            android:gravity="center"
-                            android:text="#audit"
+                            android:gravity="center_horizontal"
+                            android:text="#Audits"
                             android:textColor="@color/primary_text"
                             android:textSize="15sp" />
                         <TextView
-                            android:id="@+id/tagNAudits"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="@dimen/margenChico"
+
                             android:gravity="center"
                             android:text="@string/audits"
                             android:textColor="@color/primary_text"
                             android:textSize="12sp" />
-
                     </LinearLayout>
 
                 </LinearLayout>
