@@ -29,8 +29,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/imagenCamara"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_gravity="center"
                 android:src="@drawable/desconocidocolor"
                 app:civ_border_color="#000000"
@@ -63,7 +63,6 @@
                             android:layout_height="wrap_content"
                             android:paddingStart="@dimen/margenChico"
                             android:gravity="center"
-                            android:text="Auditor name"
                             android:textColor="@color/primary_text"
                             android:textSize="15sp" />
 
@@ -72,20 +71,46 @@
 
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="@dimen/margenChico"
+                            android:layout_marginStart="@dimen/margenChico"
                             android:gravity="center"
-                            android:text="Auditor name"
+
                             android:textColor="@color/primary_text"
                             android:textSize="15sp" />
                         <TextView
                             android:id="@+id/mailAuditor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingStart="@dimen/margenChico"
+                            android:layout_marginStart="@dimen/margenChico"
                             android:gravity="center"
-                            android:text="Auditor name"
+
                             android:textColor="@color/primary_text"
                             android:textSize="12sp" />
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_marginStart="@dimen/margenChico"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="@string/audits"
+                                android:textColor="@color/primary_text"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/cantAudits"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_horizontal"
+                                android:text="Audits:"
+                                android:layout_marginStart="@dimen/margenChico"
+                                android:textColor="@color/primary_text"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
 
@@ -105,6 +130,9 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+
+
+
                         <TextView
                             android:textStyle="bold"
                             android:layout_width="wrap_content"
@@ -115,22 +143,7 @@
                             android:textColor="@color/primary_text"
                             android:textSize="15sp" />
 
-                        <TextView
-                            android:id="@+id/cantAudits"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_horizontal"
-                            android:text="#Audits"
-                            android:textColor="@color/primary_text"
-                            android:textSize="15sp" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
 
-                            android:gravity="center"
-                            android:text="@string/audits"
-                            android:textColor="@color/primary_text"
-                            android:textSize="12sp" />
                     </LinearLayout>
 
                 </LinearLayout>

@@ -166,13 +166,19 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
             else{
                 circleImageView.setImageResource(R.drawable.desconocidocolor);
             }
+            //si tiene nombre carga el nombre, sino pone el mail como nombre
             if (unAuditor.getNombreAuditor()!= null && !unAuditor.getNombreAuditor().isEmpty()){
                 textViewNombre.setText(unAuditor.getNombreAuditor());
             }
+            else {
+                textViewNombre.setText(unAuditor.getMailUsuario());
+            }
+            //si tiene puesto lo carga, sino vacio
             if (unAuditor.getPuesto()!= null && !unAuditor.getPuesto().isEmpty()){
                 textViewPuesto.setText(unAuditor.getPuesto());
             }
-            if (unAuditor.getMailUsuario()!= null && !unAuditor.getMailUsuario().isEmpty()){
+
+            if (unAuditor.getMailUsuario()!= null && !unAuditor.getMailUsuario().isEmpty()&&unAuditor.getNombreAuditor()!=null &&!unAuditor.getNombreAuditor().isEmpty()){
                 textViewMail.setText(unAuditor.getMailUsuario());
             }
             if (unAuditor.getCantidadAuditoriasRealizada()!= null){
