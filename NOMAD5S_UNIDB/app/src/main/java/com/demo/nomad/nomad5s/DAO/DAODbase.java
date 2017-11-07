@@ -626,7 +626,7 @@ public class DAODbase extends DatabaseHelper {
                 row.put(NOMBRE_ESE, unEse.getNombreEse());
                 row.put(PUNTAJEESE, unEse.getPuntajeEse());
                 row.put(IDCRITERIO_FK, unCrit.getIdCriterio());
-                database.insert(TABLE_AREAS, null, row);
+                database.insert(TABLE_ESE, null, row);
             }
             database.close();
         }

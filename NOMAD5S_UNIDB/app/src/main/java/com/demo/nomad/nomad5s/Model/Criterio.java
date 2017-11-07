@@ -29,9 +29,7 @@ public class Criterio {
         this.listaFotosCriterio= new ArrayList<>();
     }
 
-
     //GETTER Y SETTER
-
 
     public String getIdCriterio() {
         return idCriterio;

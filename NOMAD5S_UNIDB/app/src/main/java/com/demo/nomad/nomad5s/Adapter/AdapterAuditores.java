@@ -168,7 +168,7 @@ public class AdapterAuditores extends RecyclerView.Adapter implements View.OnCli
             }
             //si tiene nombre carga el nombre, sino pone el mail como nombre
             if (unAuditor.getNombreAuditor()!= null && !unAuditor.getNombreAuditor().isEmpty()){
-                textViewNombre.setText(unAuditor.getNombreAuditor());
+                textViewNombre.setText(unAuditor.getNombreAuditor().toUpperCase());
             }
             else {
                 textViewNombre.setText(unAuditor.getMailUsuario());

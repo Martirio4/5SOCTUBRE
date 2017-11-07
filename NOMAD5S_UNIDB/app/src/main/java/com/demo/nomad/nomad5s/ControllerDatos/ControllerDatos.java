@@ -5,6 +5,7 @@ import com.demo.nomad.nomad5s.DAO.DAODbase;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Campania;
+import com.demo.nomad.nomad5s.Model.Ese;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -443,5 +444,12 @@ public class ControllerDatos {
 
     public void actualizarArea(Area unArea) {
         daoDB.updateArea(unArea.getIdArea(), unArea.getNombreArea(),unArea.getNombreResponsableArea(), unArea.getMailResponsableArea());
+    }
+
+    public List<Ese> traerlistaEses() {
+        List<Ese>listaEses= new ArrayList<>();
+
+
+        return listaEses;
     }
 }

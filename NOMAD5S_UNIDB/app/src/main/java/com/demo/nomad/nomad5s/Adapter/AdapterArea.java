@@ -152,7 +152,7 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
             textViewAudits= itemView.findViewById(R.id.cantAudits);
             textViewAudits.setVisibility(View.GONE);
             textViewPuesto=itemView.findViewById(R.id.puestoAuditor);
-            textViewPuesto.setVisibility(View.GONE);
+
 
             textViewAuditsTag=itemView.findViewById(R.id.TV_audits);
             textViewAuditsTag.setVisibility(View.GONE);
@@ -182,15 +182,21 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
 
         }
             if (unArea.getNombreArea()!= null && !unArea.getNombreArea().isEmpty()){
-                textView.setText(unArea.getNombreArea());
+                textView.setText(unArea.getNombreArea().toUpperCase());
             }
+            if (unArea.getMailResponsableArea()!= null && !unArea.getMailResponsableArea().isEmpty()){
+                String unString=unArea.getMailResponsableArea();
+                textViewMail.setText(unString);
+            }
+
+
             if (unArea.getNombreResponsableArea()!= null && !unArea.getNombreResponsableArea().isEmpty()){
-                textViewMail.setText(unArea.getNombreResponsableArea());
+                String unString="Owner: "+unArea.getNombreResponsableArea();
+                textViewPuesto.setText(unString);
             }
 
 
         }
-
     }
 
     public interface EditaEliminable {

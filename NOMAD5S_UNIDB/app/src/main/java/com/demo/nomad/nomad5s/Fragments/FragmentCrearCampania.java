@@ -55,7 +55,6 @@ public class FragmentCrearCampania extends Fragment {
 
     private Elegible elegible;
 
-
     public FragmentCrearCampania() {
         // Required empty public constructor
     }
@@ -63,9 +62,7 @@ public class FragmentCrearCampania extends Fragment {
     public interface Elegible{
         void elegirArea();
         void elegirAuditor(Area unArea);
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,8 +75,6 @@ public class FragmentCrearCampania extends Fragment {
         nuevaCampania.setIdCampania("campania_"+UUID.randomUUID());
 
         editFechaInicio =(EditText) view.findViewById(R.id.editFechaInicioEnCampania);
-
-
 
         editFechaFin =(EditText) view.findViewById(R.id.editFechaFinEnCampania);
         menuCrearCampania=(FloatingActionMenu) view.findViewById(R.id.menuAgregarCampania);

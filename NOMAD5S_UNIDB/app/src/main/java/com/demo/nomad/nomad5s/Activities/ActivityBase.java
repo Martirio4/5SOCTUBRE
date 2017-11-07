@@ -30,8 +30,11 @@ import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAreas;
 import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAuditores;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
+import com.demo.nomad.nomad5s.Model.Auditoria;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
+
+import java.util.UUID;
 
 public class ActivityBase extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentSeleccionAuditores.Terminable, FragmentCrearCampania.Elegible, FragmentManageAuditores.Avisable, AdapterAuditores.EditaEliminable,FragmentManageCampanias.Creable {
 
@@ -387,7 +390,6 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
 
     }
 
-
     public void crearDialogoBorrarAuditor(final Auditor unAuditor){
         new MaterialDialog.Builder(this)
                 .title("Delete Selected Area")
@@ -411,10 +413,17 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
     }
 
     @Override
-    public void armarAuditoria(Area unArea, Auditor unAuditor) {
+    public void armarAuditoria( Area unArea,  Auditor unAuditor) {
         FragmentManager fm = this.getSupportFragmentManager();
         fm.popBackStack("seleccionArea",fm.POP_BACK_STACK_INCLUSIVE);
         fm.popBackStack("seleccionAuditor",fm.POP_BACK_STACK_INCLUSIVE);
+
+        Auditoria unaAuditoria = new Auditoria();
+        unaAuditoria.setIdAuditoria("audit_"+ UUID.randomUUID());
+        unaAuditoria.setAuditor(unAuditor);
+        unaAuditoria.setAreaAuditada(unArea);
+        unaAuditoria.setListaEses(controllerDatos.traerlistaEses());
+
 
 
         Toast.makeText(this, "armar auditoria", Toast.LENGTH_SHORT).show();
