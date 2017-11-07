@@ -8,10 +8,19 @@ public class Area{
 
     private String idArea;
     private String nombreArea;
-    private String responsableArea;
+    private String nombreResponsableArea;
+    private String mailResponsableArea;
     private Foto fotoArea;
 
     public Area() {
+    }
+
+    public String getMailResponsableArea() {
+        return mailResponsableArea;
+    }
+
+    public void setMailResponsableArea(String mailResponsableArea) {
+        this.mailResponsableArea = mailResponsableArea;
     }
 
     public String getIdArea() {
@@ -30,12 +39,12 @@ public class Area{
         this.nombreArea = nombreArea;
     }
 
-    public String getResponsableArea() {
-        return responsableArea;
+    public String getNombreResponsableArea() {
+        return nombreResponsableArea;
     }
 
-    public void setResponsableArea(String responsableArea) {
-        this.responsableArea = responsableArea;
+    public void setNombreResponsableArea(String nombreResponsableArea) {
+        this.nombreResponsableArea = nombreResponsableArea;
     }
 
     public Foto getFotoArea() {
@@ -46,3 +55,4 @@ public class Area{
         this.fotoArea = fotoArea;
     }
 }
+

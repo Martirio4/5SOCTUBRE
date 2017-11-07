@@ -141,6 +141,7 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
         private TextView textViewPuesto;
         private TextView textViewMail;
         private TextView textViewAudits;
+        private TextView textViewAuditsTag;
 
 
 
@@ -148,19 +149,23 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
             super(itemView);
 
 
-            textViewAudits= (TextView) itemView.findViewById(R.id.cantAudits);
+            textViewAudits= itemView.findViewById(R.id.cantAudits);
             textViewAudits.setVisibility(View.GONE);
-            textViewPuesto=(TextView)itemView.findViewById(R.id.puestoAuditor);
+            textViewPuesto=itemView.findViewById(R.id.puestoAuditor);
             textViewPuesto.setVisibility(View.GONE);
 
-            textViewMail=(TextView)itemView.findViewById(R.id.mailAuditor);
-            imageView = (CircleImageView) itemView.findViewById(R.id.imagenCamara);
-            textView= (TextView) itemView.findViewById(R.id.nombreAuditor);
-
-            fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
+            textViewAuditsTag=itemView.findViewById(R.id.TV_audits);
+            textViewAuditsTag.setVisibility(View.GONE);
 
 
-            fabEditar=(ImageButton) itemView.findViewById(R.id.botonEditar);
+            textViewMail=itemView.findViewById(R.id.mailAuditor);
+            imageView = itemView.findViewById(R.id.imagenCamara);
+            textView=  itemView.findViewById(R.id.nombreAuditor);
+
+            fabEliminar =  itemView.findViewById(R.id.botonEliminar);
+
+
+            fabEditar= itemView.findViewById(R.id.botonEditar);
 
         }
 
@@ -179,8 +184,8 @@ public class AdapterArea extends RecyclerView.Adapter implements View.OnClickLis
             if (unArea.getNombreArea()!= null && !unArea.getNombreArea().isEmpty()){
                 textView.setText(unArea.getNombreArea());
             }
-            if (unArea.getResponsableArea()!= null && !unArea.getResponsableArea().isEmpty()){
-                textViewMail.setText(unArea.getResponsableArea());
+            if (unArea.getNombreResponsableArea()!= null && !unArea.getNombreResponsableArea().isEmpty()){
+                textViewMail.setText(unArea.getNombreResponsableArea());
             }
 
 

@@ -76,7 +76,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAODbase.IDAREA + " TEXT, " +
                 DAODbase.NOMBRE_AREA + " TEXT, " +
                 DAODbase.IDFOTO_AREA + " TEXT, " +
-                DAODbase.RESPONSABLEAREA + " TEXT )";
+                DAODbase.MAILRESPONSABLEAREA + " TEXT, " +
+                DAODbase.NOMBRERESPONSABLEAREA + " TEXT )";
         db.execSQL(query6);
 
         //CREO TABLA DE AREAS

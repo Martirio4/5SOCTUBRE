@@ -25,7 +25,6 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.demo.nomad.nomad5s.Adapter.AdapterArea;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.Model.Area;
-import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -59,9 +58,11 @@ public class FragmentManageAreas extends Fragment {
     private TextView textView;
 
     private EditText editNombre;
-    private EditText editResponsable;
+    private EditText editNombreResponsable;
+    private EditText editMailResponsable;
     private TextInputLayout til1;
     private TextInputLayout til2;
+    private TextInputLayout til3;
 
 
 
@@ -214,13 +215,17 @@ public class FragmentManageAreas extends Fragment {
                     public void onClick(@NonNull final MaterialDialog dialog, @NonNull DialogAction which) {
 
                         Area unArea = new Area();
-                        unArea.setIdArea(editNombre.getText().toString());
+                        unArea.setIdArea("area_"+UUID.randomUUID());
                         unArea.setFotoArea(unaFoto);
-                        if (editResponsable.getText()==null||editNombre.getText().toString().isEmpty()){
+                        if (editNombreResponsable.getText()==null||editNombre.getText().toString().isEmpty()){
                             editNombre.setText("");
                         }
+                        if (editMailResponsable.getText()==null||editNombre.getText().toString().isEmpty()){
+                            editMailResponsable.setText("");
+                        }
                         unArea.setNombreArea(editNombre.getText().toString());
-                        unArea.setResponsableArea(editResponsable.getText().toString());
+                        unArea.setNombreResponsableArea(editNombreResponsable.getText().toString());
+                        unArea.setMailResponsableArea(editMailResponsable.getText().toString());
 
                         try {
                             controllerAreas.guardarArea(unArea);
@@ -243,9 +248,11 @@ public class FragmentManageAreas extends Fragment {
 
 
         editNombre  = dialogasd.getCustomView().findViewById(R.id.ET_nombreArea);
-        editResponsable  = dialogasd.getCustomView().findViewById(R.id.ET_responsableArea);
+        editNombreResponsable  = dialogasd.getCustomView().findViewById(R.id.ET_nombreResponsableArea);
+        editMailResponsable= dialogasd.getCustomView().findViewById(R.id.ET_mailResponsableArea);
         til1= dialogasd.getCustomView().findViewById(R.id.TIL_nombreArea);
-        til2=dialogasd.getCustomView().findViewById(R.id.TIL_responsableArea);
+        til2=dialogasd.getCustomView().findViewById(R.id.TIL_nombreResponsableArea);
+        til3=dialogasd.getCustomView().findViewById(R.id.TIL_mailResponsableArea);
 
         editNombre.addTextChangedListener(new TextWatcher() {
             @Override
@@ -265,7 +272,8 @@ public class FragmentManageAreas extends Fragment {
             }
         });
 
-        editResponsable.addTextChangedListener(new TextWatcher() {
+
+        editMailResponsable.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
@@ -274,16 +282,16 @@ public class FragmentManageAreas extends Fragment {
             }
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!editResponsable.getText().toString().isEmpty()){
-                    if (isEmailValid(editResponsable.getText().toString())){
-                        til2.setError("");
+                if (!editMailResponsable.getText().toString().isEmpty()){
+                    if (isEmailValid(editMailResponsable.getText().toString())){
+                        til3.setError("");
                     }
                     else{
-                        til2.setError(getString(R.string.mailInvalido));
+                        til3.setError(getString(R.string.mailInvalido));
                     }
                 }
                 else{
-                    til2.setError("");
+                    til3.setError("");
                 }
 
 

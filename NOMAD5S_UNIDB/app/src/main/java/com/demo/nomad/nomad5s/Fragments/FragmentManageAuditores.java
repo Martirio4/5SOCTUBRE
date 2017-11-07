@@ -54,12 +54,14 @@ public class FragmentManageAuditores extends Fragment {
     private Avisable unAvisable;
     private TextView textView;
 
+    //---COMIENZA ATRIBUTOS DEL DIALOGO DATOS AUDITOR---///
     private EditText editMail;
     private EditText editNombre;
     private EditText editPuesto;
     private TextInputLayout til1;
     private TextInputLayout til2;
     private TextInputLayout til3;
+    //---FIN ATRIBUTOS DEL DIALOGO DATOS AUDITOR---///
 
 
     public FragmentManageAuditores() {

@@ -20,16 +20,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <android.support.design.widget.TextInputLayout
+            android:hint="@string/hintnombreResponsableArea"
+            android:id="@+id/TIL_nombreResponsableArea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/ET_nombreResponsableArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </android.support.design.widget.TextInputLayout>
+
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:hint="@string/hintResponsableArea"
-        android:id="@+id/TIL_responsableArea"
+        android:id="@+id/TIL_mailResponsableArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/ET_responsableArea"
+            android:id="@+id/ET_mailResponsableArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

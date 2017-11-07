@@ -3,13 +3,18 @@ package com.demo.nomad.nomad5s.Activities;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -25,6 +30,7 @@ import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAreas;
 import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAuditores;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
+import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 
 public class ActivityBase extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentSeleccionAuditores.Terminable, FragmentCrearCampania.Elegible, FragmentManageAuditores.Avisable, AdapterAuditores.EditaEliminable,FragmentManageCampanias.Creable {
@@ -34,6 +40,19 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
     private FragmentManageAreas fragmentManageAreas;
     private FragmentManageAuditores fragmentManageAuditores;
     private FragmentManager fragmentManager;
+
+    //---COMIENZA ATRIBUTOS DEL DIALOGO DATOS AUDITOR---///
+    private EditText editMail;
+    private EditText editNombre;
+    private EditText editPuesto;
+    private TextInputLayout til1;
+    private TextInputLayout til2;
+    private TextInputLayout til3;
+    //---FIN ATRIBUTOS DEL DIALOGO DATOS AUDITOR---///
+
+    //---COMIENZA ATRIBUTOS DIALOGO AREA---//
+    private EditText editNombreResponsable;
+    //---FIN ATRIBUTOS DIALOGO AREA---//
 
 
     public static final String QUE_FRAGMENT_ABRO="QUE_FRAGMENT_ABRO";
@@ -159,38 +178,9 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
 
     @Override
     public void editarArea(Area unArea) {
-        CrearDialogoEditarArea(unArea);
+        crearDialogoEditarArea(unArea);
     }
 
-    private void CrearDialogoEditarArea(final Area unArea) {
-
-        new MaterialDialog.Builder(ActivityBase.this)
-                .title("Rename Area")
-                .content("Enter the new name")
-                .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("","", new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(MaterialDialog dialog, CharSequence input) {
-
-                        try {
-                            controllerDatos.renombrarArea(unArea.getIdArea(),input.toString());
-
-                            fragmentManager = (FragmentManager) ActivityBase.this.getSupportFragmentManager();
-                            fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
-                            fragmentManageAreas.updateAdapter();
-
-                            // dialogoExito(unArea);
-                            Snackbar.make(fragmentManageAreas.getView(),"Area was succesfully updated",Snackbar.LENGTH_SHORT)
-                                    .show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Snackbar.make(fragmentManageAreas.getView(),"Area was not updated. Please try again",Snackbar.LENGTH_SHORT)
-                                    .show();
-                        }
-
-                    }
-                }).show();
-    }
 
     public void CrearDialogoBorrarArea(final Area unArea){
         new MaterialDialog.Builder(this)
@@ -275,38 +265,133 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
 
     private void crearDialogoEditarAuditor(final Auditor unAuditor) {
 
-        new MaterialDialog.Builder(ActivityBase.this)
-                .title("Rename Area")
-                .content("Enter the new name")
-                .inputType(InputType.TYPE_CLASS_TEXT)
-                .input("","", new MaterialDialog.InputCallback() {
-                    @Override
-                    public void onInput(MaterialDialog dialog, CharSequence input) {
+            final MaterialDialog  dialogasd = new MaterialDialog.Builder(this)
+                    .title(getString(R.string.tituloDarNombreAuditor))
+                    .customView(R.layout.dialog_layout_auditores,true)
+                    .positiveText(getString(R.string.save))
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull final MaterialDialog dialog, @NonNull DialogAction which) {
 
-                        try {
-                            controllerDatos.renombrarAuditor(unAuditor.getIdAuditor(),input.toString());
 
-                            fragmentManager = (FragmentManager) ActivityBase.this.getSupportFragmentManager();
+                            if (editNombre.getText()==null||editNombre.getText().toString().isEmpty()){
+
+                            }
+                            else{
+                                unAuditor.setNombreAuditor(editNombre.getText().toString());
+                            }
+                            if (editPuesto.getText()==null||editPuesto.getText().toString().isEmpty()){
+
+                            }
+                            else{
+                                unAuditor.setPuesto(editPuesto.getText().toString());
+                            }
+                            fragmentManager = getSupportFragmentManager();
                             fragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
-                            fragmentManageAuditores.updateAdapter();
 
-                            // dialogoExito(unArea);
-                            Snackbar.make(fragmentManageAuditores.getView(),"User data was succesfully updated",Snackbar.LENGTH_SHORT)
-                                    .show();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            Snackbar.make(fragmentManageAuditores.getView(),"User data was not updated. Please try again",Snackbar.LENGTH_SHORT)
-                                    .show();
+                            if (fragmentManageAuditores != null && fragmentManageAuditores.isVisible()) {
+
+                                try {
+
+                                    controllerDatos.actualizarAuditor(unAuditor);
+                                    fragmentManageAuditores.updateAdapter();
+                                    Snackbar.make(fragmentManageAuditores.getView(), unAuditor.getNombreAuditor() + " data was updated", Snackbar.LENGTH_LONG)
+                                            .show();
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Snackbar.make(fragmentManageAuditores.getView(), "data could not be updated, try again.", Snackbar.LENGTH_LONG)
+                                            .show();
+                                }
+                            }
+
+                        }
+                    })
+                    .build();
+            dialogasd.show();
+
+            editMail=dialogasd.getCustomView().findViewById(R.id.ET_mailAuditor);
+            editMail.setVisibility(View.GONE);
+
+            editNombre  = dialogasd.getCustomView().findViewById(R.id.ET_nombreAuditor);
+            editNombre.setText(unAuditor.getNombreAuditor());
+
+            editPuesto  = dialogasd.getCustomView().findViewById(R.id.ET_nombrePuesto);
+            editPuesto.setText(unAuditor.getPuesto());
+
+
+
+    }
+
+    private void crearDialogoEditarArea(final Area unArea) {
+
+        final MaterialDialog  dialogasd = new MaterialDialog.Builder(this)
+                .title(getString(R.string.tituloDarNombreArea))
+                .customView(R.layout.dialog_layout_areas,true)
+                .positiveText(getString(R.string.save))
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull final MaterialDialog dialog, @NonNull DialogAction which) {
+
+
+                        if (editNombre.getText()==null||editNombre.getText().toString().isEmpty()){
+                        }
+                        else{
+                            unArea.setNombreArea(editNombre.getText().toString());
+                        }
+                        if (editNombreResponsable.getText()==null||editNombreResponsable.getText().toString().isEmpty()){
+                        }
+                        else{
+                            unArea.setNombreResponsableArea(editNombreResponsable.getText().toString());
+                        }
+                        if (editMail==null || editMail.getText().toString().isEmpty()){
+                        }
+                        else{
+                            unArea.setMailResponsableArea(editMail.getText().toString());
+                        }
+
+                        fragmentManager = getSupportFragmentManager();
+                        fragmentManageAreas = (FragmentManageAreas) fragmentManager.findFragmentByTag("fragmentManageAreas");
+
+                        if (fragmentManageAreas != null && fragmentManageAreas.isVisible()) {
+
+                            try {
+
+                                controllerDatos.actualizarArea(unArea);
+                                fragmentManageAreas.updateAdapter();
+                                Snackbar.make(fragmentManageAreas.getView(), unArea.getNombreArea() + " was updated", Snackbar.LENGTH_LONG)
+                                        .show();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Toast.makeText(ActivityBase.this, e.toString(), Toast.LENGTH_LONG).show();
+                                Snackbar.make(fragmentManageAreas.getView(), "data could not be updated, try again.", Snackbar.LENGTH_LONG)
+                                        .show();
+                            }
                         }
 
                     }
-                }).show();
+                })
+                .build();
+        dialogasd.show();
+
+        editMail=dialogasd.getCustomView().findViewById(R.id.ET_mailResponsableArea);
+        editMail.setText(unArea.getMailResponsableArea());
+
+
+        editNombre  = dialogasd.getCustomView().findViewById(R.id.ET_nombreArea);
+        editNombre.setText(unArea.getNombreArea());
+
+        editNombreResponsable  = dialogasd.getCustomView().findViewById(R.id.ET_nombreResponsableArea);
+        editNombreResponsable.setText(unArea.getNombreResponsableArea());
+
     }
+
 
     public void crearDialogoBorrarAuditor(final Auditor unAuditor){
         new MaterialDialog.Builder(this)
                 .title("Delete Selected Area")
-                .content("The user: " + unAuditor.getNombreAuditor() +"\n"+ "will be permanently deleted."+"\n"+"Do you wisht to continue?")
+                .content("The user: " + unAuditor.getMailUsuario() +"\n"+ "will be permanently deleted."+"\n"+"Do you wisht to continue?")
                 .positiveText("Delete")
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override

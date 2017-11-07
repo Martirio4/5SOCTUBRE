@@ -402,12 +402,7 @@ public class ControllerDatos {
     }
 
 
-    public void renombrarArea(String idArea, String s) {
-        //RENOMBRAR DB
-        daoDB.rename(idArea,s);
-        //RENOMBRAR FIREBASE
-        mDatabase.child("AREAS").child(idArea).child("nombreArea").setValue(s);
-    }
+
 
     public List<Auditor> traerListaAuditores() {
         return daoDB.getAllAuditores();
@@ -429,9 +424,7 @@ public class ControllerDatos {
 
     }
 
-    public void renombrarAuditor(String idAuditor, String s) {
-        daoDB.rename(idAuditor, s);
-    }
+
 
     public List<Campania> traerListaCampanias() {
         return daoDB.getAllCampanias();
@@ -439,5 +432,16 @@ public class ControllerDatos {
 
     public Area traerArea(String string) {
         return daoDB.getAreaConId(string);
+    }
+
+    public void actualizarAuditor(Auditor unAuditor) {
+        //ACTUALIZAR DATOS EN LA DB
+        daoDB.renameAuditor(unAuditor.getIdAuditor(), unAuditor.getNombreAuditor());
+        daoDB.cambiarPuestoAuditor(unAuditor.getIdAuditor(),unAuditor.getPuesto());
+        //ACTUALIZAR DATOS EN FIREBASE
+    }
+
+    public void actualizarArea(Area unArea) {
+        daoDB.updateArea(unArea.getIdArea(), unArea.getNombreArea(),unArea.getNombreResponsableArea(), unArea.getMailResponsableArea());
     }
 }

@@ -70,7 +70,8 @@ public class DAODbase extends DatabaseHelper {
     public static final String IDAREA = "IDAREA";
     public static final String NOMBRE_AREA = "NOMBRE_AREA";
     public static final String IDFOTO_AREA = "IDFOTO_AREA";
-    public static final String RESPONSABLEAREA = "RESPONSABLEAREA";
+    public static final String MAILRESPONSABLEAREA = "MAILRESPONSABLEAREA";
+    public static final String NOMBRERESPONSABLEAREA = "NOMBRERESPONSABLEAREA";
     public static final String TABLE_AREAS="TABLE_AREAS";
     //---FIN TABLA AREAS---//
 
@@ -390,14 +391,7 @@ public class DAODbase extends DatabaseHelper {
         database.close();
     }
 
-    //CAMBIAR MAIL AUDITOR
-    public void cambiarMailAuditor(String idAuditor, String mailNuevo) {
-        SQLiteDatabase database = getWritableDatabase();
 
-        String query ="UPDATE "+TABLE_AREAS+" SET MAILAUDITOR='"+mailNuevo+"' WHERE IDAUDITOR='"+idAuditor+"'";
-        database.execSQL(query);
-        database.close();
-    }
 
 
 
@@ -418,8 +412,9 @@ public class DAODbase extends DatabaseHelper {
             //COMO LA AUDITORIA LA GENERA EL MANAGER SOLO SE CARGAN LOS DATOS INICIALES
             row.put(IDAREA, unArea.getIdArea());
             row.put(NOMBRE_AREA, unArea.getNombreArea());
-            row.put(RESPONSABLEAREA, unArea.getResponsableArea());
+            row.put(NOMBRERESPONSABLEAREA, unArea.getNombreResponsableArea());
             row.put(IDFOTO_AREA, unArea.getFotoArea().getIdFoto());
+            row.put(MAILRESPONSABLEAREA,unArea.getMailResponsableArea());
            
 
             //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
@@ -469,7 +464,8 @@ public class DAODbase extends DatabaseHelper {
             //LEER CADA FILA DE LA TABLA RESULTADO
             unAreaConId.setIdArea((cursor.getString(cursor.getColumnIndex(IDAREA))));
             unAreaConId.setNombreArea((cursor.getString(cursor.getColumnIndex(NOMBRE_AREA))));
-            unAreaConId.setResponsableArea((cursor.getString(cursor.getColumnIndex(RESPONSABLEAREA))));
+            unAreaConId.setNombreResponsableArea((cursor.getString(cursor.getColumnIndex(NOMBRERESPONSABLEAREA))));
+            unAreaConId.setMailResponsableArea((cursor.getString(cursor.getColumnIndex(MAILRESPONSABLEAREA))));
             idFotoArea=cursor.getString(cursor.getColumnIndex(IDFOTO_AREA));
         }
         cursor.close();
@@ -505,23 +501,16 @@ public class DAODbase extends DatabaseHelper {
 
     }
 
-    //RENOMBRAR AREA
-    public void rename(String idArea, String s) {
+    //UPDATE AREA
+    public void updateArea(String idArea, String nombreArea, String nombreResponsable, String mailResponsable) {
         SQLiteDatabase database = getWritableDatabase();
 
-        String query ="UPDATE "+TABLE_AREAS+" SET NOMBRE_AREA='"+s+"' WHERE IDAREA='"+idArea+"'";
+        String query ="UPDATE "+TABLE_AREAS+" SET MAILRESPONSABLEAREA='"+mailResponsable+"', NOMBRERESPONSABLEAREA='"+nombreResponsable+"', NOMBRE_AREA='"+nombreArea+"' WHERE IDAREA='"+idArea+"'";
         database.execSQL(query);
         database.close();
     }
 
-    //CAMBIAR RESPONSABLE AREA
-    public void cambiarResponsableArea(String idArea, String s) {
-        SQLiteDatabase database = getWritableDatabase();
 
-        String query ="UPDATE "+TABLE_AREAS+" SET RESPONSABLEAREA='"+s+"' WHERE IDAREA='"+idArea+"'";
-        database.execSQL(query);
-        database.close();
-    }
 
     //CAMBIAR FOTO AREA
     public void cambiarFotoArea(String idArea, String idFotoNueva) {

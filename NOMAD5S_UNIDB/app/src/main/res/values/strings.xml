@@ -48,4 +48,5 @@
     <string name="mailInvalido">Please enter a valid e-mail adress</string>
     <string name="nombreAreaIncompleto">Please enter a name for the new area</string>
     <string name="audits">Audits</string>
+    <string name="hintnombreResponsableArea">Area owner</string>
 </resources>
