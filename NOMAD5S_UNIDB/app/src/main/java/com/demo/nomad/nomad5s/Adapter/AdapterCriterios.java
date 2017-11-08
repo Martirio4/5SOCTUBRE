@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.demo.nomad.nomad5s.Fragments.FragmentManageAuditores;
+import com.demo.nomad.nomad5s.Fragments.FragmentManageCriterios;
 import com.demo.nomad.nomad5s.Model.Criterio;
 import com.demo.nomad.nomad5s.R;
 import com.squareup.picasso.Picasso;
@@ -30,7 +30,7 @@ public class AdapterCriterios extends RecyclerView.Adapter implements View.OnCli
 
     private Context context;
     private List<Criterio> listaCriteriosOriginales;
-    private List<Criterio> listaAuditoresFavoritos;
+    private List<Criterio> listaCriteriosFavoritos;
     private View.OnClickListener listener;
     private AdapterView.OnLongClickListener listenerLong;
     private EditaEliminable editaEliminable;
@@ -51,14 +51,16 @@ public class AdapterCriterios extends RecyclerView.Adapter implements View.OnCli
         this.listaCriteriosOriginales = listaCriteriosOriginales;
     }
 
-    public void addListaAuditoresOriginales(List<Criterio> listaAuditoresOriginales) {
-        this.listaCriteriosOriginales.addAll(listaAuditoresOriginales);
+    public void addListaCriteriosOriginales(List<Criterio> listaCriteriosOriginales) {
+        this.listaCriteriosOriginales.addAll(listaCriteriosOriginales);
     }
 
 
     public List<Criterio> getListaCriteriosOriginales() {
         return listaCriteriosOriginales;
     }
+
+
 
     //crear vista y viewholder
     @Override
@@ -70,44 +72,31 @@ public class AdapterCriterios extends RecyclerView.Adapter implements View.OnCli
 
 
         viewCelda.setOnClickListener(listener);
-        AuditorViewHolder AuditoresViewHolder = new AuditorViewHolder(viewCelda);
+        CriterioViewHolder CriteriosViewHolder = new CriterioViewHolder(viewCelda);
 
-        return AuditoresViewHolder;
+        return CriteriosViewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final Criterio unCriterio = listaCriteriosOriginales.get(position);
-        AuditorViewHolder AuditorViewHolder = (AuditorViewHolder) holder;
-        AuditorViewHolder.cargarAuditor(unCriterio);
+        CriterioViewHolder CriterioViewHolder = (CriterioViewHolder) holder;
+        CriterioViewHolder.cargarCriterio(unCriterio);
+        Integer unint=position+1;
+        String elString=unint.toString();
+        ((CriterioViewHolder) holder).posicion.setText(elString);
 
         FragmentActivity unaActivity = (FragmentActivity) context;
         FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-        FragmentManageAuditores FragmentManageAuditores = (FragmentManageAuditores) fragmentManager.findFragmentByTag("fragmentManageAuditores");
+        FragmentManageCriterios FragmentManageCriterios = (FragmentManageCriterios) fragmentManager.findFragmentByTag("fragmentManageCriterios");
 
 
-        if (FragmentManageAuditores != null && FragmentManageAuditores.isVisible()) {
+        if (FragmentManageCriterios != null && FragmentManageCriterios.isVisible()) {
 
-            AuditorViewHolder.fabEliminar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    editaEliminable = (EditaEliminable) context;
-                    editaEliminable.EliminarAuditor(unCriterio);
-
-                }
-            });
-
-            AuditorViewHolder.fabEditar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    editaEliminable=(EditaEliminable) context;
-                    editaEliminable.editarAuditor(unCriterio);
-                }
-            });
+//            COMPORTAMIENTO DE LOS BOTONES DE LA CELDA
         }
         else{
-            AuditorViewHolder.fabEditar.setVisibility(View.GONE);
-            AuditorViewHolder.fabEliminar.setVisibility(View.GONE);
+//            COMPORTAMIENTO DE LOS BOTONES DE LA CELDA
         }
 
     }
@@ -131,70 +120,42 @@ public class AdapterCriterios extends RecyclerView.Adapter implements View.OnCli
     //creo el viewholder que mantiene las referencias
     //de los elementos de la celda
 
-    private static class AuditorViewHolder extends RecyclerView.ViewHolder {
-        private CircleImageView circleImageView;
-        private TextView textViewNombre;
-        private TextView textViewPuesto;
-        private TextView textViewMail;
-        private TextView textViewAudits;
-        private ImageButton fabEliminar;
-        private ImageButton fabEditar;
+    private static class CriterioViewHolder extends RecyclerView.ViewHolder {
+        private TextView puntaje1;
+        private TextView puntaje2;
+        private TextView puntaje3;
+        private TextView puntaje4;
+        private TextView puntaje5;
+        private TextView enunciado;
+        private TextView posicion;
 
-
-
-        public AuditorViewHolder(View itemView) {
+        public CriterioViewHolder(View itemView) {
             super(itemView);
-            circleImageView = (CircleImageView) itemView.findViewById(R.id.imagenCamara);
-            textViewNombre= (TextView) itemView.findViewById(R.id.nombreAuditor);
-            textViewAudits= (TextView) itemView.findViewById(R.id.cantAudits);
-            textViewMail=(TextView)itemView.findViewById(R.id.mailAuditor);
-            textViewPuesto=(TextView)itemView.findViewById(R.id.puestoAuditor);
-            fabEliminar = (ImageButton) itemView.findViewById(R.id.botonEliminar);
-            fabEditar=(ImageButton) itemView.findViewById(R.id.botonEditar);
 
-
+        puntaje1=itemView.findViewById(R.id.TV_descripcionPuntaje1);
+        puntaje2=itemView.findViewById(R.id.TV_descripcionPuntaje2);
+        puntaje3=itemView.findViewById(R.id.TV_descripcionPuntaje3);
+        puntaje4=itemView.findViewById(R.id.TV_descripcionPuntaje4);
+        puntaje5=itemView.findViewById(R.id.TV_descripcionPuntaje5);
+        enunciado=itemView.findViewById(R.id.TV_enunciado);
+        posicion=itemView.findViewById(R.id.TV_numeroItem);
         }
 
-        public void cargarAuditor(Criterio unCriterio) {
-
-            if (unCriterio.getFotoAuditor()!=null) {
-                File f =new File(unCriterio.getFotoAuditor().getRutaFotoDB());
-                Picasso.with(circleImageView.getContext())
-                        .load(f)
-                        .into(circleImageView);
-            }
-            else{
-                circleImageView.setImageResource(R.drawable.desconocidocolor);
-            }
-            //si tiene nombre carga el nombre, sino pone el mail como nombre
-            if (unCriterio.getNombreAuditor()!= null && !unCriterio.getNombreAuditor().isEmpty()){
-                textViewNombre.setText(unCriterio.getNombreAuditor().toUpperCase());
-            }
-            else {
-                textViewNombre.setText(unCriterio.getMailUsuario());
-            }
-            //si tiene puesto lo carga, sino vacio
-            if (unCriterio.getPuesto()!= null && !unCriterio.getPuesto().isEmpty()){
-                textViewPuesto.setText(unCriterio.getPuesto());
-            }
-
-            if (unCriterio.getMailUsuario()!= null && !unCriterio.getMailUsuario().isEmpty()&&unCriterio.getNombreAuditor()!=null &&!unCriterio.getNombreAuditor().isEmpty()){
-                textViewMail.setText(unCriterio.getMailUsuario());
-            }
-            if (unCriterio.getCantidadAuditoriasRealizada()!= null){
-                textViewAudits.setText(unCriterio.getCantidadAuditoriasRealizada().toString());
-            }
-
-
-
-
+        public void cargarCriterio(Criterio unCriterio) {
+        puntaje1.setText(unCriterio.getOpcion1());
+        puntaje2.setText(unCriterio.getOpcion2());
+        puntaje3.setText(unCriterio.getOpcion3());
+        puntaje4.setText(unCriterio.getOpcion4());
+        puntaje5.setText(unCriterio.getOpcion5());
+        enunciado.setText(unCriterio.getTextoCriterio());
         }
-
 
     }
 
     public interface EditaEliminable {
-        void EliminarAuditor(Criterio unCriterio);
-        void editarAuditor(Criterio unCriterio);
+        void EliminarCriterio(Criterio unCriterio);
+        void editarCriterio(Criterio unCriterio);
     }
+
+
 }

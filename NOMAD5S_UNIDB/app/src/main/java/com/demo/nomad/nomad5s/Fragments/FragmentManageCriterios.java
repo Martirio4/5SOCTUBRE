@@ -57,6 +57,7 @@ public class FragmentManageCriterios extends Fragment {
 
         //REDEFINIR ESTE METODO // REDEFINIR ADAPTER
         adapterCriterios.setListaCriteriosOriginales(controllerDatos.traerCriteriosParaEse(idese));
+        adapterCriterios.notifyDataSetChanged();
 
 
 

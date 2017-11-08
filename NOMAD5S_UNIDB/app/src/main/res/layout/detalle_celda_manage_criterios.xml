@@ -40,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:id="@+id/TV_numeroItem"
                     android:textColor="@color/verde3"
                     android:text="25"
                     android:textAlignment="center"
@@ -64,6 +65,7 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/TV_enunciado"
                     android:textColor="@color/grisOscuroNomad"
                     android:maxLines="3"
                     android:paddingStart="@dimen/margenChico"

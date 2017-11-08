@@ -1,6 +1,7 @@
 package com.demo.nomad.nomad5s.Activities;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ import com.demo.nomad.nomad5s.R;
 public class ActivityViewPager extends AppCompatActivity {
 
     public static final String QUEMUESTRO="QUEMUESTRO";
+    private ViewPager pagerCriterios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +26,6 @@ public class ActivityViewPager extends AppCompatActivity {
         switch (queMuestro){
             case "criterios":
                 abrirCriterios();
-
         }
-
     }
 }
