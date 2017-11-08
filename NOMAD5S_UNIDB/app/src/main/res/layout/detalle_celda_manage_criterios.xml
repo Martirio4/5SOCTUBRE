@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/blancoNomad"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/altoTarjeta3"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margenMini"
+        android:layout_marginStart="@dimen/margenChico"
+        android:layout_marginEnd="@dimen/margenChico"
+        android:elevation="5dp"
+        app:cardBackgroundColor="@color/marfil">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margenMini"
+            android:layout_marginEnd="@dimen/margenChico"
+            android:layout_marginStart="@dimen/margenChico"
+            android:layout_marginTop="@dimen/margenMini"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_weight="15"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+                <TextView
+                    android:textSize="12sp"
+                    android:textAlignment="center"
+                    android:text="@string/item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:textColor="@color/verde3"
+                    android:text="25"
+                    android:textAlignment="center"
+                    android:textSize="30sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <View
+                android:layout_marginTop="@dimen/margenChico"
+                android:layout_marginBottom="@dimen/margenChico"
+                android:background="@color/grisNomad"
+                android:layout_width="1dp"
+                android:layout_height="match_parent">
+
+            </View>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_weight="85"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textColor="@color/grisOscuroNomad"
+                    android:maxLines="3"
+                    android:paddingStart="@dimen/margenChico"
+                    android:paddingEnd="@dimen/margenChico"
+                    android:textAlignment="center"
+                    android:textSize="16sp"
+                    android:text="descripcion del enunciado del criterio, segun el cual se evalua el punto a tener en cuenta."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <ImageButton
+            android:background="@android:color/transparent"
+            android:id="@+id/botonEliminar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:src="@drawable/ic_delete_forever_red_24dp"
+            />
+
+    </android.support.v7.widget.CardView>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margenMicro"
+            android:layout_marginStart="@dimen/margenChico"
+            android:layout_marginEnd="@dimen/margenChico"
+            android:elevation="5dp"
+            app:cardBackgroundColor="@color/verde0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margenMini"
+                android:layout_marginEnd="@dimen/margenChico"
+                android:layout_marginStart="@dimen/margenChico"
+                android:layout_marginTop="@dimen/margenMini"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:text="@string/score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/grisNomad"
+                        
+                        android:text="5"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="@dimen/margenChico"
+                    android:layout_marginBottom="@dimen/margenChico"
+                    android:background="@color/grisNomad"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent">
+                </View>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="85"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/grisNomad"
+                        android:id="@+id/TV_descripcionPuntaje5"
+                        android:maxLines="5"
+                        android:paddingStart="@dimen/margenChico"
+                        android:paddingEnd="@dimen/margenChico"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="ra Todos los doar fuera Todos los doar fuera"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margenMicro"
+            android:layout_marginStart="@dimen/margenChico"
+            android:layout_marginEnd="@dimen/margenChico"
+            android:elevation="5dp"
+            app:cardBackgroundColor="@color/verde0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margenMini"
+                android:layout_marginEnd="@dimen/margenChico"
+                android:layout_marginStart="@dimen/margenChico"
+                android:layout_marginTop="@dimen/margenMini"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:text="@string/score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/grisNomad"
+
+                        android:text="4"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="@dimen/margenChico"
+                    android:layout_marginBottom="@dimen/margenChico"
+                    android:background="@color/grisNomad"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent">
+                </View>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="85"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/grisNomad"
+                        android:id="@+id/TV_descripcionPuntaje4"
+                        android:maxLines="5"
+                        android:paddingStart="@dimen/margenChico"
+                        android:paddingEnd="@dimen/margenChico"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="Todos Todos los doar fueraTodera Todos los doaera"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margenMicro"
+            android:layout_marginStart="@dimen/margenChico"
+            android:layout_marginEnd="@dimen/margenChico"
+            android:elevation="5dp"
+            app:cardBackgroundColor="@color/verde0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margenMini"
+                android:layout_marginEnd="@dimen/margenChico"
+                android:layout_marginStart="@dimen/margenChico"
+                android:layout_marginTop="@dimen/margenMini"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:text="@string/score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/grisNomad"
+
+                        android:text="3"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="@dimen/margenChico"
+                    android:layout_marginBottom="@dimen/margenChico"
+                    android:background="@color/grisNomad"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent">
+                </View>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="85"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/grisNomad"
+                        android:id="@+id/TV_descripcionPuntaje3"
+                        android:maxLines="5"
+                        android:paddingStart="@dimen/margenChico"
+                        android:paddingEnd="@dimen/margenChico"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="ra Todos los doar fuera Todos los doar fuera"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margenMicro"
+            android:layout_marginStart="@dimen/margenChico"
+            android:layout_marginEnd="@dimen/margenChico"
+            android:elevation="5dp"
+            app:cardBackgroundColor="@color/verde0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margenMini"
+                android:layout_marginEnd="@dimen/margenChico"
+                android:layout_marginStart="@dimen/margenChico"
+                android:layout_marginTop="@dimen/margenMini"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:text="@string/score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/grisNomad"
+
+                        android:text="2"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="@dimen/margenChico"
+                    android:layout_marginBottom="@dimen/margenChico"
+                    android:background="@color/grisNomad"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent">
+                </View>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="85"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/grisNomad"
+                        android:id="@+id/TV_descripcionPuntaje2"
+                        android:maxLines="5"
+                        android:paddingStart="@dimen/margenChico"
+                        android:paddingEnd="@dimen/margenChico"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="ra Todos los doar fuera Todos los doar fuera"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.CardView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margenMicro"
+            android:layout_marginStart="@dimen/margenChico"
+            android:layout_marginEnd="@dimen/margenChico"
+            android:elevation="5dp"
+            app:cardBackgroundColor="@color/verde0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/margenMini"
+                android:layout_marginEnd="@dimen/margenChico"
+                android:layout_marginStart="@dimen/margenChico"
+                android:layout_marginTop="@dimen/margenMini"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textSize="12sp"
+                        android:textAlignment="center"
+                        android:text="@string/score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="@color/grisNomad"
+
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+                <View
+                    android:layout_marginTop="@dimen/margenChico"
+                    android:layout_marginBottom="@dimen/margenChico"
+                    android:background="@color/grisNomad"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent">
+                </View>
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_weight="85"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/grisNomad"
+                        android:id="@+id/TV_descripcionPuntaje1"
+                        android:maxLines="5"
+                        android:paddingStart="@dimen/margenChico"
+                        android:paddingEnd="@dimen/margenChico"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:text="ra Todos los doar fuera Todos los doar fuera"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
+

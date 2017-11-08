@@ -32,6 +32,11 @@
             android:id="@+id/beginAudit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <Button
+            android:text="Manage_criterios"
+            android:id="@+id/manageCriterios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
     </LinearLayout>

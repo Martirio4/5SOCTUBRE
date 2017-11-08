@@ -5,6 +5,7 @@ import com.demo.nomad.nomad5s.DAO.DAODbase;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Campania;
+import com.demo.nomad.nomad5s.Model.Criterio;
 import com.demo.nomad.nomad5s.Model.Ese;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -451,5 +452,10 @@ public class ControllerDatos {
 
 
         return listaEses;
+    }
+
+    public List<Criterio> traerCriteriosParaEse(String unString) {
+
+        return new ArrayList<>();
     }
 }

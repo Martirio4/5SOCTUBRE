@@ -5,7 +5,7 @@
     <color name="colorAccent">#ff6f00</color>
 
     <color name="marfil">#ffffff</color>
-    <color name="verde0">#4caf50</color>
+    <color name="verde01">#4caf50</color>
     <color name="unverdemediano">#388e3c</color>
 
     <color name="antiverde">#aa5739</color>
@@ -28,6 +28,7 @@
     <color name="blancoNomad">#fcfbf5</color>
     <color name="verde2">#669975</color>
     <color name="verde1">#92be96</color>
+    <color name="verde0">#e8f5e9</color>
     <color name="grisNomad">#5c5b5c</color>
     <color name="grisOscuroNomad">#212121</color>
 

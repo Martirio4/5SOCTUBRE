@@ -49,4 +49,6 @@
     <string name="nombreAreaIncompleto">Please enter a name for the new area</string>
     <string name="audits">Audits</string>
     <string name="hintnombreResponsableArea">Area owner</string>
+    <string name="item">Item</string>
+    <string name="score">Score</string>
 </resources>

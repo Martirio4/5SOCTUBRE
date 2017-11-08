@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private Button boton;
     private Button boton2;
     private Button boton3;
+    private Button boton4;
 
 
     @Override
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        boton = (Button) findViewById(R.id.agregarCampania);
+        boton =  findViewById(R.id.agregarCampania);
 
 
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        boton2=(Button)findViewById(R.id.manageareas);
+        boton2=findViewById(R.id.manageareas);
         boton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,12 +47,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        boton3=(Button)findViewById(R.id.manageauditores);
+        boton3=findViewById(R.id.manageauditores);
         boton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 abrirDeterminadoFragment("manageAuditores");
 
+            }
+        });
+
+        boton4=findViewById(R.id.manageCriterios);
+        boton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirActivityViewPager("criterios");
             }
         });
 
@@ -61,6 +70,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ActivityBase.class);
         Bundle bundle= new Bundle();
         bundle.putString(ActivityBase.QUE_FRAGMENT_ABRO, unString);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+    public void abrirActivityViewPager(String parametro){
+        Intent intent= new Intent(this, ActivityViewPager.class);
+        Bundle bundle=new Bundle();
+        bundle.putString(ActivityViewPager.QUEMUESTRO, parametro);
         intent.putExtras(bundle);
         startActivity(intent);
     }

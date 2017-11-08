@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ActivityBase"></activity>
+        <activity android:name=".Activities.ActivityBase" />
+        <activity android:name=".Activities.ActivityViewPager"></activity>
     </application>
 
 </manifest>
