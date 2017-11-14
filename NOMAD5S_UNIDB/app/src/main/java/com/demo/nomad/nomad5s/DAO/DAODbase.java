@@ -46,13 +46,14 @@ public class DAODbase extends DatabaseHelper {
 
     //---COMIENZO TABLA ESES---//
     public static final String IDESE = "IDESE";
-    public static final String IDCRITERIO_FK = "IDCRITERIO";
+    public static final String IDCRITERIO_FK = "IDCRITERIO_FK";
     public static final String PUNTAJEESE = "PUNTAJEESE";
     public static final String NOMBRE_ESE = "NOMBRE_ESE";
     public static final String TABLE_ESE="TABLE_ESE";
     //---FIN TABLA ESES---//
 
     //---COMIENZO TABLA CRITERIO---//
+    public static final String NUMCRITERIO = "NUMCRITERIO";
     public static final String IDCRITERIO = "IDCRITERIO";
     public static final String TEXTOCRITERIO = "TEXTOCRITERIO";
     public static final String TEXTOOPCION1 = "TEXTOOPCION1";
@@ -521,21 +522,18 @@ public class DAODbase extends DatabaseHelper {
         database.close();
     }
 
-
-    
-    
     //AGREGAR CRITERIO
     public void addCriterio (Criterio unCriterio){
-        if(!checkIfExistCriterio(unCriterio.getIdCriterio())) {
+        if(!checkIfExistCriterio(unCriterio.getNumCriterio())) {
             SQLiteDatabase database = getWritableDatabase();
             //CREO LA FILA Y LE CARGO LOS DATOS
-            
+
             if (unCriterio.getListaFotosCriterio().size()>0){
                 //para cada foto creo un renglon en la tabla
                 for (Foto unafoto:unCriterio.getListaFotosCriterio()
                         ) {
                     ContentValues row = new ContentValues();
-                    row.put(IDCRITERIO, unCriterio.getIdCriterio());
+                    row.put(NUMCRITERIO, unCriterio.getNumCriterio());
                     row.put(TEXTOCRITERIO, unCriterio.getTextoCriterio());
                     row.put(TEXTOOPCION1, unCriterio.getOpcion1());
                     row.put(TEXTOOPCION2, unCriterio.getOpcion2());
@@ -549,7 +547,7 @@ public class DAODbase extends DatabaseHelper {
             }
             else{
                 ContentValues row = new ContentValues();
-                row.put(IDCRITERIO, unCriterio.getIdCriterio());
+                row.put(NUMCRITERIO, unCriterio.getNumCriterio());
                 row.put(TEXTOCRITERIO, unCriterio.getTextoCriterio());
                 row.put(TEXTOOPCION1, unCriterio.getOpcion1());
                 row.put(TEXTOOPCION2, unCriterio.getOpcion2());
@@ -559,9 +557,7 @@ public class DAODbase extends DatabaseHelper {
                 row.put(PUNTAJEELEGIDO, unCriterio.getPuntajeElegido());
                 database.insert(TABLE_AREAS, null, row);
             }
-            
             //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
-            
             database.close();
         }
     }
@@ -574,12 +570,12 @@ public class DAODbase extends DatabaseHelper {
         SQLiteDatabase database = getReadableDatabase();
 
         String query = "SELECT * FROM " + TABLE_CRITERIOS +
-                " WHERE IDCRITERIO='"+id+"'";
+                " WHERE NUMCRITERIO='"+id+"'";
 
         Cursor cursor = database.rawQuery(query, null);
         while(cursor.moveToNext()){
-            if (!cursor.getString(cursor.getColumnIndex(IDCRITERIO)).equals(unCriterioConId.getIdCriterio())){
-                unCriterioConId.setIdCriterio(cursor.getString(cursor.getColumnIndex(IDCRITERIO)));
+            if (!cursor.getString(cursor.getColumnIndex(NUMCRITERIO)).equals(unCriterioConId.getNumCriterio())){
+                unCriterioConId.setNumCriterio(cursor.getString(cursor.getColumnIndex(NUMCRITERIO)));
                 unCriterioConId.setTextoCriterio(cursor.getString(cursor.getColumnIndex(TEXTOCRITERIO)));
                 unCriterioConId.setOpcion1(cursor.getString(cursor.getColumnIndex(TEXTOOPCION1)));
                 unCriterioConId.setOpcion2(cursor.getString(cursor.getColumnIndex(TEXTOOPCION2)));
@@ -603,7 +599,53 @@ public class DAODbase extends DatabaseHelper {
         }
 
         //SI NO ENCUENTRA VALORES DEVUELVE NULL, SINO EL ESE
-        if (unCriterioConId.getIdCriterio()==null||unCriterioConId.getIdCriterio().isEmpty()){
+        if (unCriterioConId.getNumCriterio()==null||unCriterioConId.getNumCriterio().isEmpty()){
+            return null;
+        }
+        else{
+            return unCriterioConId;
+        }
+
+    }
+
+    //TRAER CRITERIO CON ESE
+    public Criterio getCriteriosConEse(String idEse){
+
+        Criterio unCriterioConId = new Criterio();
+        List<String> listaFotoCriterioConId = new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_CRITERIOS +
+                " WHERE NUMCRITERIO='"+idEse+"'";
+
+        Cursor cursor = database.rawQuery(query, null);
+        while(cursor.moveToNext()){
+            if (!cursor.getString(cursor.getColumnIndex(NUMCRITERIO)).equals(unCriterioConId.getNumCriterio())){
+                unCriterioConId.setNumCriterio(cursor.getString(cursor.getColumnIndex(NUMCRITERIO)));
+                unCriterioConId.setTextoCriterio(cursor.getString(cursor.getColumnIndex(TEXTOCRITERIO)));
+                unCriterioConId.setOpcion1(cursor.getString(cursor.getColumnIndex(TEXTOOPCION1)));
+                unCriterioConId.setOpcion2(cursor.getString(cursor.getColumnIndex(TEXTOOPCION2)));
+                unCriterioConId.setOpcion3(cursor.getString(cursor.getColumnIndex(TEXTOOPCION3)));
+                unCriterioConId.setOpcion4(cursor.getString(cursor.getColumnIndex(TEXTOOPCION4)));
+                unCriterioConId.setOpcion5(cursor.getString(cursor.getColumnIndex(TEXTOOPCION5)));
+                unCriterioConId.setPuntajeElegido(cursor.getInt(cursor.getColumnIndex(PUNTAJEELEGIDO)));
+            }
+            listaFotoCriterioConId.add(cursor.getString(cursor.getColumnIndex(IDFOTOCRITERIO)));
+        }
+        cursor.close();
+        database.close();
+
+        //LE CARGO Las fotos al criterio
+        if (listaFotoCriterioConId.size()>0){
+            for (String idFotoCriterio:listaFotoCriterioConId
+                    ) {
+                unCriterioConId.agregarFoto(getFotoConId(idFotoCriterio));
+
+            }
+        }
+
+        //SI NO ENCUENTRA VALORES DEVUELVE NULL, SINO EL ESE
+        if (unCriterioConId.getNumCriterio()==null||unCriterioConId.getNumCriterio().isEmpty()){
             return null;
         }
         else{
@@ -621,16 +663,57 @@ public class DAODbase extends DatabaseHelper {
             //CREO LA FILA Y LE CARGO LOS DATOS
             for (Criterio unCrit:unEse.getListaCriterios()
                  ) {
-                ContentValues row = new ContentValues();
-                row.put(IDESE, unEse.getIdEse());
-                row.put(NOMBRE_ESE, unEse.getNombreEse());
-                row.put(PUNTAJEESE, unEse.getPuntajeEse());
-                row.put(IDCRITERIO_FK, unCrit.getIdCriterio());
-                database.insert(TABLE_ESE, null, row);
+
+                    ContentValues row = new ContentValues();
+                    row.put(IDESE, unEse.getIdEse());
+                    row.put(NOMBRE_ESE, unEse.getNombreEse());
+                    row.put(PUNTAJEESE, unEse.getPuntajeEse());
+                    row.put(IDCRITERIO_FK, unCrit.getNumCriterio());
+                    database.insert(TABLE_ESE, null, row);
+
+
             }
             database.close();
         }
+        else{
+            for (Criterio uncrit:unEse.getListaCriterios()
+                 ) {
+                    if(!eseTieneCrit(unEse.getIdEse(),uncrit.getIdCriterio())){
+                        SQLiteDatabase database = getWritableDatabase();
+                        ContentValues row = new ContentValues();
+                        row.put(IDESE, unEse.getIdEse());
+                        row.put(NOMBRE_ESE, unEse.getNombreEse());
+                        row.put(PUNTAJEESE, unEse.getPuntajeEse());
+                        row.put(IDCRITERIO_FK, uncrit.getNumCriterio());
+                        database.insert(TABLE_ESE, null, row);
+
+                    }
+            }
+        }
     }
+
+    private boolean eseTieneCrit(String idEse, String idCriterio) {
+        List<String>criteriosEseConId= new ArrayList<>();
+        SQLiteDatabase database = getReadableDatabase();
+
+        String query = "SELECT * FROM " + TABLE_ESE +
+                " WHERE IDESE='"+idEse+"'";
+
+        Cursor cursor = database.rawQuery(query, null);
+        while(cursor.moveToNext()){
+            if (cursor.getString(cursor.getColumnIndex(IDCRITERIO_FK)).equals(idCriterio)){
+               cursor.close();
+               database.close();
+                return true;
+            }
+        }
+        cursor.close();
+        database.close();
+        return false;
+
+    }
+
+
     //TRAER ESE CON ID
     public Ese getEseConId(String id){
 
@@ -784,6 +867,12 @@ public class DAODbase extends DatabaseHelper {
         return !(unAuditoria == null);
     }
 
+
+    public void addCriterioAEse(String idEse, Criterio unCriterio) {
+        Ese laEses=getEseConId(idEse);
+        laEses.agregarCriterio(unCriterio);
+        addEse(laEses);
+    }
 
 
 }

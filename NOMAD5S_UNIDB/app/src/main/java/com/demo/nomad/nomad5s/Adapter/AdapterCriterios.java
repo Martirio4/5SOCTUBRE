@@ -8,18 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.demo.nomad.nomad5s.Fragments.FragmentManageCriterios;
+import com.demo.nomad.nomad5s.Fragments.FragmentManageEse;
 import com.demo.nomad.nomad5s.Model.Criterio;
 import com.demo.nomad.nomad5s.R;
-import com.squareup.picasso.Picasso;
 
-import java.io.File;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -88,10 +83,10 @@ public class AdapterCriterios extends RecyclerView.Adapter implements View.OnCli
 
         FragmentActivity unaActivity = (FragmentActivity) context;
         FragmentManager fragmentManager = (FragmentManager) unaActivity.getSupportFragmentManager();
-        FragmentManageCriterios FragmentManageCriterios = (FragmentManageCriterios) fragmentManager.findFragmentByTag("fragmentManageCriterios");
+        FragmentManageEse FragmentManageEse = (FragmentManageEse) fragmentManager.findFragmentByTag("fragmentManageCriterios");
 
 
-        if (FragmentManageCriterios != null && FragmentManageCriterios.isVisible()) {
+        if (FragmentManageEse != null && FragmentManageEse.isVisible()) {
 
 //            COMPORTAMIENTO DE LOS BOTONES DE LA CELDA
         }

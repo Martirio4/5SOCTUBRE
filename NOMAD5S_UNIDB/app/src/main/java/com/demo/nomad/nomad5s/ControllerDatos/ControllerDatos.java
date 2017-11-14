@@ -448,14 +448,53 @@ public class ControllerDatos {
     }
 
     public List<Ese> traerlistaEses() {
+        //pedir lista a firebase
+
         List<Ese>listaEses= new ArrayList<>();
 
+        Ese ese1=new Ese();
+        Ese ese2=new Ese();
+        Ese ese3=new Ese();
+        Ese ese4=new Ese();
+        Ese ese5=new Ese();
+
+        ese1.setIdEse("1S Seiri");
+        ese2.setIdEse("2S Seiton");
+        ese3.setIdEse("3S Seiso");
+        ese4.setIdEse("4S Seiketsu");
+        ese5.setIdEse("5S Shitsuke");
+
+        ese1.setListaCriterios(traerCriteriosParaEse(ese1));
+        listaEses.add(ese1);
+
+        ese2.setListaCriterios(traerCriteriosParaEse(ese2));
+        listaEses.add(ese2);
+
+        ese3.setListaCriterios(traerCriteriosParaEse(ese3));
+        listaEses.add(ese3);
+
+        ese4.setListaCriterios(traerCriteriosParaEse(ese4));
+        listaEses.add(ese4);
+
+        ese5.setListaCriterios(traerCriteriosParaEse(ese5));
+        listaEses.add(ese5);
 
         return listaEses;
     }
 
-    public List<Criterio> traerCriteriosParaEse(String unString) {
+    public List<Criterio> traerCriteriosParaEse(Ese ese) {
+        List<Criterio>listaCriterios;
+
+
 
         return new ArrayList<>();
+    }
+
+    public void guardarCriterio(Criterio unCrit) {
+        daoDB.addCriterio(unCrit);
+    }
+
+    public void AgregarCriterioAEse(String idEse, String idCriterio) {
+        daoDB.addCriterioAEse(idEse, idCriterio);
     }
 }

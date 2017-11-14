@@ -10,7 +10,7 @@ import java.util.List;
 public class Criterio {
 
 
-    private String idCriterio;
+    private String numCriterio;
     private String textoCriterio;
     private String opcion1;
     private String opcion2;
@@ -19,6 +19,7 @@ public class Criterio {
     private String opcion5;
     private Integer puntajeElegido;
     private List<Foto>listaFotosCriterio;
+    private String idCriterio;
 
 
     //CONSTRUCTOR
@@ -31,12 +32,12 @@ public class Criterio {
 
     //GETTER Y SETTER
 
-    public String getIdCriterio() {
-        return idCriterio;
+    public String getNumCriterio() {
+        return numCriterio;
     }
 
-    public void setIdCriterio(String idCriterio) {
-        this.idCriterio = idCriterio;
+    public void setNumCriterio(String numCriterio) {
+        this.numCriterio = numCriterio;
     }
 
     public String getTextoCriterio() {
@@ -104,5 +105,13 @@ public class Criterio {
     }
     public void agregarFoto(Foto unaFoto){
         this.listaFotosCriterio.add(unaFoto);
+    }
+
+    public String getIdCriterio() {
+        return idCriterio;
+    }
+
+    public void setIdCriterio(String idCriterio) {
+        this.idCriterio = idCriterio;
     }
 }
