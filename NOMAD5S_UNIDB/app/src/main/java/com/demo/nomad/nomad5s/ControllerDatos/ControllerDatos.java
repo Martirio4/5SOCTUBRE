@@ -494,7 +494,8 @@ public class ControllerDatos {
         daoDB.addCriterio(unCrit);
     }
 
+    /*
     public void AgregarCriterioAEse(String idEse, String idCriterio) {
-        daoDB.addCriterioAEse(idEse, idCriterio);
-    }
+        daoDB.addCriterioAEse(idEse, idCriterio);}
+    */
 }

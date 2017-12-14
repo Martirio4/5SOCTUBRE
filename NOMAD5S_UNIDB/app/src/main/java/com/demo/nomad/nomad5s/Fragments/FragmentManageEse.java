@@ -64,7 +64,7 @@ public class FragmentManageEse extends Fragment {
                 Criterio unCrit= new Criterio();
                 unCrit.setIdCriterio("crit_"+ UUID.randomUUID());
                 controllerDatos.guardarCriterio(unCrit);
-                controllerDatos.AgregarCriterioAEse(unCrit.getIdCriterio());
+               // controllerDatos.AgregarCriterioAEse(unCrit.getIdCriterio());
 
             }
         });
@@ -77,8 +77,8 @@ public class FragmentManageEse extends Fragment {
         recyclerView.setAdapter(adapterCriterios);
 
         //REDEFINIR ESTE METODO // REDEFINIR ADAPTER
-        adapterCriterios.setListaCriteriosOriginales(controllerDatos.traerCriteriosParaEse(idese));
-        adapterCriterios.notifyDataSetChanged();
+       // adapterCriterios.setListaCriteriosOriginales(controllerDatos.traerCriteriosParaEse(idese));
+      //  adapterCriterios.notifyDataSetChanged();
 
 
 

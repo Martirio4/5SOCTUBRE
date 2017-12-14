@@ -64,7 +64,7 @@ public class FragmentSeleccionAuditores extends Fragment {
     }
 
     public interface Terminable{
-        void armarAuditoria(Area unArea, Auditor unAuditor);
+        void armarAuditoria(Auditor unAuditor);
     }
 
 
@@ -75,9 +75,6 @@ public class FragmentSeleccionAuditores extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_manage_auditores, container, false);
 
-        controllerAuditores=new ControllerDatos(getContext());
-        Bundle bundle = getArguments();
-        unArea=controllerAuditores.traerArea(bundle.getString(IDAREA));
         /*
         Realm realm = Realm.getDefaultInstance();
         RealmResults<Auditores> result2 = realm.where(Auditores.class)
@@ -97,7 +94,7 @@ public class FragmentSeleccionAuditores extends Fragment {
                 Integer posicion = recyclerAuditores.getChildAdapterPosition(v);
                 List<Auditor> listaActoresOriginales = adapterAuditores.getListaAuditoresOriginales();
                 Auditor auditorClickeado = listaActoresOriginales.get(posicion);
-                terminable.armarAuditoria(unArea,auditorClickeado );
+                terminable.armarAuditoria(auditorClickeado );
             }
         };
         adapterAuditores.setListener(listener);

@@ -17,6 +17,7 @@ public class Auditoria {
     private Double puntajeFinal;
     private String fechaAuditoria;
     private List<Ese> listaEses;
+    private String idCampania;
 
 
     public Auditoria() {
@@ -75,5 +76,13 @@ public class Auditoria {
 
     public void agregarEse(Ese unEse){
         this.listaEses.add(unEse);
+    }
+
+    public String getIdCampania() {
+        return idCampania;
+    }
+
+    public void setIdCampania(String idCampania) {
+        this.idCampania = idCampania;
     }
 }

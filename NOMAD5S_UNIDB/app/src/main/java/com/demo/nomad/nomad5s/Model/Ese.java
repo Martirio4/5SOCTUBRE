@@ -12,6 +12,8 @@ public class Ese {
     private Double puntajeEse;
     private List<Criterio> listaCriterios;
     private String nombreEse;
+    private String idAuditoria;
+
 
     public Ese() {
         this.listaCriterios=new ArrayList<>();
@@ -52,5 +54,13 @@ public class Ese {
     }
     public void agregarCriterio(Criterio unCriterio){
         this.listaCriterios.add(unCriterio);
+    }
+
+    public String getIdAuditoria() {
+        return idAuditoria;
+    }
+
+    public void setIdAuditoria(String idAuditoria) {
+        this.idAuditoria = idAuditoria;
     }
 }

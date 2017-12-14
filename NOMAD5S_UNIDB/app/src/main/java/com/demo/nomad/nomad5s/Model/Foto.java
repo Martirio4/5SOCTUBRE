@@ -11,6 +11,7 @@ public class Foto {
     private String rutaFotoDB;
     private String rutaFotoFB;
     private String comentario;
+    private String idCriterio;
 
     public Foto() {
     }
@@ -55,5 +56,13 @@ public class Foto {
 
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public String getIdCriterio() {
+        return idCriterio;
+    }
+
+    public void setIdCriterio(String idCriterio) {
+        this.idCriterio = idCriterio;
     }
 }

@@ -32,6 +32,7 @@ public class DAODbase extends DatabaseHelper {
     public static final String FECHA_AUDITORIA = "FECHA_AUDITORIA";
     public static final String IDESE_FK = "IDESE";
     public static final String PUNTAJE_FINAL = "PUNTAJE_FINAL";
+    public static final String IDCAMPANIA_FK2 = "IDCAMPANIA_FK2";
     public static final String TABLE_AUDITORIAS="TABLE_AUDITORIAS";
     //---FIN TABLA AUDITORIAS---//
 
@@ -39,7 +40,7 @@ public class DAODbase extends DatabaseHelper {
     public static final String IDCAMPANIA = "IDCAMPANIA";
     public static final String FECHA_FIN_CAMPANIA = "FECHA_FIN_CAMPANIA";
     public static final String FECHA_INICIO_CAMPANIA = "FECHA_INICIO_CAMPANIA";
-    public static final String IDAUDITORIA_FK = "IDAUDITORIA";
+    public static final String IDAUDITORIA_FK = "IDAUDITORIA_FK";
     public static final String NOMBRE_CAMPANIA = "NOMBRE_CAMPANIA";
     public static final String TABLE_CAMPANIA="TABLE_CAMPANIA";
     //---FIN TABLA CAMPANIAS---//
@@ -49,6 +50,7 @@ public class DAODbase extends DatabaseHelper {
     public static final String IDCRITERIO_FK = "IDCRITERIO_FK";
     public static final String PUNTAJEESE = "PUNTAJEESE";
     public static final String NOMBRE_ESE = "NOMBRE_ESE";
+    public static final String IDAUDITORIA_FK2 = "IDAUDITORIA_FK2";
     public static final String TABLE_ESE="TABLE_ESE";
     //---FIN TABLA ESES---//
 
@@ -63,6 +65,7 @@ public class DAODbase extends DatabaseHelper {
     public static final String TEXTOOPCION5 = "TEXTOOPCION5";
     public static final String PUNTAJEELEGIDO = "PUNTAJEELEGIDO";
     public static final String IDFOTOCRITERIO = "IDFOTOCRITERIO";
+    public static final String IDESE_FK2 = "IDESE_FK2";
     public static final String TABLE_CRITERIOS="TABLE_CRITERIOS";
 
     //---FIN TABLA CRITERIOS---//
@@ -81,6 +84,7 @@ public class DAODbase extends DatabaseHelper {
     public static final String COMENTARIO = "COMENTARIO";
     public static final String RUTAFOTODB = "RUTAFOTODB";
     public static final String RUTAFOTOFB = "RUTAFOTOFB";
+    public static final String IDCRITERIO_FK2 = "IDCRITERIO_FK2";
     public static final String TABLE_FOTOS="TABLE_FOTOS";
     //---FIN TABLA FOTOS---//
 
@@ -213,6 +217,7 @@ public class DAODbase extends DatabaseHelper {
             row.put(IDFOTO, unaFoto.getIdFoto());
             row.put(COMENTARIO, unaFoto.getComentario());
             row.put(RUTAFOTODB, unaFoto.getRutaFotoDB());
+            row.put(IDCRITERIO_FK2, unaFoto.getIdCriterio());
             
             //LE DIGO A LA BD QUE CARGUE LA FILA EN LA TABLA
             database.insert(TABLE_FOTOS, null, row);
@@ -237,6 +242,7 @@ public class DAODbase extends DatabaseHelper {
             fotoConId.setComentario((cursor.getString(cursor.getColumnIndex(COMENTARIO))));
             fotoConId.setRutaFotoDB((cursor.getString(cursor.getColumnIndex(RUTAFOTODB))));
             fotoConId.setRutaFotoFB((cursor.getString(cursor.getColumnIndex(RUTAFOTOFB))));
+            fotoConId.setIdCriterio((cursor.getString(cursor.getColumnIndex(IDCRITERIO_FK2))));
         }
         cursor.close();
         database.close();
@@ -305,16 +311,13 @@ public class DAODbase extends DatabaseHelper {
             }
         }
         return listaAllAuditores;
-
     }
 
     //TRAER AUDITOR CON ID
     public Auditor getAuditorConId(String id){
         
         String idFotoAuditor=null;
-
         SQLiteDatabase database = getReadableDatabase();
-
         String query = "SELECT * FROM " + TABLE_AUDITORES +
                 " WHERE IDAUDITOR='"+id+"'";
 
@@ -540,6 +543,7 @@ public class DAODbase extends DatabaseHelper {
                     row.put(TEXTOOPCION3, unCriterio.getOpcion3());
                     row.put(TEXTOOPCION4, unCriterio.getOpcion4());
                     row.put(TEXTOOPCION5, unCriterio.getOpcion5());
+                    row.put(IDESE_FK2, unCriterio.getIdEse());
                     row.put(PUNTAJEELEGIDO, unCriterio.getPuntajeElegido());
                     row.put(IDFOTOCRITERIO, unafoto.getIdFoto());
                     database.insert(TABLE_AREAS, null, row);
@@ -554,6 +558,7 @@ public class DAODbase extends DatabaseHelper {
                 row.put(TEXTOOPCION3, unCriterio.getOpcion3());
                 row.put(TEXTOOPCION4, unCriterio.getOpcion4());
                 row.put(TEXTOOPCION5, unCriterio.getOpcion5());
+                row.put(IDESE_FK2, unCriterio.getIdEse());
                 row.put(PUNTAJEELEGIDO, unCriterio.getPuntajeElegido());
                 database.insert(TABLE_AREAS, null, row);
             }
@@ -582,6 +587,7 @@ public class DAODbase extends DatabaseHelper {
                 unCriterioConId.setOpcion3(cursor.getString(cursor.getColumnIndex(TEXTOOPCION3)));
                 unCriterioConId.setOpcion4(cursor.getString(cursor.getColumnIndex(TEXTOOPCION4)));
                 unCriterioConId.setOpcion5(cursor.getString(cursor.getColumnIndex(TEXTOOPCION5)));
+                unCriterioConId.setIdEse(cursor.getString(cursor.getColumnIndex(IDESE_FK2)));
                 unCriterioConId.setPuntajeElegido(cursor.getInt(cursor.getColumnIndex(PUNTAJEELEGIDO)));
             }
             listaFotoCriterioConId.add(cursor.getString(cursor.getColumnIndex(IDFOTOCRITERIO)));
@@ -628,6 +634,7 @@ public class DAODbase extends DatabaseHelper {
                 unCriterioConId.setOpcion3(cursor.getString(cursor.getColumnIndex(TEXTOOPCION3)));
                 unCriterioConId.setOpcion4(cursor.getString(cursor.getColumnIndex(TEXTOOPCION4)));
                 unCriterioConId.setOpcion5(cursor.getString(cursor.getColumnIndex(TEXTOOPCION5)));
+                unCriterioConId.setIdEse(cursor.getString(cursor.getColumnIndex(IDESE_FK2)));
                 unCriterioConId.setPuntajeElegido(cursor.getInt(cursor.getColumnIndex(PUNTAJEELEGIDO)));
             }
             listaFotoCriterioConId.add(cursor.getString(cursor.getColumnIndex(IDFOTOCRITERIO)));
@@ -666,12 +673,14 @@ public class DAODbase extends DatabaseHelper {
 
                     ContentValues row = new ContentValues();
                     row.put(IDESE, unEse.getIdEse());
+                    row.put(IDAUDITORIA_FK2, unEse.getIdAuditoria());
                     row.put(NOMBRE_ESE, unEse.getNombreEse());
                     row.put(PUNTAJEESE, unEse.getPuntajeEse());
+                    row.put(PUNTAJEESE, unEse.getPuntajeEse());
                     row.put(IDCRITERIO_FK, unCrit.getNumCriterio());
+
+
                     database.insert(TABLE_ESE, null, row);
-
-
             }
             database.close();
         }
@@ -682,6 +691,7 @@ public class DAODbase extends DatabaseHelper {
                         SQLiteDatabase database = getWritableDatabase();
                         ContentValues row = new ContentValues();
                         row.put(IDESE, unEse.getIdEse());
+                        row.put(IDAUDITORIA_FK2, unEse.getIdAuditoria());
                         row.put(NOMBRE_ESE, unEse.getNombreEse());
                         row.put(PUNTAJEESE, unEse.getPuntajeEse());
                         row.put(IDCRITERIO_FK, uncrit.getNumCriterio());
@@ -728,6 +738,7 @@ public class DAODbase extends DatabaseHelper {
         while(cursor.moveToNext()){
             if (!cursor.getString(cursor.getColumnIndex(IDESE)).equals(unEseConId.getIdEse())){
                 unEseConId.setIdEse(cursor.getString(cursor.getColumnIndex(IDESE)));
+                unEseConId.setIdAuditoria(cursor.getString(cursor.getColumnIndex(IDAUDITORIA_FK2)));
                 unEseConId.setNombreEse(cursor.getString(cursor.getColumnIndex(NOMBRE_ESE)));
                 unEseConId.setPuntajeEse(cursor.getDouble(cursor.getColumnIndex(PUNTAJEESE)));
             }
@@ -769,6 +780,7 @@ public class DAODbase extends DatabaseHelper {
                  ) {
                     ContentValues row = new ContentValues();
                     row.put(IDAUDITORIA, unAuditoria.getIdAuditoria());
+                    row.put(IDCAMPANIA_FK2, unAuditoria.getIdCampania());
                     row.put(IDAREA_FK, unAuditoria.getAreaAuditada().getIdArea());
                     row.put(IDAUDITOR_FK, unAuditoria.getAuditor().getIdAuditor());
                     row.put(FECHA_AUDITORIA, unAuditoria.getFechaAuditoria());
@@ -800,6 +812,7 @@ public class DAODbase extends DatabaseHelper {
             if (!cursor.getString(cursor.getColumnIndex(IDAUDITORIA)).equals(unAuditoria.getIdAuditoria()))
             {
                 unAuditoria.setIdAuditoria(cursor.getString(cursor.getColumnIndex(IDAUDITORIA)));
+                unAuditoria.setIdCampania(cursor.getString(cursor.getColumnIndex(IDCAMPANIA_FK2)));
                 unAuditoria.setFechaAuditoria(cursor.getString(cursor.getColumnIndex(FECHA_AUDITORIA)));
                 unAuditoria.setPuntajeFinal(cursor.getDouble(cursor.getColumnIndex(PUNTAJE_FINAL)));
 

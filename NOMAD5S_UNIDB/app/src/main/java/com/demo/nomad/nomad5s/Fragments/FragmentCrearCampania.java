@@ -51,6 +51,8 @@ public class FragmentCrearCampania extends Fragment {
     private RecyclerView recyclerArea;
     private AdapterArea adapterArea;
 
+    private String idCampaniaCreada;
+
     private ControllerDatos controllerDatos;
 
     private Elegible elegible;
@@ -60,8 +62,7 @@ public class FragmentCrearCampania extends Fragment {
     }
 
     public interface Elegible{
-        void elegirArea();
-        void elegirAuditor(Area unArea);
+        void crearAuditoria(Campania unaCampania);
     }
 
     @Override
@@ -73,6 +74,7 @@ public class FragmentCrearCampania extends Fragment {
 
         final Campania nuevaCampania= new Campania();
         nuevaCampania.setIdCampania("campania_"+UUID.randomUUID());
+        setIdCampaniaCreada(nuevaCampania.getIdCampania());
 
         editFechaInicio =(EditText) view.findViewById(R.id.editFechaInicioEnCampania);
 
@@ -150,8 +152,7 @@ public class FragmentCrearCampania extends Fragment {
             @Override
             public void onClick(View v) {
 
-
-            elegible.elegirArea();
+            elegible.crearAuditoria(nuevaCampania);
 
 
                 //ABRIR FRAGMENT SELECCION AREAS
@@ -194,13 +195,9 @@ public class FragmentCrearCampania extends Fragment {
             }
         });
 
-
-
-
-
-
         return view;
     }
+
 
     private void mostrarDialogoFechaEnEdit(final EditText unEdit) {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
@@ -221,5 +218,13 @@ public class FragmentCrearCampania extends Fragment {
     }
     public String getDeadline(){
         return editFechaFin.getText().toString();
+    }
+
+    public String getIdCampaniaCreada() {
+        return idCampaniaCreada;
+    }
+
+    public void setIdCampaniaCreada(String idCampaniaCreada) {
+        this.idCampaniaCreada = idCampaniaCreada;
     }
 }

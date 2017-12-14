@@ -20,7 +20,7 @@ public class Criterio {
     private Integer puntajeElegido;
     private List<Foto>listaFotosCriterio;
     private String idCriterio;
-
+    private String idEse;
 
     //CONSTRUCTOR
 
@@ -113,5 +113,13 @@ public class Criterio {
 
     public void setIdCriterio(String idCriterio) {
         this.idCriterio = idCriterio;
+    }
+
+    public String getIdEse() {
+        return idEse;
+    }
+
+    public void setIdEse(String idEse) {
+        this.idEse = idEse;
     }
 }

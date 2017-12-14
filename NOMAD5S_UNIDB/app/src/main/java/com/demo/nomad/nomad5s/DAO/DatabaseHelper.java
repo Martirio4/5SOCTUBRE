@@ -41,6 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAODbase.IDAUDITOR_FK + " TEXT, " +
                 DAODbase.IDESE_FK + " TEXT, " +
                 DAODbase.PUNTAJE_FINAL + " NUMERIC, " +
+                DAODbase.IDCAMPANIA_FK2 + " TEXT, " +
                 DAODbase.FECHA_AUDITORIA + " TEXT )";
         db.execSQL(query2);
 
@@ -49,6 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAODbase.IDESE + " TEXT, " +
                 DAODbase.IDCRITERIO_FK + " TEXT, " +
                 DAODbase.NOMBRE_ESE + " TEXT, " +
+                DAODbase.IDAUDITORIA_FK2 + " TEXT, " +
                 DAODbase.PUNTAJEESE + " NUMERIC )";
         db.execSQL(query3);
 
@@ -68,6 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAODbase.IDFOTO + " TEXT, " +
                 DAODbase.COMENTARIO + " TEXT, " +
                 DAODbase.RUTAFOTODB + " TEXT, " +
+                DAODbase.IDCRITERIO_FK2 + " TEXT, " +
                 DAODbase.RUTAFOTOFB + " TEXT )";
         db.execSQL(query5);
 
@@ -80,7 +83,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAODbase.NOMBRERESPONSABLEAREA + " TEXT )";
         db.execSQL(query6);
 
-        //CREO TABLA DE AREAS
+        //CREO TABLA DE CRITERIOS
         String query7 =  "CREATE TABLE " + DAODbase.TABLE_CRITERIOS  + "(" +
                 DAODbase.IDCRITERIO + " TEXT, " +
                 DAODbase.TEXTOCRITERIO + " TEXT, " +
@@ -90,6 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DAODbase.TEXTOOPCION4 + " TEXT, " +
                 DAODbase.TEXTOOPCION5 + " TEXT, " +
                 DAODbase.PUNTAJEELEGIDO + " TEXT, " +
+                DAODbase.IDESE_FK2 + " TEXT, " +
                 DAODbase.IDFOTOCRITERIO + " TEXT )";
         db.execSQL(query7);
     }

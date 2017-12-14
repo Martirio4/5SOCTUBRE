@@ -22,6 +22,7 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.demo.nomad.nomad5s.Adapter.AdapterArea;
 import com.demo.nomad.nomad5s.ControllerDatos.ControllerDatos;
 import com.demo.nomad.nomad5s.Model.Area;
+import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 import com.github.clans.fab.FloatingActionButton;
@@ -41,6 +42,7 @@ import pl.aprilapps.easyphotopicker.EasyImage;
  */
 public class FragmentSeleccionAreas extends Fragment {
 
+
     private ControllerDatos controllerAreas;
     private List<Area> listaAreas;
     private RecyclerView recyclerAreas;
@@ -49,7 +51,11 @@ public class FragmentSeleccionAreas extends Fragment {
     private File fotoOriginal;
     private File fotoComprimida;
     private FloatingActionButton fabAgregarArea;
-    private FragmentCrearCampania.Elegible unElegible;
+    private Elegible unElegible;
+
+    public interface Elegible{
+        void elegirAuditor(Area unArea);
+    }
 
     private TextView textView;
 
@@ -73,11 +79,15 @@ public class FragmentSeleccionAreas extends Fragment {
         */
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_manage_auditores, container, false);
+
+
         controllerAreas=new ControllerDatos(getContext());
         /*
         Realm realm = Realm.getDefaultInstance();
@@ -119,6 +129,6 @@ public class FragmentSeleccionAreas extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.unElegible=(FragmentCrearCampania.Elegible)context;
+        this.unElegible=(Elegible)context;
     }
 }

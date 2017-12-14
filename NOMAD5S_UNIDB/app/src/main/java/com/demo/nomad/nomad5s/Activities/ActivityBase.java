@@ -31,12 +31,13 @@ import com.demo.nomad.nomad5s.Fragments.FragmentSeleccionAuditores;
 import com.demo.nomad.nomad5s.Model.Area;
 import com.demo.nomad.nomad5s.Model.Auditor;
 import com.demo.nomad.nomad5s.Model.Auditoria;
+import com.demo.nomad.nomad5s.Model.Campania;
 import com.demo.nomad.nomad5s.Model.Foto;
 import com.demo.nomad.nomad5s.R;
 
 import java.util.UUID;
 
-public class ActivityBase extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentSeleccionAuditores.Terminable, FragmentCrearCampania.Elegible, FragmentManageAuditores.Avisable, AdapterAuditores.EditaEliminable,FragmentManageCampanias.Creable {
+public class ActivityBase extends AppCompatActivity implements FragmentManageAreas.Avisable,AdapterArea.EditaEliminable, FragmentSeleccionAuditores.Terminable, FragmentCrearCampania.Elegible,FragmentSeleccionAreas.Elegible, FragmentManageAuditores.Avisable, AdapterAuditores.EditaEliminable,FragmentManageCampanias.Creable {
 
    
     private ControllerDatos controllerDatos;
@@ -58,6 +59,12 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
     //---FIN ATRIBUTOS DIALOGO AREA---//
 
 
+    //---GUARDO DATOS DE CAMPANIA Y DE AUDITORIA CREADA---//
+    private Campania campaniaCreada;
+    private Auditor auditorElegido;
+    private Area areaElegida;
+
+
     public static final String QUE_FRAGMENT_ABRO="QUE_FRAGMENT_ABRO";
 
     @Override
@@ -73,7 +80,6 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
         switch (queFragmentTengoQueAbrir) {
             case "manageAuditores":
                 abrirFragmentManageAuditores();
-
                 break;
             case "manageAreas":
                 abrirFragmentManageAreas();
@@ -119,7 +125,6 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
     }
     private void abrirFragmentSeleccionAuditores(Area unArea){
         FragmentSeleccionAuditores fragmentSeleccionAuditores = new FragmentSeleccionAuditores();
-
         Bundle bundle= new Bundle();
         bundle.putString(FragmentSeleccionAuditores.IDAREA,unArea.getIdArea());
         fragmentSeleccionAuditores.setArguments(bundle);
@@ -413,31 +418,63 @@ public class ActivityBase extends AppCompatActivity implements FragmentManageAre
     }
 
     @Override
-    public void armarAuditoria( Area unArea,  Auditor unAuditor) {
+    public void armarAuditoria(Auditor unAuditor) {
+        setAuditorElegido(unAuditor);
+        cargarAuditoriaCampania();
+    }
+
+    private void cargarAuditoriaCampania() {
         FragmentManager fm = this.getSupportFragmentManager();
         fm.popBackStack("seleccionArea",fm.POP_BACK_STACK_INCLUSIVE);
         fm.popBackStack("seleccionAuditor",fm.POP_BACK_STACK_INCLUSIVE);
 
         Auditoria unaAuditoria = new Auditoria();
         unaAuditoria.setIdAuditoria("audit_"+ UUID.randomUUID());
-        unaAuditoria.setAuditor(unAuditor);
-        unaAuditoria.setAreaAuditada(unArea);
+        unaAuditoria.setAuditor(auditorElegido);
+        unaAuditoria.setAreaAuditada(areaElegida);
         unaAuditoria.setListaEses(controllerDatos.traerlistaEses());
 
-
-
-        Toast.makeText(this, "armar auditoria", Toast.LENGTH_SHORT).show();
+        campaniaCreada.agregarAuditoria(unaAuditoria);
+        //aca tengo que actualizar el adapter de manageCampanias//
     }
 
+
+    //---VUELVO DEL FRAGMENT SELECCION AREAS CON UN AREA SELECCIONADA Y ABRO SELECCION DE AUDITORES---//
     @Override
-    public void elegirArea() {
+    public void elegirAuditor(Area unArea) {
+        setAreaElegida(unArea);
+        abrirFragmentSeleccionAuditores(unArea);
+    }
+
+
+//---VUELVO DEL FRAGMENT CREAR CAMPANIA CON LA CAMPANIA CREADA Y VOY A SELECCION DE AREA---//
+    @Override
+    public void crearAuditoria(Campania unaCampania) {
+        setCampaniaCreada(unaCampania);
         abrirFragmentSeleccionAreas();
     }
 
+    public Campania getCampaniaCreada() {
+        return campaniaCreada;
+    }
 
+    public void setCampaniaCreada(Campania campaniaCreada) {
+        this.campaniaCreada = campaniaCreada;
+    }
 
-    @Override
-    public void elegirAuditor(Area unArea) {
-        abrirFragmentSeleccionAuditores(unArea);
+    public Auditor getAuditorElegido() {
+        return auditorElegido;
+    }
+
+    public void setAuditorElegido(Auditor auditorElegido) {
+        this.auditorElegido = auditorElegido;
+    }
+
+    public Area getAreaElegida() {
+        return areaElegida;
+    }
+
+    public void setAreaElegida(Area areaElegida) {
+        this.areaElegida = areaElegida;
     }
 }
